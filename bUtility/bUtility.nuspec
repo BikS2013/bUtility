@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://biks.lcl</licenseUrl>
+    <projectUrl>http://biks.lcl</projectUrl>
+    <iconUrl>http://biks.lcl</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>simple extensions.</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>biks utility</tags>
+  </metadata>
+</package>
+
