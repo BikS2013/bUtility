@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.ServiceRegistry", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.WebApi", "bUtility.WebApi\bUtility.WebApi.csproj", "{CBC420BF-7799-4970-B6F3-E350DCB8543F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Dapper", "bUtility.Dapper\bUtility.Dapper.csproj", "{1261A0FF-C8D3-4225-A421-4641CB0FB130}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{CBC420BF-7799-4970-B6F3-E350DCB8543F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBC420BF-7799-4970-B6F3-E350DCB8543F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBC420BF-7799-4970-B6F3-E350DCB8543F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1261A0FF-C8D3-4225-A421-4641CB0FB130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1261A0FF-C8D3-4225-A421-4641CB0FB130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1261A0FF-C8D3-4225-A421-4641CB0FB130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1261A0FF-C8D3-4225-A421-4641CB0FB130}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
