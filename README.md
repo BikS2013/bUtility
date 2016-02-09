@@ -12,7 +12,7 @@ bool In<T>(this T value, params T[] list)
 returns true if the array contains the value, false if the value or array is null, false otherwise.
 
 ``` c#
-object GetInstance(this Type type)
+object GetInstance(this Type type, params object[] parameters)
 ```
 creates an instance of the specified type
 
