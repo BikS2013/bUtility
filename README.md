@@ -1,5 +1,5 @@
 ## bUtility
-simple utilities:
+simple utilities. (nuget packages)[https://www.nuget.org/packages?q=butility]
 ####Extension functions:
 ``` c#
 string Clear(this string value)
