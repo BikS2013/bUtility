@@ -9,12 +9,12 @@ namespace bUtility.Reflection
 {
     public static partial class ReflectionExtensions
     {
-        public static object GetInstance(this Type type)
+        public static object GetInstance(this Type type, params object[] parameters)
         {
             var constructor = type.GetConstructor(System.Type.EmptyTypes);
             if (constructor != null)
             {
-                var instance = constructor.Invoke(null);
+                var instance = constructor.Invoke(parameters);
                 return instance;
             }
             return null;

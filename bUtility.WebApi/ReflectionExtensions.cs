@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -12,24 +13,33 @@ namespace bUtility.WebApi
         public static void PropertyUpdate(this object obj, Action<object, PropertyInfo> updateAction)
         {
             if (obj == null) return;
-            obj.GetType().GetProperties().ToList().ForEach(p =>
+            if (obj is IEnumerable)
             {
-                Console.WriteLine(p.Name);
-                if (p.PropertyType.IsClass
-                && p.PropertyType != typeof(string)
-                && !p.PropertyType.IsArray)
+                foreach (object item in obj as IEnumerable)
                 {
-                    var pObj = p.GetValue(obj);
-                    if (pObj != null)
+                    item.PropertyUpdate(updateAction);
+                }
+            }
+            else {
+                obj.GetType().GetProperties().ToList().ForEach(p =>
+                {
+                    Console.WriteLine(p.Name);
+                    if (p.PropertyType.IsClass
+                    && p.PropertyType != typeof(string)
+                    && !p.PropertyType.IsArray)
                     {
-                        pObj.PropertyUpdate(updateAction);
+                        var pObj = p.GetValue(obj);
+                        if (pObj != null)
+                        {
+                            pObj.PropertyUpdate(updateAction);
+                        }
                     }
-                }
-                else
-                {
-                    updateAction(obj, p);
-                }
-            });
+                    else
+                    {
+                        updateAction(obj, p);
+                    }
+                });
+            }
         }
 
         public static void ToLocalTime(this object obj)
