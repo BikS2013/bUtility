@@ -52,7 +52,7 @@
   <ItemGroup>
     <Compile Include="DDLInfo.cs" />
     <Compile Include="Guid2StringMapper.cs" />
-    <Compile Include="HelperExtensions.cs" />
+    <Compile Include="DMLExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

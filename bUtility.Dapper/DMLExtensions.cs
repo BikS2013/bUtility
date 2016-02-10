@@ -10,11 +10,15 @@ using System.Threading.Tasks;
 
 namespace bUtility.Dapper
 {
-    public static class HelperExtensions
+    public static class DMLExtensions
     {
+        public static string GetColumnList(this Type type)
+        {
+            return type.GetMemberNames<PropertyInfo>().Concatenate((c, n) => $"{c}, {n}");
+        }
         public static string GetParameterList(this Type type)
         {
-            return type.GetPropertyNames().Select(c => $"@{c.Trim()}").Concatenate((c, n) => $"{c}, {n}");
+            return type.GetMemberNames<PropertyInfo>().Select(c => $"@{c.Trim()}").Concatenate((c, n) => $"{c}, {n}");
         }
 
         public static string GetParameterList(this string columnList)
@@ -22,24 +26,20 @@ namespace bUtility.Dapper
             return columnList.Split(',').Select(c => $"@{c.Trim()}").Concatenate((c, n) => $"{c}, {n}");
         }
 
-        public static string GetColumnList(this Type type)
+        public static string GetUpdateClause(this Type type, Func<PropertyInfo, Boolean> filter = null)
         {
-            return type.GetPropertyNames().Concatenate((c, n) => $"{c}, {n}");
-        }
-        public static string GetUpdateColumnList(this Type type, Func<PropertyInfo, Boolean> filter = null)
-        {
-            return type.GetPropertyNames(filter).Select(c => $"{c}=@{c}").Concatenate((c, n) => $"{c}, {n}");
+            return type.GetMemberNames<PropertyInfo>(filter).Select(c => $"{c}=@{c}").Concatenate((c, n) => $"{c}, {n}");
         }
 
 
         public static string GetWhereClause4NotNulls(this object obj)
         {
-            return obj?.GetPropertyNames((PropertyInfo pInfo) => pInfo.GetValue(obj) != null)?.Select(c => $"{c} = @{c}").Concatenate((c, n) => $"{c} and {n}");
+            return obj?.GetMemberNames<PropertyInfo>((PropertyInfo pInfo) => pInfo.GetValue(obj) != null)?.Select(c => $"{c} = @{c}").Concatenate((c, n) => $"{c} and {n}");
         }
 
         public static string getWherePart4Nulls(this object obj)
         {
-            return obj.GetPropertyNames((PropertyInfo pInfo) => pInfo.GetValue(obj) == null)?.Select(c => $"{c} is null")?.Concatenate((c, n) => $"{c} and {n}");
+            return obj.GetMemberNames<PropertyInfo>((PropertyInfo pInfo) => pInfo.GetValue(obj) == null)?.Select(c => $"{c} is null")?.Concatenate((c, n) => $"{c} and {n}");
         }
 
         public static IEnumerable<string> GetWhereParts(this object obj)
@@ -52,7 +52,7 @@ namespace bUtility.Dapper
 
         public static string getWherePart(this object obj)
         {
-            return obj.GetPropertyNames().Select(c => $"{c} = @{c}").Aggregate((c, n) => $"{c} and {n}");
+            return obj.GetMemberNames<PropertyInfo>().Select(c => $"{c} = @{c}").Aggregate((c, n) => $"{c} and {n}");
         }
 
         public static IEnumerable<T> execQuery<T>(this IDbConnection con, object param)

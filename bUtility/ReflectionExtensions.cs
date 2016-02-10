@@ -99,13 +99,14 @@ namespace bUtility.Reflection
             }
         }
 
-        public static IEnumerable<string> GetPropertyNames(this Type type, Func<PropertyInfo, Boolean> filter = null)
+        public static IEnumerable<string> GetMemberNames<T>(this Type type, Func<T, Boolean> filter = null) where T : MemberInfo
         {
-            return type?.GetMembers<PropertyInfo>(filter)?.Select(p => p.Name);
+            return type?.GetMembers<T>(filter)?.Select(p => p.Name);
         }
-        public static IEnumerable<string> GetPropertyNames(this object obj, Func<PropertyInfo, Boolean> filter = null)
+
+        public static IEnumerable<string> GetMemberNames<T>(this object obj, Func<T, Boolean> filter = null) where T : MemberInfo
         {
-            return obj?.GetType().GetPropertyNames(filter);
+            return obj?.GetType().GetMemberNames<T>(filter);
         }
 
         public static T GetMemberInfo<T>(this Type type, string memberName) where T : MemberInfo
