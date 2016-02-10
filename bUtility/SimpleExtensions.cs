@@ -24,5 +24,13 @@ namespace bUtility
             return found;
         }
 
+        public static string Concatenate(this IEnumerable<string> list, Func<string, string, string> pattern)
+        {
+            if (list != null && list.Any())
+            {
+                return list.Aggregate((c, n) => pattern(c, n));
+            }
+            return null;
+        }
     }
 }

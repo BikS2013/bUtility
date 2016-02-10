@@ -17,7 +17,7 @@ namespace bUtility.WebApi
             if (actionContext?.ActionArguments?.Count > 0)
             {
                 var request = actionContext?.ActionArguments?.Values.First();
-                var payload = request?.GetPublic("Payload");
+                var payload = request?.GetValue("Payload");
                 payload.ToLocalTime();
             }
             base.OnActionExecuting(actionContext);

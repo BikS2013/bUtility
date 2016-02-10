@@ -9,6 +9,8 @@ namespace bUtility.Reflection
 {
     public static partial class ReflectionExtensions
     {
+        static BindingFlags defaultBindings = BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy;
+
         public static object GetInstance(this Type type, params object[] parameters)
         {
             var constructor = type.GetConstructor(System.Type.EmptyTypes);
@@ -20,13 +22,13 @@ namespace bUtility.Reflection
             return null;
         }
 
-        public static object GetPublic(this object obj, string propertyName)
+        public static object GetValue(this object obj, string propertyName)
         {
             if (obj != null)
             {
                 try
                 {
-                    var pinfo = obj.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+                    var pinfo = obj.GetType().GetProperty(propertyName, defaultBindings);
                     if (pinfo != null)
                     {
                         return pinfo.GetValue(obj);
@@ -40,18 +42,18 @@ namespace bUtility.Reflection
             return null;
         }
 
-        public static T GetPublic<T>(this object obj, string propertyName, T defaultValue) where T : class
+        public static T GetValue<T>(this object obj, string propertyName, T defaultValue) where T : class
         {
-            return GetPublic(obj, propertyName) as T ?? defaultValue;
+            return GetValue(obj, propertyName) as T ?? defaultValue;
         }
 
-        public static void SetPublic(this object obj, string propertyName, object value)
+        public static void SetValue(this object obj, string propertyName, object value)
         {
             if (obj != null)
             {
                 try
                 {
-                    var pinfo = obj.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+                    var pinfo = obj.GetType().GetProperty(propertyName, defaultBindings);
                     if (pinfo != null)
                     {
                         pinfo.SetValue(obj, value);
@@ -70,7 +72,7 @@ namespace bUtility.Reflection
             {
                 try
                 {
-                    var minfo = obj.GetType().GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+                    var minfo = obj.GetType().GetMethod(methodName, defaultBindings);
                     if (minfo != null)
                     {
                         minfo.Invoke(obj, parameters);
@@ -83,13 +85,44 @@ namespace bUtility.Reflection
             }
         }
 
-        public static T GetCustomAttribute<T>(this MethodInfo methodInfo) where T : System.Attribute
+        public static IEnumerable<T> GetMembers<T>(this Type type, Func<T, Boolean> filter = null) where T :MemberInfo
         {
-            if (methodInfo == null) return null;
-            var attributes = methodInfo.GetCustomAttributes<T>();
+            foreach (var p in type?.GetMembers(defaultBindings))
+            {
+                if (p is T && p != null)
+                {
+                    if (filter == null || filter(p as T))
+                    {
+                        yield return p as T;
+                    }
+                }
+            }
+        }
+
+        public static IEnumerable<string> GetPropertyNames(this Type type, Func<PropertyInfo, Boolean> filter = null)
+        {
+            return type?.GetMembers<PropertyInfo>(filter)?.Select(p => p.Name);
+        }
+        public static IEnumerable<string> GetPropertyNames(this object obj, Func<PropertyInfo, Boolean> filter = null)
+        {
+            return obj?.GetType().GetPropertyNames(filter);
+        }
+
+        public static T GetMemberInfo<T>(this Type type, string memberName) where T : MemberInfo
+        {
+            return type?.GetMember(memberName, defaultBindings) as T;
+        }
+        public static T GetMemberInfo<T>(this object obj, string memberName) where T : MemberInfo
+        {
+            return obj?.GetType().GetMemberInfo<T>(memberName);
+        }
+
+        public static T GetCustomAttribute<T>(this MemberInfo memberInfo) where T : System.Attribute
+        {
+            if (memberInfo == null) return null;
+            var attributes = memberInfo.GetCustomAttributes<T>();
             if (attributes != null) return attributes.FirstOrDefault(i => true);
             return null;
         }
-
     }
 }

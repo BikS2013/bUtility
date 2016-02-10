@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace bUtility.Dapper
 {
-    public class GuidHandler : SqlMapper.TypeHandler<Guid>
+    public class Guid2StringMapper : SqlMapper.TypeHandler<Guid>
     {
         public override Guid Parse(object value)
         {

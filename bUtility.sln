@@ -13,6 +13,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.WebApi", "bUtility
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Dapper", "bUtility.Dapper\bUtility.Dapper.csproj", "{1261A0FF-C8D3-4225-A421-4641CB0FB130}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{87E30697-1A51-4B84-9039-81747F16E772}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D62CE562-5F34-4062-BA55-C6E6388AAC14}"
+	ProjectSection(SolutionItems) = preProject
+		docs\butility.dapper.md = docs\butility.dapper.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

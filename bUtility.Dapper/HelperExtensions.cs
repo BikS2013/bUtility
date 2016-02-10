@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using bUtility.Reflection;
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,47 +12,14 @@ namespace bUtility.Dapper
 {
     public static class HelperExtensions
     {
-        public static string Concatenate(this IEnumerable<string> list, Func<string, string, string> pattern)
+        public static string GetParameterList(this Type type)
         {
-            if (list != null && list.Any())
-            {
-                return list.Aggregate((c, n) => pattern(c, n));
-            }
-            return null;
-        }
-        public static IEnumerable<PropertyInfo> GetProperties(this Type type, Func<PropertyInfo, Boolean> filter = null)
-        {
-            foreach (var p in type.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance))
-            {
-                if (filter == null || filter(p))
-                {
-                    yield return p;
-                }
-            }
-        }
-        public static T GetCustomAttribute<T>(this PropertyInfo pinfo, bool inherit = true) where T : Attribute
-        {
-            if (pinfo == null) return null;
-            return pinfo.GetCustomAttributes(typeof(T), inherit).FirstOrDefault() as T;
-        }
-
-        public static IEnumerable<string> GetPropertyNames(this Type type, Func<PropertyInfo, Boolean> filter = null)
-        {
-            return type.GetProperties(filter).Select(p => p.Name);
-        }
-        public static IEnumerable<string> GetPropertyNames(this object obj, Func<PropertyInfo, Boolean> filter = null)
-        {
-            return obj.GetType().GetPropertyNames(filter);
+            return type.GetPropertyNames().Select(c => $"@{c.Trim()}").Concatenate((c, n) => $"{c}, {n}");
         }
 
         public static string GetParameterList(this string columnList)
         {
             return columnList.Split(',').Select(c => $"@{c.Trim()}").Concatenate((c, n) => $"{c}, {n}");
-        }
-
-        public static string GetParameterList(this Type type)
-        {
-            return type.GetPropertyNames().Select(c => $"@{c.Trim()}").Concatenate((c, n) => $"{c}, {n}");
         }
 
         public static string GetColumnList(this Type type)

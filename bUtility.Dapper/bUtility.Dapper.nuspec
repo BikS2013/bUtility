@@ -14,6 +14,11 @@
     <releaseNotes>simple dapper utility.</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>biks dapper utility</tags>
+    <dependencies>
+      <group>
+        <dependency id="bUtility" version="0.0.0.4" />
+      </group>
+    </dependencies>
   </metadata>
 </package>
 
