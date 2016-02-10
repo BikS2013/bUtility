@@ -19,49 +19,47 @@ string Concatenate(this IEnumerable<string> list, Func<string, string, string> p
 ```
 
 ####Reflection Extensions:
+**GetInstance**
 ``` c#
 object GetInstance(this Type type, params object[] parameters)
 ```
-creates an instance of the specified type
 
+**GetValue**
 ``` c#
 object GetValue(this object obj, string propertyName)
-```
-returns the value of the public property "propertyName" for object
-
-``` c#
 T GetValue<T>(this object obj, string propertyName, T defaultValue) where T : class
 ```
-returns the value of the public property "propertyName" for object
 
 
+**SetValue**
 ``` c#
 void SetValue(this object obj, string propertyName, object value)
 ```
-sets the value of the public property "propertyName" for object
 
+**Invoke**
 ``` c#
 void Invoke(this object obj, string methodName, params object[] parameters)
 ```
-invokes the public method "methodName"
 
+**GetMembers**
 ``` c#
 IEnumerable<T> GetMembers<T>(this Type type, Func<T, Boolean> filter = null) where T :MemberInfo
 ```
 
+**GetPropertyNames**
 ``` c#
 IEnumerable<string> GetPropertyNames(this Type type, Func<PropertyInfo, Boolean> filter = null)
 IEnumerable<string> GetPropertyNames(this object obj, Func<PropertyInfo, Boolean> filter = null)
 ```
 
-
+**GetMemberInfo**
 ``` c#
 T GetMemberInfo<T>(this Type type, string memberName) where T : MemberInfo
 T GetMemberInfo<T>(this object obj, string memberName) where T : MemberInfo
 ```
 returns PropertyInfo, MethodInfo, etc from object or type for the member: memberName
 
-
+**GetCustomAttribute**
 ```c#
 T GetCustomAttribute<T>(this MemberInfo memberInfo) where T : System.Attribute
 ```
