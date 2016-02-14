@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExceptionHandler.cs" />
     <Compile Include="ReflectionExtensions.cs" />
     <Compile Include="IUserIDProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
