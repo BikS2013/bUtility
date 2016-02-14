@@ -50,7 +50,7 @@
     <Compile Include="EmailService.cs" />
     <Compile Include="ExtensionsLocal.cs" />
     <Compile Include="HtmlResource.cs" />
-    <Compile Include="IEmailServices.cs" />
+    <Compile Include="IEmailService.cs" />
     <Compile Include="IResourceResolver.cs" />
     <Compile Include="MailAttachment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
