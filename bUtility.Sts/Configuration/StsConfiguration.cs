@@ -15,11 +15,11 @@ namespace bUtility.Sts.Configuration
             get { return base["relyingParties"] as RelyingParties; }
         }
 
-        [ConfigurationProperty("issue")]
-        public Issue Issue
-        {
-            get { return base["issue"] as Issue; }
-        }
+        //[ConfigurationProperty("issue")]
+        //public Issue Issue
+        //{
+        //    get { return base["issue"] as Issue; }
+        //}
 
         public static StsConfiguration Current
         {

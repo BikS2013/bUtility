@@ -86,44 +86,6 @@ namespace bUtility.Sts.Configuration
             }
         }
 
-        [ConfigurationProperty("applicationCodes")]
-        public string ApplicationCodes
-        {
-            get
-            {
-                return base["applicationCodes"] as string;
-            }
-        }
-
-        /// <summary>
-        /// Application authorized by relyingParty. 
-        /// We specify this in order to eliminate the access 
-        /// rights granted to the user carrying the token.
-        /// </summary>
-        [ConfigurationProperty("application", IsRequired = false)]
-        public string Application
-        {
-            get
-            {
-                return base["application"] as String;
-            }
-        }
-
-
-        public bool DebugEnabled
-        {
-            get { return this.Debug.HasValue && this.Debug.Value; }
-        }
-
-        [ConfigurationProperty("debug", DefaultValue = false, IsRequired = false)]
-        public bool? Debug
-        {
-            get
-            {
-                return base["debug"] as bool?;
-            }
-        }
-
         [ConfigurationProperty("audienceUris")]
         public AudienceUriElementCollection AudienceUris
         {

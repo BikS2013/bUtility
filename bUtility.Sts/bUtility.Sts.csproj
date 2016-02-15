@@ -56,16 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CertificateHelper.cs" />
-    <Compile Include="Configuration\Actor.cs" />
-    <Compile Include="Configuration\Actors.cs" />
-    <Compile Include="Configuration\AudienceUris.cs" />
-    <Compile Include="Configuration\CallerIdentities.cs" />
-    <Compile Include="Configuration\Issue.cs" />
-    <Compile Include="Configuration\NameRegistry.cs" />
     <Compile Include="Configuration\RelyingParty.cs" />
     <Compile Include="Configuration\RelyingParties.cs" />
-    <Compile Include="Configuration\RootCertificates.cs" />
-    <Compile Include="Configuration\Simple.cs" />
     <Compile Include="Configuration\StsConfiguration.cs" />
     <Compile Include="constants\Federation.cs" />
     <Compile Include="IgnoreCertificateErrorsValidator.cs" />
