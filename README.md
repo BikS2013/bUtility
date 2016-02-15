@@ -1,6 +1,8 @@
-## bUtility
-simple utilities. [nuget packages](https://www.nuget.org/packages?q=butility)
 #### [bUtility.Dapper](docs/butility.dapper.md), [bUtility.sts](docs/butility.sts.md)
+
+
+## bUtility
+
 ####Extensions:
 **Clear**
 ``` c#
