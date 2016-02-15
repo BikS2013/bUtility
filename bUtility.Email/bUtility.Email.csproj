@@ -48,7 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmailService.cs" />
-    <Compile Include="IeMailService.cs" />
+    <Compile Include="ExtensionsLocal.cs" />
+    <Compile Include="HtmlResource.cs" />
+    <Compile Include="IEmailService.cs" />
+    <Compile Include="IResourceResolver.cs" />
+    <Compile Include="MailAttachment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SendMailRequest.cs" />
   </ItemGroup>
@@ -63,13 +67,13 @@
     <None Include="_CreateNewNuGetPackage\RunMeToUploadNuGetPackage.cmd" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="_CreateNewNuGetPackage\DoNotModify\NuGet.exe" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\bUtility\bUtility.csproj">
       <Project>{f07af388-76dc-423a-a434-33bd0b2086b1}</Project>
       <Name>bUtility</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="_CreateNewNuGetPackage\DoNotModify\NuGet.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

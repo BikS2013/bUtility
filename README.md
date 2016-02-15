@@ -19,6 +19,11 @@ string Concatenate(this IEnumerable<string> list, Func<string, string, string> p
 //stringList.Concatenate( (c,n) => $"{c}, {n}");
 ```
 
+**HasAny**
+``` c#
+bool HasAny<T>(this IEnumerable<T> collection)
+```
+
 ####Reflection Extensions:
 **GetInstance**
 ``` c#
