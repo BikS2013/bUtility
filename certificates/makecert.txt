@@ -1,0 +1,13 @@
+﻿makecert -r -pe -n "CN=ca.model.local" -e 01/01/2020 -ss my -sr localMachine -sky exchange -sp "Microsoft RSA SChannel Cryptographic Provider" -sy 12
+makecert -pe -n "CN=sts.model.local" -e 01/01/2020 -is my -ir localMachine -in "ca.model.local" -ss my -sr localMachine -sky exchange -sp "Microsoft RSA SChannel Cryptographic Provider" -sy 12
+makecert -pe -n "CN=web.model.local" -e 01/01/2020 -is my -ir localMachine -in "ca.model.local" -ss my -sr localMachine -sky exchange -sp "Microsoft RSA SChannel Cryptographic Provider" -sy 12
+makecert -pe -n "CN=issuer.model.local" -e 01/01/2020 -is my -ir localMachine -in "ca.model.local" -ss my -sr localMachine -sky exchange -sp "Microsoft RSA SChannel Cryptographic Provider" -sy 12
+makecert -pe -n "CN=api.model.local" -e 01/01/2020 -is my -ir localMachine -in "ca.model.local" -ss my -sr localMachine -sky exchange -sp "Microsoft RSA SChannel Cryptographic Provider" -sy 12
+
+το password που χρησιμοποιήθηκε στο export είναι το:123456
+το ca.model.local πρέπει να γίνει import στο trusted root certificate store.
+πρέπει να δοθεί read/write access στο issuer.model.local στον χρήστη που τρέχει το application pool
+
+π.χ.
+location: [computerName]
+user name: IIS AppPool\DefaultAppPool
