@@ -1,4 +1,4 @@
-#### [bUtility.Dapper](docs/butility.dapper.md), [bUtility.sts](docs/butility.sts.md)
+#### [bUtility.Dapper](docs/butility.dapper.md), [bUtility.Sts](docs/butility.sts.md)
 
 
 ## bUtility
