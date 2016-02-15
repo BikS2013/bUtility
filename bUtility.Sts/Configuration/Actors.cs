@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.IdentityModel.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace bUtility.Sts.Configuration
 {
-    [ConfigurationCollection(typeof(AudienceUriElement), AddItemName = "uri")]
-    public class AudienceUriCollection : ConfigurationElementCollection
+    [ConfigurationCollection(typeof(Actor), AddItemName = "actor")]
+    public class Actors : ConfigurationElementCollection
     {
         protected override ConfigurationElement CreateNewElement()
         {
-            return new AudienceUriElement();
+            return new Actor();
         }
 
         protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((AudienceUriElement)element).Value;
+            return ((Actor)element).Url.Value;
         }
     }
 }

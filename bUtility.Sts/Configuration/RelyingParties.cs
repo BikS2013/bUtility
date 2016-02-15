@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace bUtility.Sts.Configuration
 {
     [ConfigurationCollection(typeof(RelyingParty), AddItemName = "rp")]
-    public class RelyingPartyCollection : ConfigurationElementCollection
+    public class RelyingParties : ConfigurationElementCollection
     {
         protected override ConfigurationElement CreateNewElement()
         {

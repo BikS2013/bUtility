@@ -29,6 +29,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>bUtility.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -38,11 +44,13 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
+    <Reference Include="System.identitymodel.services" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.20622.1351, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.2.206221351\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,19 +60,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CertificateHelper.cs" />
-    <Compile Include="Configuration\AudienceUriCollection.cs" />
+    <Compile Include="Configuration\Actor.cs" />
+    <Compile Include="Configuration\Actors.cs" />
+    <Compile Include="Configuration\AudienceUris.cs" />
+    <Compile Include="Configuration\CallerIdentities.cs" />
+    <Compile Include="Configuration\Issue.cs" />
+    <Compile Include="Configuration\NameRegistry.cs" />
     <Compile Include="Configuration\RelyingParty.cs" />
-    <Compile Include="Configuration\RelyingPartyCollection.cs" />
-    <Compile Include="Configuration\StsConfigurationSection.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="FederationFields.cs" />
+    <Compile Include="Configuration\RelyingParties.cs" />
+    <Compile Include="Configuration\RootCertificates.cs" />
+    <Compile Include="Configuration\Simple.cs" />
+    <Compile Include="Configuration\StsConfiguration.cs" />
+    <Compile Include="constants\Federation.cs" />
+    <Compile Include="IgnoreCertificateErrorsValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelyingPartyExtensions.cs" />
     <Compile Include="RequestScope.cs" />
     <Compile Include="SimpleSts.cs" />
     <Compile Include="SimpleStsConfiguration.cs" />
-    <Compile Include="TokenTypes.cs" />
+    <Compile Include="constants\TokenTypes.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bUtility.snk" />
     <None Include="packages.config" />
     <None Include="_CreateNewNuGetPackage\Config.ps1" />
     <None Include="_CreateNewNuGetPackage\DoNotModify\CreateNuGetPackage.ps1" />

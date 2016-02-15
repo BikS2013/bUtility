@@ -12,14 +12,8 @@ namespace bUtility.Sts
     public class SimpleStsConfiguration: SecurityTokenServiceConfiguration
     {
         static readonly object Locker = new object();
-        private static readonly Dictionary<string, SimpleStsConfiguration> CurrentConfigurations = new Dictionary<string, SimpleStsConfiguration>();
-        private static readonly Dictionary<string, Func<SecurityTokenHandler>> HandlerGenerator = new Dictionary<string, Func<SecurityTokenHandler>>
-        {
-            [TokenTypes.Saml11TokenProfile11] = ()=> new SamlSecurityTokenHandler() ,
-            [TokenTypes.Saml2TokenProfile11] = () => new Saml2SecurityTokenHandler(),
-            [TokenTypes.JsonWebToken] = () => new JwtSecurityTokenHandler()
-        };
-
+        private static readonly Dictionary<string, SimpleStsConfiguration> CurrentConfigurations = 
+            new Dictionary<string, SimpleStsConfiguration>();
 
         public RelyingParty RelyingParty { get; private set;}
 
@@ -30,7 +24,7 @@ namespace bUtility.Sts
             this.SecurityTokenService = typeof(SimpleSts);
 
             this.SecurityTokenHandlers.Clear();
-            this.SecurityTokenHandlers.Add(HandlerGenerator[rp.TokenType]());
+            this.SecurityTokenHandlers.Add(rp.TokenType.GetSecurityTokenHandler());
 
             if (rp.EncryptingCredentials != null)
             {
@@ -38,7 +32,6 @@ namespace bUtility.Sts
                 this.SecurityTokenHandlers.Add(new EncryptedSecurityTokenHandler());
             }
         }
-
 
         public static SimpleStsConfiguration ForRelyingParty(RelyingParty rp)
         {
@@ -54,5 +47,6 @@ namespace bUtility.Sts
             }
             return CurrentConfigurations[rp.Name];
         }
+
     }
 }

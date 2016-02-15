@@ -1,56 +1,69 @@
-﻿using bUtility.Sts.local;
+﻿using bUtility.Sts.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IdentityModel;
 using System.IdentityModel.Protocols.WSTrust;
+using System.IdentityModel.Services;
+using System.IdentityModel.Services.Configuration;
+using System.IO;
 using System.Linq;
 using System.Security;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace bUtility.Sts
 {
     public class SimpleSts: SecurityTokenService
     {
-        public SimpleSts(SimpleStsConfiguration securityTokenServiceConfiguration) 
-            : base(securityTokenServiceConfiguration)
+        public SimpleSts(SimpleStsConfiguration configuration) 
+            : base(configuration)
         {
             // Ignore certificate errors as we will use our selfsigned ones and it will take too long to validate 
             // the certificate path.
-            this.SecurityTokenServiceConfiguration.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
-            this.SecurityTokenServiceConfiguration.CertificateValidator = new CertificateHelper.IgnoreCertificateErrorsValidator();
+            SecurityTokenServiceConfiguration.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
+            SecurityTokenServiceConfiguration.CertificateValidator = new IgnoreCertificateErrorsValidator();
 
-            this.SecurityTokenServiceConfiguration.DefaultTokenType = securityTokenServiceConfiguration.RelyingParty.TokenType; 
+            SecurityTokenServiceConfiguration.DefaultTokenType = configuration.RelyingParty.TokenType; 
         }
 
-        protected override Scope GetScope(ClaimsPrincipal principal, RequestSecurityToken rst)
+        protected override Scope GetScope(ClaimsPrincipal principal, RequestSecurityToken request)
         {
-            if (rst.AppliesTo == null)
+            if (request.AppliesTo == null)
             {
-                throw new InvalidRequestException($"token request from {principal.Identity.Name} - but no realm specified.");
+                throw new InvalidRequestException($"token request from {principal?.Identity?.Name} - but no realm specified.");
             }
 
-            var authenticationMethod = principal.Identities.First().FindFirst(ClaimTypes.AuthenticationMethod);
-            if (authenticationMethod == null)
-            {
-                throw new ApplicationException("Authentication method not defined!");
-            }
-
-            var conf = (SimpleStsConfiguration)this.SecurityTokenServiceConfiguration;
+            var conf = (SimpleStsConfiguration)SecurityTokenServiceConfiguration;
             var rp = conf.RelyingParty;
-            if (rp == null || rp.Realm != rst.AppliesTo.Uri.ToString())
+            if (rp == null || rp.Realm != request.AppliesTo.Uri.ToString())
             {
-                throw new InvalidRequestException(string.Format($"The AppliesTo uri {rst.AppliesTo.Uri} is not registered as a relying party."));
+                throw new InvalidRequestException(string.Format($"The AppliesTo uri {request.AppliesTo.Uri} is not registered as a relying party."));
             }
 
-            var scope = new RequestScope(rst.AppliesTo.Uri, rp);
+            var scope = new RequestScope(request.AppliesTo.Uri, rp);
 
             scope.ReplyToAddress = rp.RedirectUrl;
 
-            rst.TokenType = rp.TokenType;
+            request.TokenType = rp.TokenType;
 
             return scope;
+        }
+
+        protected override Lifetime GetTokenLifetime(Lifetime requestLifetime)
+        {
+            var scope = Scope as RequestScope;
+            if (scope == null) throw new ApplicationException("No STS request scope found!");
+            if (scope.RelyingParty.TokenLifeTime > 0)
+            {
+                return new Lifetime(DateTime.UtcNow, DateTime.UtcNow.AddMinutes(scope.RelyingParty.TokenLifeTime));
+            }
+            else
+            {
+                return base.GetTokenLifetime(requestLifetime);
+            }
         }
 
         protected override ClaimsIdentity GetOutputClaimsIdentity(ClaimsPrincipal principal, RequestSecurityToken request, Scope scope)
@@ -60,10 +73,6 @@ namespace bUtility.Sts
                 throw new SecurityException("Empty principal while creating claims identity!");
 
             ClaimsIdentity userIdentity = principal.Identities.First();
-            if (userIdentity.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier) == null)
-            {
-                throw new SecurityException($"No user name has been specified! Original identity: {userIdentity.ToJson()}");
-            }
             var inheritedClaims =
                 userIdentity.Claims.Where(i => !i.Type.In(ClaimTypes.AuthenticationInstant, ClaimTypes.AuthenticationMethod))
                 .Select(c => new Claim(c.Type, c.Value));
@@ -80,7 +89,6 @@ namespace bUtility.Sts
 
             return outputIdentity;
         }
-
 
     }
 }

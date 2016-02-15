@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IdentityModel.Configuration;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -81,14 +82,30 @@ namespace bUtility.Sts.Configuration
         {
             get
             {
-                string value = base["tokenType"] as string;
-                switch (value)
-                {
-                    case "Saml11TokenProfile11": return TokenTypes.Saml11TokenProfile11;
-                    case "Saml2TokenProfile11": return TokenTypes.Saml2TokenProfile11;
-                    case "JsonWebToken": return TokenTypes.JsonWebToken;
-                    default: return TokenTypes.Saml11TokenProfile11;
-                }
+                return base["tokenType"] as string;
+            }
+        }
+
+        [ConfigurationProperty("applicationCodes")]
+        public string ApplicationCodes
+        {
+            get
+            {
+                return base["applicationCodes"] as string;
+            }
+        }
+
+        /// <summary>
+        /// Application authorized by relyingParty. 
+        /// We specify this in order to eliminate the access 
+        /// rights granted to the user carrying the token.
+        /// </summary>
+        [ConfigurationProperty("application", IsRequired = false)]
+        public string Application
+        {
+            get
+            {
+                return base["application"] as String;
             }
         }
 
@@ -104,6 +121,15 @@ namespace bUtility.Sts.Configuration
             get
             {
                 return base["debug"] as bool?;
+            }
+        }
+
+        [ConfigurationProperty("audienceUris")]
+        public AudienceUriElementCollection AudienceUris
+        {
+            get
+            {
+                return base["audienceUris"] as AudienceUriElementCollection;
             }
         }
 
@@ -132,9 +158,9 @@ namespace bUtility.Sts.Configuration
             get
             {
                 // allow optional use of the encrypting certificate
-                if (!this.EncryptingCertificate.ElementInformation.IsPresent) return null;
-                this._encryptingCertificate = this._encryptingCertificate ?? GetCertificate(this.EncryptingCertificate);
-                return new X509EncryptingCredentials(this._encryptingCertificate);
+                if (!EncryptingCertificate.ElementInformation.IsPresent) return null;
+                _encryptingCertificate = _encryptingCertificate ?? EncryptingCertificate.GetCertificate();
+                return new X509EncryptingCredentials(_encryptingCertificate);
             }
         }
 
@@ -142,35 +168,20 @@ namespace bUtility.Sts.Configuration
         {
             get
             {
-                return new X509SigningCredentials(this.SigningX509Certificate);
+                return new X509SigningCredentials(SigningX509Certificate);
             }
         }
 
         private X509Certificate2 _signingCertificate = null;
-        public X509Certificate2 SigningX509Certificate
+        X509Certificate2 SigningX509Certificate
         {
             get
             {
-                if (!this.SigningCertificate.ElementInformation.IsPresent) throw new ArgumentException("SigningCertificate is not specified in the configuration! Signing is required.");
-                this._signingCertificate = this._signingCertificate ?? GetCertificate(this.SigningCertificate);
-                return this._signingCertificate;
+                if (!SigningCertificate.ElementInformation.IsPresent)
+                    throw new Exception("SigningCertificate is not specified in the configuration! Signing is required.");
+                _signingCertificate = _signingCertificate ?? SigningCertificate.GetCertificate();
+                return _signingCertificate;
             }
         }
-
-
-        private static X509Certificate2 GetCertificate(CertificateReferenceElement reference)
-        {
-            if (reference != null)
-            {
-                return CertificateHelper.GetCertificate(
-                    reference.StoreName,
-                    reference.StoreLocation,
-                    reference.X509FindType,
-                    reference.FindValue);
-            }
-            return null;
-        }
-
-
     }
 }
