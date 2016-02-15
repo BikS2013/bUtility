@@ -70,6 +70,37 @@ void HandleSignIn(this HttpResponse httpResponse, Uri baseUri, RelyingParty rp, 
 ```
 
 
+###Sample Applications: 
+
+#####bUtility.Sts.MvcSample: sample sts implementation 
+**Web Config Details**
+```c#
+  <configSections>
+    <section name="bUtility.Sts" type="bUtility.Sts.Configuration.StsConfiguration, bUtility.Sts, Version=0.0.0.1, Culture=neutral" />
+    <section name="system.identityModel" type="System.IdentityModel.Configuration.SystemIdentityModelSection, System.IdentityModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089" />
+  </configSections>
+```
+
+**Sts.Config Details**
+```c#
+<?xml version="1.0"?>
+<bUtility.Sts>
+  <relyingParties>
+    <rp name="test" tokenLifeTime="480" issuerName="simpleSTS"
+        redirectUrl="https://localhost/bUtility.Sts.MvcClient/Sample/index" 
+        realm="https://localhost/bUtility.Sts.MvcClient/" 
+        authenticationUrl="http://localhost/bUtility.Sts.MvcSample/account"
+        tokenType="urn:oasis:names:tc:SAML:1.0:assertion">
+      <signingCertificate storeLocation="LocalMachine" storeName="My" 
+                          x509FindType="FindBySubjectName" 
+                          findValue="issuer.model.local" />
+    </rp>
+  </relyingParties>
+</bUtility.Sts>
+```
+
+
+
 
 ```c#
 
