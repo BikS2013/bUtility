@@ -72,7 +72,7 @@ void HandleSignIn(this HttpResponse httpResponse, Uri baseUri, RelyingParty rp, 
 
 ###Sample Applications: 
 
-#####bUtility.Sts.MvcSample: sample sts implementation 
+####bUtility.Sts.MvcSample: sample sts implementation 
 **Web Config Details**
 ```c#
   <configSections>
@@ -81,7 +81,7 @@ void HandleSignIn(this HttpResponse httpResponse, Uri baseUri, RelyingParty rp, 
   </configSections>
 ```
 
-**Sts.Config Details**
+**STS.Config Details**
 ```c#
 <?xml version="1.0"?>
 <bUtility.Sts>
