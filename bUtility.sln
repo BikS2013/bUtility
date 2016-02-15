@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Sts", "bUtility.St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Sts.MvcSample", "bUtility.Sts.MvcSample\bUtility.Sts.MvcSample.csproj", "{7B73BA8E-67DC-4ED9-8E4C-BE588F1DE7A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Sts.MvcClient", "bUtility.Sts.MvcClient\bUtility.Sts.MvcClient.csproj", "{CA8DD060-F005-4174-BE62-3E65A726632B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{7B73BA8E-67DC-4ED9-8E4C-BE588F1DE7A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B73BA8E-67DC-4ED9-8E4C-BE588F1DE7A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B73BA8E-67DC-4ED9-8E4C-BE588F1DE7A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA8DD060-F005-4174-BE62-3E65A726632B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA8DD060-F005-4174-BE62-3E65A726632B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA8DD060-F005-4174-BE62-3E65A726632B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA8DD060-F005-4174-BE62-3E65A726632B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
