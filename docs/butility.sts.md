@@ -9,9 +9,7 @@ Federation, TokenTypes
 
 ####Configuration classes: 
 
-RelyingParty, RelyingParties, StsConfiguration
-
-(are used to describe STS server configuration, supported relying parties etc.)
+**RelyingParty, RelyingParties, StsConfiguration** are used to describe STS server configuration, supported relying parties etc.
 
 
 **RelyingParty** members
