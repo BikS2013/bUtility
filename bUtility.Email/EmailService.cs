@@ -1,76 +1,107 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Net.Mime;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace bUtility
 {
-    public class EmailService : IeMailService
+    public class EmailService : IEmailService
     {
-        private readonly string from;
-        private readonly string smtp;
-        private readonly int port;
-        private readonly bool enableSSL;
-        public EmailService(string sender, string SMTP, int SMTPPort, bool MailSSL)
-        {
-            from = sender;
-            smtp = SMTP;
-            port = SMTPPort;
-            enableSSL = MailSSL;
-        }
-        public EmailService(string SMTP, int SMTPPort, bool MailSSL)
-        {
-            smtp = SMTP;
-            port = SMTPPort;
-            enableSSL = MailSSL;
-        }
+        readonly MailAddress Sender;
+        readonly MailAddress From;
+        readonly string SMTP;
+        readonly int Port;
+        readonly bool EnableSSL;
+        bool UseAuthentication;
+        string UserName;
+        string Password;
+        string Domain;
+        readonly IResourceResolver ResourceResolver;
 
-        public bool EmailSend(SendMailRequest request, string sender)
+        public EmailService(string from, string fromDisplayName, string sender, string senderDisplayName, string smtp, int port, bool enableSSL, IResourceResolver resourceResolver)
         {
-            MailMessage mail = new MailMessage();
-            request.MailTo?.ForEach(to => mail.To.Add(to));
-            request.MailCC?.ForEach(cc => mail.CC.Add(cc));
-            request.MailBCC?.ForEach(bcc => mail.Bcc.Add(bcc));
-            mail.Sender = new MailAddress(sender);
-            mail.From = new MailAddress(sender);
-            mail.Subject = request.Subject;
-            mail.SubjectEncoding = System.Text.Encoding.UTF8;
-            mail.BodyEncoding = System.Text.Encoding.UTF8;
-
-            request.Attachments?.ForEach(data =>
+            if (from.Clear() == null)
             {
-                if (data != null)
+                throw new Exception("From address cannot be null or empty");
+            }
+            if (smtp.Clear() == null || port == 0)
+            {
+                throw new Exception("Invalid SMTP server configuration");
+            }
+            From = ExtensionsLocal.GetMailAddress(from, fromDisplayName);
+            Sender = ExtensionsLocal.GetMailAddress(sender, senderDisplayName) ?? From;
+            SMTP = smtp.Clear();
+            Port = port;
+            EnableSSL = enableSSL;
+            UseAuthentication = false;
+            ResourceResolver = resourceResolver;
+        }
+
+        public EmailService(string from, string fromDisplayName, string sender, string senderDisplayName, string smtp, int port, bool enableSSL) : this(from, fromDisplayName, sender, senderDisplayName, smtp, port, enableSSL, null)
+        { }
+
+        public EmailService(string from, string fromDisplayName, string smtp, int port, bool enableSSL, IResourceResolver resourceResolver) : this(from, fromDisplayName, null, null, smtp, port, enableSSL, resourceResolver)
+        { }
+
+        public EmailService(string from, string fromDisplayName, string smtp, int port, bool enableSSL) : this(from, fromDisplayName, null, null, smtp, port, enableSSL)
+        { }
+
+        public EmailService(string from, string smtp, int port, bool enableSSL, IResourceResolver resourceResolver) : this(from, null, smtp, port, enableSSL, resourceResolver)
+        { }
+        public EmailService(string from, string smtp, int port, bool enableSSL) : this(from, null, smtp, port, enableSSL)
+        { }
+
+        public void SetCredentials(string userName, string password, string domain)
+        {
+            UserName = userName.Clear();
+            Password = password.Clear();
+            Domain = domain.Clear();
+            UseAuthentication = true;
+        }
+
+        public bool Send(SendMailRequest request)
+        {
+            if (request != null)
+            {
+                MailMessage mail = new MailMessage();
+
+                mail.SetRecipients(request.MailTo, request.MailCC, request.MailBCC);
+
+                mail.From = From;
+                mail.Sender = Sender;
+
+                mail.Subject = request.Subject;
+                mail.SubjectEncoding = Encoding.UTF8;
+
+                mail.IsBodyHtml = request.IsBodyHtml;
+                mail.BodyEncoding = Encoding.Unicode;
+                mail.Body = request.Body;
+
+                mail.AddAttachments(request.Attachments, ResourceResolver);
+
+                mail.AddHtmlView(request.Body, request.HtmlResources, ResourceResolver);
+
+                return Send(mail);
+            }
+            throw new Exception("Request is null");
+        }
+
+        public bool Send(MailMessage mail)
+        {
+            if (mail != null)
+            {
+                using (SmtpClient client = new SmtpClient(SMTP, Port))
                 {
-                    mail.Attachments.Add(new Attachment(data, MediaTypeNames.Application.Octet));
+                    client.EnableSsl = EnableSSL;
+                    if (UseAuthentication)
+                    {
+                        client.Credentials = new System.Net.NetworkCredential(UserName, Password, Domain);
+                    }
+                    client.Send(mail);
                 }
-            });
-
-            mail.IsBodyHtml = true;
-            mail.BodyEncoding = System.Text.Encoding.Unicode;
-            mail.Body = request.Body;
-
-            if (smtp.Clear() != null && port != 0)
-            {
-                SmtpClient smtpClient = new SmtpClient(smtp);
-                smtpClient.Port = port;
-                smtpClient.EnableSsl = enableSSL;
-
-                smtpClient.Send(mail);
                 return true;
-
             }
-            else
-            {
-                throw new Exception("Invalid Configuration.");
-            }
-        }
-
-        public bool EmailSend(SendMailRequest request)
-        {
-            return EmailSend(request, from);
+            throw new Exception("Mail is null");
         }
     }
 }
