@@ -1,5 +1,6 @@
 ## bUtility
 simple utilities. [nuget packages](https://www.nuget.org/packages?q=butility)
+#### [bUtility.Dapper](docs/butility.dapper.md), [bUtility.sts](docs/butility.sts.md)
 ####Extensions:
 **Clear**
 ``` c#
@@ -74,6 +75,3 @@ T GetCustomAttribute<T>(this MemberInfo memberInfo) where T : System.Attribute
 ```
 
 
-## [bUtility.Dapper](docs/butility.dapper.md)
-Dapper related utilities:
-####Extension functions:
