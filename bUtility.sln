@@ -21,6 +21,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D62CE562-5F34-4062-BA55-C6E6388AAC14}"
 	ProjectSection(SolutionItems) = preProject
 		docs\butility.dapper.md = docs\butility.dapper.md
+		docs\butility.sts.md = docs\butility.sts.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Sts", "bUtility.Sts\bUtility.Sts.csproj", "{93159ED4-1D44-40D2-A928-2CAB3E234974}"
