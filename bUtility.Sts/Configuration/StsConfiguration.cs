@@ -7,20 +7,25 @@ using System.Threading.Tasks;
 
 namespace bUtility.Sts.Configuration
 {
-    public class StsConfiguration : ConfigurationSection
+    public class StsConfiguration<T> : ConfigurationSection where T : ConfigurationElement, IRelyingParty, new()
     {
         [ConfigurationProperty("relyingParties")]
-        public RelyingParties RelyingParties
+        public RelyingParties<T> RelyingParties
         {
-            get { return base["relyingParties"] as RelyingParties; }
+            get { return base["relyingParties"] as RelyingParties<T>; }
         }
 
-        //[ConfigurationProperty("issue")]
-        //public Issue Issue
-        //{
-        //    get { return base["issue"] as Issue; }
-        //}
+        public static StsConfiguration<T> Current
+        {
+            get
+            {
+                return ConfigurationManager.GetSection("bUtility.Sts") as StsConfiguration<T>;
+            }
+        }
 
+    }
+    public class StsConfiguration : StsConfiguration<RelyingParty>
+    {
         public static StsConfiguration Current
         {
             get

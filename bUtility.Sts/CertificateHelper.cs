@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Selectors;
+using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -61,7 +62,7 @@ namespace bUtility.Sts
 
         public static X509Certificate2 GetCertificate(this CertificateReferenceElement reference)
         {
-            if (reference != null)
+            if (reference != null && reference.ElementInformation.IsPresent)
             {
                 return GetCertificate(
                     reference.StoreName,
@@ -72,6 +73,20 @@ namespace bUtility.Sts
 
             return null;
         }
+
+        public static X509SigningCredentials GetSigningCredentials(this CertificateReferenceElement reference) {
+            var cert = reference?.GetCertificate();
+            if (cert == null) return null;
+            return new X509SigningCredentials(cert);
+        }
+
+        public static X509EncryptingCredentials GetEncryptingCredentials(this CertificateReferenceElement reference)
+        {
+            var cert = reference?.GetCertificate();
+            if (cert == null) return null;
+            return new X509EncryptingCredentials(cert);
+        }
+
 
         /// <summary>
         /// Sign data using a certificate. Warning: the certificate must be reloaded!

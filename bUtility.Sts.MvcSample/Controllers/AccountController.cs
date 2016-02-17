@@ -24,8 +24,10 @@ namespace bUtility.Sts.MvcSample.Controllers
             {
                 if (model.Id == null) model.Id = "test";
 
-                ActionResult redirection; 
-                RelyingParty rp = model.Id.GetRelyingPartyElement(out redirection);
+
+
+                ActionResult redirection;
+                IRelyingParty rp = model.Id.GetRelyingPartyElement(out redirection);
 
                 if (redirection != null)
                     return redirection;

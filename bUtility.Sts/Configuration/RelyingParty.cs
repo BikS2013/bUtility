@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace bUtility.Sts.Configuration
 {
-    public class RelyingParty : ConfigurationElement
+    public class RelyingParty : ConfigurationElement, IRelyingParty
     {
 
         [ConfigurationProperty("name", IsKey = true, IsRequired = true)]
@@ -86,16 +86,6 @@ namespace bUtility.Sts.Configuration
             }
         }
 
-        [ConfigurationProperty("audienceUris")]
-        public AudienceUriElementCollection AudienceUris
-        {
-            get
-            {
-                return base["audienceUris"] as AudienceUriElementCollection;
-            }
-        }
-
-
         [ConfigurationProperty("encryptingCertificate")]
         public CertificateReferenceElement EncryptingCertificate
         {
@@ -111,38 +101,6 @@ namespace bUtility.Sts.Configuration
             get
             {
                 return base["signingCertificate"] as CertificateReferenceElement;
-            }
-        }
-
-        private X509Certificate2 _encryptingCertificate = null;
-        public X509EncryptingCredentials EncryptingCredentials
-        {
-            get
-            {
-                // allow optional use of the encrypting certificate
-                if (!EncryptingCertificate.ElementInformation.IsPresent) return null;
-                _encryptingCertificate = _encryptingCertificate ?? EncryptingCertificate.GetCertificate();
-                return new X509EncryptingCredentials(_encryptingCertificate);
-            }
-        }
-
-        public X509SigningCredentials SigningCredentials
-        {
-            get
-            {
-                return new X509SigningCredentials(SigningX509Certificate);
-            }
-        }
-
-        private X509Certificate2 _signingCertificate = null;
-        X509Certificate2 SigningX509Certificate
-        {
-            get
-            {
-                if (!SigningCertificate.ElementInformation.IsPresent)
-                    throw new Exception("SigningCertificate is not specified in the configuration! Signing is required.");
-                _signingCertificate = _signingCertificate ?? SigningCertificate.GetCertificate();
-                return _signingCertificate;
             }
         }
     }

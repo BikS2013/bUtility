@@ -14,9 +14,9 @@ namespace bUtility.Sts.MvcSample
     {
         static string OnErrorRedirectUrl = "https://github.com/BikS2013/bUtility";
 
-        public static RelyingParty GetRelyingPartyElement(this string id, out ActionResult action)
+        public static IRelyingParty GetRelyingPartyElement(this string id, out ActionResult action)
         {
-            RelyingParty rp = StsConfiguration.Current.RelyingParties.FindByName(id);
+            IRelyingParty rp = StsConfiguration<RelyingParty>.Current.RelyingParties.FindByName(id);
             action = null;
             if (rp == null)
             {
@@ -49,7 +49,7 @@ namespace bUtility.Sts.MvcSample
         }
 
         public static ActionResult HandleSignInRequestLocal(this Controller controller, Models.LoginModel model,
-            Func<Models.LoginModel, bool> logonFunction, RelyingParty rp)
+            Func<Models.LoginModel, bool> logonFunction, IRelyingParty rp)
         {
             try
             {

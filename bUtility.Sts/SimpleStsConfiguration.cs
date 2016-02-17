@@ -15,25 +15,26 @@ namespace bUtility.Sts
         private static readonly Dictionary<string, SimpleStsConfiguration> CurrentConfigurations = 
             new Dictionary<string, SimpleStsConfiguration>();
 
-        public RelyingParty RelyingParty { get; private set;}
+        public IRelyingParty RelyingParty { get; private set;}
 
-        public SimpleStsConfiguration(RelyingParty rp)
+        public SimpleStsConfiguration(IRelyingParty rp)
             : base(rp.IssuerName)
         {
             RelyingParty = rp;
-            this.SecurityTokenService = typeof(SimpleSts);
+            SecurityTokenService = typeof(SimpleSts);
 
-            this.SecurityTokenHandlers.Clear();
-            this.SecurityTokenHandlers.Add(rp.TokenType.GetSecurityTokenHandler());
+            SecurityTokenHandlers.Clear();
+            SecurityTokenHandlers.Add(rp.TokenType.GetSecurityTokenHandler());
 
-            if (rp.EncryptingCredentials != null)
+
+            ServiceCertificate = rp.GetEncryptingCertificate();
+            if (ServiceCertificate != null)
             {
-                ServiceCertificate = rp.EncryptingCredentials.Certificate;
-                this.SecurityTokenHandlers.Add(new EncryptedSecurityTokenHandler());
+                SecurityTokenHandlers.Add(new EncryptedSecurityTokenHandler());
             }
         }
 
-        public static SimpleStsConfiguration ForRelyingParty(RelyingParty rp)
+        public static SimpleStsConfiguration ForRelyingParty(IRelyingParty rp)
         {
             if (!CurrentConfigurations.ContainsKey(rp.Name))
             {

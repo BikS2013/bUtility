@@ -10,15 +10,15 @@ namespace bUtility.Sts
 {
     public class RequestScope: Scope
     {
-        public RelyingParty RelyingParty { get; private set; }
+        public IRelyingParty RelyingParty { get; private set; }
 
-        public RequestScope(Uri uri, RelyingParty rp):
-            base(uri.ToString(),rp.SigningCredentials)
+        public RequestScope(Uri uri, IRelyingParty rp):
+            base(uri.ToString(), rp.SigningCertificate.GetSigningCredentials())
         {
             RelyingParty = rp;
-            if (rp.EncryptingCredentials != null)
+            EncryptingCredentials = rp.GetEncryptingCredentials();
+            if (EncryptingCredentials != null)
             {
-                EncryptingCredentials = rp.EncryptingCredentials;
                 TokenEncryptionRequired = true;
                 SymmetricKeyEncryptionRequired = true;
             }

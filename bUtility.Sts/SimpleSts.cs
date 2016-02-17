@@ -23,22 +23,29 @@ namespace bUtility.Sts
         {
             // Ignore certificate errors as we will use our selfsigned ones and it will take too long to validate 
             // the certificate path.
-            SecurityTokenServiceConfiguration.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
-            SecurityTokenServiceConfiguration.CertificateValidator = new IgnoreCertificateErrorsValidator();
+            //SecurityTokenServiceConfiguration.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None
+            //SecurityTokenServiceConfiguration.CertificateValidator = new IgnoreCertificateErrorsValidator()
 
             SecurityTokenServiceConfiguration.DefaultTokenType = configuration.RelyingParty.TokenType; 
         }
 
+        SimpleStsConfiguration getConfiguration()
+        {
+            return SecurityTokenServiceConfiguration as SimpleStsConfiguration;
+        }
+        IRelyingParty getRelyingParty()
+        {
+            return getConfiguration()?.RelyingParty;
+        }
         protected override Scope GetScope(ClaimsPrincipal principal, RequestSecurityToken request)
         {
-            if (request.AppliesTo == null)
+            if (request?.AppliesTo == null)
             {
                 throw new InvalidRequestException($"token request from {principal?.Identity?.Name} - but no realm specified.");
             }
 
-            var conf = (SimpleStsConfiguration)SecurityTokenServiceConfiguration;
-            var rp = conf.RelyingParty;
-            if (rp == null || rp.Realm != request.AppliesTo.Uri.ToString())
+            var rp = getRelyingParty();
+            if (rp?.Realm != request.AppliesTo.Uri.ToString())
             {
                 throw new InvalidRequestException(string.Format($"The AppliesTo uri {request.AppliesTo.Uri} is not registered as a relying party."));
             }
@@ -68,22 +75,23 @@ namespace bUtility.Sts
 
         protected override ClaimsIdentity GetOutputClaimsIdentity(ClaimsPrincipal principal, RequestSecurityToken request, Scope scope)
         {
-
-            if (principal == null)
-                throw new SecurityException("Empty principal while creating claims identity!");
-
-            ClaimsIdentity userIdentity = principal.Identities.First();
+            ClaimsIdentity userIdentity = principal?.Identities?.First();
+            if (userIdentity == null)
+                throw new Exception("User Identity not found.");
             var inheritedClaims =
                 userIdentity.Claims.Where(i => !i.Type.In(ClaimTypes.AuthenticationInstant, ClaimTypes.AuthenticationMethod))
                 .Select(c => new Claim(c.Type, c.Value));
-
 
             var relyingParty = (scope as RequestScope).RelyingParty;
 
             var outputIdentity = new ClaimsIdentity(relyingParty.IssuerName);
             // We also have the ClaimTypes.AuthenticationMethod that shows which was the original authenticator
-            outputIdentity.AddClaim(new Claim(ClaimTypes.AuthenticationInstant, DateTime.UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'"), ClaimValueTypes.DateTime, relyingParty.IssuerName));
-            outputIdentity.AddClaim(new Claim(ClaimTypes.AuthenticationMethod, relyingParty.AuthenticationUrl, ClaimValueTypes.String, relyingParty.IssuerName));
+            outputIdentity.AddClaim(new Claim(ClaimTypes.AuthenticationInstant, 
+                DateTime.UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'"), 
+                ClaimValueTypes.DateTime, relyingParty.IssuerName));
+            outputIdentity.AddClaim(new Claim(ClaimTypes.AuthenticationMethod, 
+                relyingParty.AuthenticationUrl, 
+                ClaimValueTypes.String, relyingParty.IssuerName));
 
             outputIdentity.AddClaims(inheritedClaims);
 
