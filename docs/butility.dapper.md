@@ -20,22 +20,28 @@ string GetParameterList(this Type type)
 string GetUpdateClause(this Type type, Func<PropertyInfo, Boolean> filter = null)
 ```
 
-**GetWhereClause4[Not]Nulls**
+**GetWhereClause**
 ```c#
-string GetWhereClause4NotNulls(this object obj)
-string getWherePart4Nulls(this object obj)
-
-IEnumerable<string> GetWhereParts(this object obj)
-string getWherePart(this object obj)
+string GetWhereClause(this object obj, boolean includeNulls=false)
 ```
 
 ```c#
 IEnumerable<T> execQuery<T>(this IDbConnection con, object param)
 ```
+
+**Select**
 ```c#
-
+IEnumerable<T> Select<T>(this IDbConnection con)
+T SelectSingle<T>(this IDbConnection con, object whereObject)
+IEnumerable<T> Select<T>(this IDbConnection con, object whereObject)
 ```
+
+**Insert**
 ```c#
-
+int Insert<T>(this IDbConnection con, T data)
 ```
 
+**Delete**
+```c#
+int Delete<T>(this IDbConnection con, object whereObject)
+```

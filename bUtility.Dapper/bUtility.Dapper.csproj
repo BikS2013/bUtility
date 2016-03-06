@@ -55,6 +55,7 @@
     <Compile Include="Guid2StringMapper.cs" />
     <Compile Include="DMLExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statements.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bUtility.Dapper.nuspec" />

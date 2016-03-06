@@ -31,36 +31,45 @@ namespace bUtility.Dapper
             return type.GetMemberNames<PropertyInfo>(filter).Select(c => $"{c}=@{c}").Concatenate((c, n) => $"{c}, {n}");
         }
 
-
-        public static string GetWhereClause4NotNulls(this object obj)
+        public static string GetWhereClause(this object obj, bool includeNulls = false)
         {
-            return obj?.GetMemberNames<PropertyInfo>((PropertyInfo pInfo) => pInfo.GetValue(obj) != null)?.Select(c => $"{c} = @{c}").Concatenate((c, n) => $"{c} and {n}");
-        }
-
-        public static string getWherePart4Nulls(this object obj)
-        {
-            return obj.GetMemberNames<PropertyInfo>((PropertyInfo pInfo) => pInfo.GetValue(obj) == null)?.Select(c => $"{c} is null")?.Concatenate((c, n) => $"{c} and {n}");
-        }
-
-        public static IEnumerable<string> GetWhereParts(this object obj)
-        {
-            var notNulls = obj.GetWhereClause4NotNulls();
-            var nulls = obj.getWherePart4Nulls();
-            if (notNulls != null) yield return notNulls;
-            if (nulls != null) yield return nulls;
-        }
-
-        public static string getWherePart(this object obj)
-        {
-            return obj.GetMemberNames<PropertyInfo>().Select(c => $"{c} = @{c}").Aggregate((c, n) => $"{c} and {n}");
+            var part1 = obj?.GetMemberNames<PropertyInfo>((PropertyInfo pInfo) => pInfo.GetValue(obj) != null)?
+                .Select(c => $"{c} = @{c}").Concatenate((c, n) => $"{c} and {n}");
+            if (!includeNulls) return part1;
+            var part2 = obj.GetMemberNames<PropertyInfo>((PropertyInfo pInfo) => pInfo.GetValue(obj) == null)?.Select(c => $"{c} is null")?.Concatenate((c, n) => $"{c} and {n}");
+            if (part1.Clear() != null && part2.Clear() != null) return $"{part1} and {part2}";
+            return part1 ?? part2;
         }
 
         public static IEnumerable<T> execQuery<T>(this IDbConnection con, object param)
         {
             string tableName = typeof(T).Name;
             string selectPart = typeof(T).GetColumnList();
-            string wherePart = param.getWherePart();
+            string wherePart = param.GetWhereClause();
             return con.Query<T>($"select {selectPart} from {tableName} where {wherePart}", param);
+        }
+
+        public static IEnumerable<T> Select<T>(this IDbConnection con)
+        {
+            return con.Query<T>(Statements<T>.GetSelect());
+        }
+        public static T SelectSingle<T>(this IDbConnection con, object whereObject)
+        {
+            return con.Query<T>(Statements<T>.GetSelect(whereObject), whereObject).FirstOrDefault();
+        }
+        public static IEnumerable<T> Select<T>(this IDbConnection con, object whereObject)
+        {
+            return con.Query<T>(Statements<T>.GetSelect(whereObject), whereObject);
+        }
+
+        public static int Insert<T>(this IDbConnection con, T data)
+        {
+            return con.Execute(Statements<T>.GetInsert(), data);
+        }
+
+        public static int Delete<T>(this IDbConnection con, object whereObject)
+        {
+            return con.Execute(Statements<T>.GetDelete(whereObject), whereObject);
         }
     }
 }
