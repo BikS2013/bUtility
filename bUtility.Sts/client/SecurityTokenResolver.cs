@@ -14,5 +14,10 @@ namespace bUtility.Sts
             : base("My", StoreLocation.LocalMachine)
         {
         }
+
+        protected override bool TryResolveSecurityKeyCore(SecurityKeyIdentifierClause keyIdentifierClause, out SecurityKey key)
+        {
+            return base.TryResolveSecurityKeyCore(keyIdentifierClause, out key);
+        }
     }
 }
