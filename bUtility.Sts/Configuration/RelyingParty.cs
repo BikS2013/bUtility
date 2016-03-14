@@ -103,5 +103,25 @@ namespace bUtility.Sts.Configuration
                 return base["signingCertificate"] as CertificateReferenceElement;
             }
         }
+
+        [ConfigurationProperty("embeddedSigningCertificate")]
+        public EmbeddedCertificate EmbeddedSigningCertificate
+        {
+            get
+            {
+                return base["embeddedSigningCertificate"] as EmbeddedCertificate;
+            }
+        }
+
+        
+        public X509Certificate2 GetEncryptingCertificate()
+        {
+            return EncryptingCertificate.GetCertificate();
+        }
+
+        public X509Certificate2 GetSigningCertificate()
+        {
+            return SigningCertificate.GetCertificate() ?? EmbeddedSigningCertificate.GetCertificate();
+        }
     }
 }

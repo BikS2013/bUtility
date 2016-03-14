@@ -15,23 +15,16 @@ namespace bUtility.Sts
 {
     public static class RelyingPartyExtensions
     {
-        public static X509Certificate2 GetSigningCertificate(this IRelyingParty rp)
+        public static X509SigningCredentials GetSigningCredentials(this X509Certificate2 certificate)
         {
-            return rp.SigningCertificate.GetCertificate();
+            if (certificate == null) return null;
+            return new X509SigningCredentials(certificate);
         }
 
-        public static X509Certificate2 GetEncryptingCertificate(this IRelyingParty rp)
+        public static X509EncryptingCredentials GetEncryptingCredentials(this X509Certificate2 certificate)
         {
-            return rp.EncryptingCertificate.GetCertificate();
-        }
-        public static X509SigningCredentials GetSigningCredentials(this IRelyingParty rp)
-        {
-            return rp.SigningCertificate.GetSigningCredentials();
-        }
-
-        public static X509EncryptingCredentials GetEncryptingCredentials(this IRelyingParty rp)
-        {
-            return rp.EncryptingCertificate.GetEncryptingCredentials();
+            if (certificate == null) return null;
+            return new X509EncryptingCredentials(certificate);
         }
 
 

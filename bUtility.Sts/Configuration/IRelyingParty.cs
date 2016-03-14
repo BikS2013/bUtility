@@ -19,7 +19,7 @@ namespace bUtility.Sts.Configuration
         string IssuerName { get; }
         string TokenType { get; }
 
-        CertificateReferenceElement EncryptingCertificate { get; }
-        CertificateReferenceElement SigningCertificate { get; }
+        X509Certificate2 GetEncryptingCertificate();
+        X509Certificate2 GetSigningCertificate();
     }
 }

@@ -125,5 +125,14 @@ namespace bUtility.Reflection
             if (attributes != null) return attributes.FirstOrDefault(i => true);
             return null;
         }
+
+        public static Assembly FindAssembly(this string name)
+        {
+            if (name == null) return null;
+            var aList = AppDomain.CurrentDomain.GetAssemblies();
+            var assembly = aList.FirstOrDefault(a => a.FullName == name);
+            return assembly;
+        }
+
     }
 }

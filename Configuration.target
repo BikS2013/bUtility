@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <!-- 
+        Specify custom build action for configuration files
+        http://blogs.msdn.com/b/msbuild/archive/2005/10/06/477064.aspx 
+   -->
+   <Target Name="AfterBuild">
+      <ItemGroup Condition="'$(BuildingInsideVisualStudio)'=='true'">
+         <_CommonConfigFiles Include="Configuration\Common\**\*.config" />
+         <_CurrentConfigFiles Include="Configuration\$(ConfigurationName)\**\*.config" />
+      </ItemGroup>
+      <MakeDir Directories="Configuration\Current" Condition="Exists('Configuration\Current')==false"/>
+      <Delete Files="Configuration\Current\**\*.config" ContinueOnError="true" />
+      <Copy Retries="3" RetryDelayMilliseconds="500" SourceFiles="@(_CommonConfigFiles)" DestinationFiles="@(_CommonConfigFiles->'Configuration\Current\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="false" />
+      <Copy Retries="3" RetryDelayMilliseconds="500" SourceFiles="@(_CurrentConfigFiles)" DestinationFiles="@(_CurrentConfigFiles->'Configuration\Current\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="false" />
+      <Message Text="Copied $(ConfigurationName) configuration files for project $(MSBuildProjectName)" Importance="high" />
+   </Target>
+   <Target Name="CopyCurrentConfig" AfterTargets="CopyAllFilesToSingleFolderForPackage" BeforeTargets="MSDeployPublish">
+    <ItemGroup>
+      <_PublishConfiguration Include="Configuration\Current\**\*.config" />
+    </ItemGroup>
+    <Message Text="Preparing configuration files for publish..." Importance="high" />
+    <RemoveDir Directories="$(_PackageTempDir)\Configuration" ContinueOnError="true" />
+    <MakeDir Directories="$(_PackageTempDir)\Configuration\Current" Condition="Exists('Configuration\Current')==false" />
+    <Copy Retries="3" RetryDelayMilliseconds="500" SourceFiles="@(_PublishConfiguration)" DestinationFiles="@(_PublishConfiguration->'$(_PackageTempDir)\Configuration\Current\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="false" />
+    <Message Text="Configuration files copied to publish location" Importance="high" />
+   </Target>
+</Project>

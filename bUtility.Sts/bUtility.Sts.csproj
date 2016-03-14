@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CertificateHelper.cs" />
+    <Compile Include="Configuration\EmbeddedCertificate.cs" />
     <Compile Include="Configuration\IRelyingParty.cs" />
     <Compile Include="Configuration\RelyingParty.cs" />
     <Compile Include="Configuration\RelyingParties.cs" />

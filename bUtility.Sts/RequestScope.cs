@@ -13,10 +13,10 @@ namespace bUtility.Sts
         public IRelyingParty RelyingParty { get; private set; }
 
         public RequestScope(Uri uri, IRelyingParty rp):
-            base(uri.ToString(), rp.SigningCertificate.GetSigningCredentials())
+            base(uri.ToString(), rp.GetSigningCertificate().GetSigningCredentials())
         {
             RelyingParty = rp;
-            EncryptingCredentials = rp.GetEncryptingCredentials();
+            EncryptingCredentials = rp.GetEncryptingCertificate().GetEncryptingCredentials();
             if (EncryptingCredentials != null)
             {
                 TokenEncryptionRequired = true;

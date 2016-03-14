@@ -1,4 +1,6 @@
-﻿using System;
+﻿using bUtility.Reflection;
+using bUtility.Sts.Configuration;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
@@ -13,6 +15,23 @@ namespace bUtility.Sts
 {
     public static class CertificateHelper
     {
+
+        public static X509Certificate2 GetCertificate( this EmbeddedCertificate config)
+        {
+            var assembly = config?.AssemblyName?.FindAssembly();
+            if (assembly != null)
+            {
+                var stream = assembly.GetManifestResourceStream(config.ResourceName);
+                if (stream != null)
+                {
+                    byte[] data = new byte[stream.Length];
+                    stream.Read(data, 0, (int)stream.Length);
+                    X509Certificate2 certificate = new X509Certificate2(data, config.Password);
+                    return certificate;
+                }
+            }
+            return null;
+        }
 
         public static X509Certificate2 GetCertificate(StoreName name, StoreLocation location, X509FindType findType, object findValue)
         {
