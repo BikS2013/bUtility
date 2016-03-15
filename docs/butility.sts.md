@@ -112,3 +112,7 @@ void HandleSignIn(this HttpResponse httpResponse, Uri baseUri, RelyingParty rp, 
 
 ```
 
+###Sample Url
+```
+https://butilitystsclient.azurewebsites.net/sample/index
+```
