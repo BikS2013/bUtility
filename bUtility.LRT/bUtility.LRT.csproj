@@ -42,9 +42,14 @@
   <ItemGroup>
     <Compile Include="IAction.cs" />
     <Compile Include="IOperation.cs" />
+    <Compile Include="IOperationResult.cs" />
     <Compile Include="IOperationStore.cs" />
     <Compile Include="IPolicy.cs" />
+    <Compile Include="PolicyAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Policy.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

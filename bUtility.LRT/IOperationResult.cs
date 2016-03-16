@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace bUtility.LRT
 {
-    public interface IPolicy<in T, out R>
+    public interface IOperationResult
     {
-        bool Execute();
-        bool Resume();
-        bool Cancel();
-
+        bool Completed { get; }
     }
 }

@@ -8,13 +8,17 @@ namespace bUtility.LRT
 {
     public interface IAction
     {
+        bool Execute();
+        bool Ask();
+        bool Cancel();
+
+        IAction NextAction();
     }
 
-    public interface IAction<in T, out R>: IAction
+    public interface IAction<out T, out R>: IAction where R: IOperationResult
     {
-        R Execute(T data);
-        R Ask(T data);
-        void Cancel(T data);
+        T GetData();
+        R GetResult();
     }
 
 }

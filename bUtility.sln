@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.LRT", "bUtility.LR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Sts.MvcServer", "bUtility.Sts.MvcServer\bUtility.Sts.MvcServer.csproj", "{29ADEC23-C6E2-4ADF-9FD8-6AC676AC0D2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardActivation", "CardActivation\CardActivation.csproj", "{AFB2E856-6DFC-4832-98E4-FD39894E7A96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		azure|Any CPU = azure|Any CPU
@@ -93,6 +95,12 @@ Global
 		{29ADEC23-C6E2-4ADF-9FD8-6AC676AC0D2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29ADEC23-C6E2-4ADF-9FD8-6AC676AC0D2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29ADEC23-C6E2-4ADF-9FD8-6AC676AC0D2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFB2E856-6DFC-4832-98E4-FD39894E7A96}.azure|Any CPU.ActiveCfg = Release|Any CPU
+		{AFB2E856-6DFC-4832-98E4-FD39894E7A96}.azure|Any CPU.Build.0 = Release|Any CPU
+		{AFB2E856-6DFC-4832-98E4-FD39894E7A96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFB2E856-6DFC-4832-98E4-FD39894E7A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFB2E856-6DFC-4832-98E4-FD39894E7A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFB2E856-6DFC-4832-98E4-FD39894E7A96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

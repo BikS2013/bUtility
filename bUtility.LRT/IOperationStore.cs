@@ -8,8 +8,7 @@ namespace bUtility.LRT
 {
     public interface IOperationStore
     {
-        void Store(IOperation operation);
-
-
+        bool LogExecution(IAction action, Exception ex);
+        bool LogCancelation(IAction action, Exception ex);
     }
 }

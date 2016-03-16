@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="bUtility.LRT.PolicyAction&lt;T, R&gt;">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAUAAAAAQAAAAgAAQgAAAAQBAAAEAAAQAAAAA=</HashCode>
+      <FileName>PolicyAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="bUtility.LRT.IPolicy&lt;T, R&gt;">
+    <Position X="8" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAQAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>IPolicy.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="bUtility.LRT.IAction">
+    <Position X="3.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAQAAAAAAAAgAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IAction.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="bUtility.LRT.IAction&lt;T, R&gt;">
+    <Position X="5.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>IAction.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
