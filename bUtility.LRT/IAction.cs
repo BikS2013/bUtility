@@ -8,17 +8,24 @@ namespace bUtility.LRT
 {
     public interface IAction
     {
+        bool IsCompleted();
+        bool IsReversed();
+
         bool Execute();
         bool Ask();
-        bool Cancel();
+        bool Reverse();
 
         IAction NextAction();
+
+        object GetData();
+
+        object GetResult();
     }
 
     public interface IAction<out T, out R>: IAction where R: IOperationResult
     {
-        T GetData();
-        R GetResult();
+        new T GetData();
+        new R GetResult();
     }
 
 }

@@ -66,6 +66,7 @@
     <Compile Include="Request.cs" />
     <Compile Include="RequestHeader.cs" />
     <Compile Include="Response.cs" />
+    <Compile Include="SimpleRequest.cs" />
     <Compile Include="ToLocalTimeFilterAttribute.cs" />
   </ItemGroup>
   <ItemGroup>

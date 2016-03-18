@@ -10,7 +10,7 @@ namespace bUtility.LRT
     {
         bool Execute();
         bool Resume();
-        bool Cancel();
+        bool Reverse();
 
     }
 }
