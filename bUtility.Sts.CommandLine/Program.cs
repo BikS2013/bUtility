@@ -84,30 +84,26 @@ namespace bUtility.Sts.CommandLine
             }
 
             _loginCookies = new CookieContainer();
-            using (var loginResponse = WebClientHelper.Post(testUrl, stepTwoPostData, _loginCookies))
+            using (var testResponse = WebClientHelper.Post(testUrl, stepTwoPostData, _loginCookies))
             {
-                var httpLoginResponse = loginResponse as HttpWebResponse;
+                var httpResponse = testResponse as HttpWebResponse;
 
-                if (!httpLoginResponse.StatusCode.In( HttpStatusCode.Found, HttpStatusCode.OK) )
+                if (!httpResponse.StatusCode.In( HttpStatusCode.Found, HttpStatusCode.OK) )
                 {
                     throw new Exception("Invalid Status Code");
                 }
 
-                if (!httpLoginResponse.ResponseUri.ToString().StartsWith(testUrl, StringComparison.CurrentCultureIgnoreCase))
+                if (!httpResponse.ResponseUri.ToString().StartsWith(testUrl, StringComparison.CurrentCultureIgnoreCase))
                 {
                     throw new Exception("Invalid Response Uri");
                 }
 
-                //get the sessionId 
-                using (var res = WebClientHelper.Get(httpLoginResponse.ResponseUri.ToString(), null, _loginCookies))
+                using (StreamReader reader = new StreamReader(httpResponse.GetResponseStream()))
                 {
-                    using (StreamReader reader = new StreamReader(res.GetResponseStream()))
+                    var alltext = reader.ReadToEnd().ToString();
+                    foreach (var cookie in _loginCookies.GetCookies(new Uri(testUrl)))
                     {
-                        var alltext = reader.ReadToEnd().ToString();
-                        foreach (var cookie in _loginCookies.GetCookies(new Uri(testUrl)))
-                        {
-                            var txt = cookie.ToString();
-                        }
+                        var txt = cookie.ToString();
                     }
                 }
             }
