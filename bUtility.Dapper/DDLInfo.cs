@@ -8,21 +8,23 @@ namespace bUtility.Dapper
 {
     public class DDLInfo
     {
-        public static DDLInfo Column(string name, int? length = null, int? decimals = null, bool allowNull = true)
+        public static DDLInfo Column(string name, int? length = null, int? decimals = null, bool allowNull = true, bool ignore = true)
         {
-            return new DDLInfo(name, length, decimals, allowNull);
+            return new DDLInfo(name, length, decimals, allowNull, ignore);
         }
 
         public string Name { get; set; }
         int? _Length { get; set; }
         int? _Decimals { get; set; }
         public bool _AllowNull { get; set; }
-        public DDLInfo(string name, int? length = null, int? decimals = null, bool allowNull = true)
+        public bool _Ignore { get; set; }
+        public DDLInfo(string name, int? length = null, int? decimals = null, bool allowNull = true, bool ignore = true)
         {
             Name = name;
             _Length = length;
             _Decimals = decimals;
             _AllowNull = allowNull;
+            _Ignore = ignore;
         }
 
         public DDLInfo Length(int? value)
@@ -38,6 +40,11 @@ namespace bUtility.Dapper
         public DDLInfo AllowNull(bool option = true)
         {
             _AllowNull = option;
+            return this;
+        }
+        public DDLInfo Ignore(bool option = false)
+        {
+            _Ignore = option;
             return this;
         }
 
