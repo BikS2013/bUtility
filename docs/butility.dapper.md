@@ -1,4 +1,4 @@
-#### [bUtility](../README.md), [bUtility.Sts](butility.sts.md)
+#### [bUtility](../README.md), [bUtility.WebApi](docs/butility.webapi.md), [bUtility.Sts](butility.sts.md)
 
 ## bUtility.Dapper
 Dapper related utilities:

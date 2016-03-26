@@ -59,6 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NotFoundResolution\ActionSelector.cs" />
+    <Compile Include="NotFoundResolution\ControllerSelector.cs" />
+    <Compile Include="NotFoundResolution\ErrorController.cs" />
     <Compile Include="ExceptionHandler.cs" />
     <Compile Include="ReflectionExtensions.cs" />
     <Compile Include="IUserIDProvider.cs" />

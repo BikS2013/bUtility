@@ -3,22 +3,22 @@
   <Class Name="bUtility.LRT.PolicyAction&lt;T, R&gt;">
     <Position X="5.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAUAAAAAQAAAAgAAQgAAAAQBAAAEAAAQAAAAA=</HashCode>
+      <HashCode>AAAAAAAAEAgAAAQAAAAgAAQhAAAARBAAAEACQQAAAIA=</HashCode>
       <FileName>PolicyAction.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Interface Name="bUtility.LRT.IPolicy&lt;T, R&gt;">
-    <Position X="8" Y="3.25" Width="1.5" />
+    <Position X="8" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAQAAAAAQAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAACAAgAAAA=</HashCode>
       <FileName>IPolicy.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="bUtility.LRT.IAction">
     <Position X="3.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAQAAAAAQAAAAAAAAgAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAEAAAAAQAAAAAAAAgAAAAQBAAAEACQAAAAAA=</HashCode>
       <FileName>IAction.cs</FileName>
     </TypeIdentifier>
   </Interface>
