@@ -1,4 +1,4 @@
-#### [bUtility](../README.md), [bUtility.WebApi](docs/butility.webapi.md), [bUtility.Dapper](butility.dapper.md)
+#### [bUtility](../README.md), [bUtility.WebApi](docs/butility.WebApi.md), [bUtility.Dapper](butility.dapper.md)
 
 ## bUtility.sts
 Sts related utilities:
