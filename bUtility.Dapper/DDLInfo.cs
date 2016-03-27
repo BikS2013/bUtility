@@ -8,25 +8,32 @@ namespace bUtility.Dapper
 {
     public class DDLInfo
     {
-        public static DDLInfo Column(string name, int? length = null, int? decimals = null, bool allowNull = true, bool ignore = true)
+        public static DDLInfo Column(string name, Type type = null, int? length = null, int? decimals = null, bool allowNull = true, bool ignore = true)
         {
-            return new DDLInfo(name, length, decimals, allowNull, ignore);
+            return new DDLInfo(name, type, length, decimals, allowNull, ignore);
         }
 
         public string Name { get; set; }
+        Type _Type { get; set; }
         int? _Length { get; set; }
         int? _Decimals { get; set; }
         public bool _AllowNull { get; set; }
         public bool _Ignore { get; set; }
-        public DDLInfo(string name, int? length = null, int? decimals = null, bool allowNull = true, bool ignore = true)
+        public DDLInfo(string name, Type type, int? length = null, int? decimals = null, bool allowNull = true, bool ignore = true)
         {
             Name = name;
+            _Type = type;
             _Length = length;
             _Decimals = decimals;
             _AllowNull = allowNull;
             _Ignore = ignore;
         }
 
+        public DDLInfo Type(Type type)
+        {
+            _Type = type;
+            return this;
+        }
         public DDLInfo Length(int? value)
         {
             _Length = value;
@@ -48,6 +55,13 @@ namespace bUtility.Dapper
             return this;
         }
 
+        public Type TypeInfo
+        {
+            get
+            {
+                return _Type;
+            }
+        }
         public string LengthExpression
         {
             get
