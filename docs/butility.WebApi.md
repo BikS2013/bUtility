@@ -2,7 +2,7 @@
 
 ## bUtility.WebApi
 
-###NotFoundResolution
+###Routing Configuration
 **Global.asax** 
 ```c#
 GlobalConfiguration.Configure((httpConfiguration) =>
