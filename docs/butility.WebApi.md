@@ -18,20 +18,20 @@ GlobalConfiguration.Configure((httpConfiguration) =>
     //....
 
 
-    //default api route
+    //generic api routing
     httpConfiguration.Routes.MapHttpRoute(
             name: "DefaultApi",
             routeTemplate: "api/{controller}/{action}"
         );
 
-    //any other route
+    //handles any other route
     httpConfiguration.Routes.MapHttpRoute(
         name: "Error404",
         routeTemplate: "{*url}",
         defaults: new { controller = "Index", action = "Get" }
     );
 
-    //exception handling
+    //handles wrong urls & exceptions
     httpConfiguration.Services.Replace(typeof(IHttpControllerSelector), 
         new ControllerSelector(httpConfiguration, "Index", "GetSimple"));
     httpConfiguration.Services.Replace(typeof(IHttpActionSelector), 
