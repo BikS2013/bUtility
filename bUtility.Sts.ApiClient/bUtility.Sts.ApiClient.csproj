@@ -85,6 +85,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bower_components\angular\angular.min.js" />
+    <Content Include="bower_components\jquery\dist\jquery.min.js" />
+    <Content Include="index.html" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\TestApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -168,6 +172,9 @@
       <Project>{cbc420bf-7799-4970-b6f3-e350dcb8543f}</Project>
       <Name>bUtility.WebApi</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bower.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

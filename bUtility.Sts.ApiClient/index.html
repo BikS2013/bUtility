@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <base href="[basehRef]" />
+    <title>apiClient</title>
+    <meta charset="utf-8" />
+    <meta name="contextPath" content="[contextPath]" />
+    <script src="[libhRef]jquery/dist/jquery.min.js"></script>
+    <script src="[libhRef]angular/angular.min.js"></script>
+    <script>
+        test1 = function test1() {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("Post", '[basehRef]api/testApi/sample', false); // false for synchronous request
+            xmlHttp.send(null);
+            return xmlHttp.responseText;
+        }
+
+        $(document).ready(function () {
+        });
+
+        test2 = function test2() {
+            $.post("[basehRef]api/testApi/sample", "{name: 'mitsos'}", function (data) {
+                alert(data);
+            });
+        }
+
+        var sampleApp = angular.module("sampleApp", ["ng"]);
+        sampleApp.component('callTest', {
+            template: "<div ng-click='angularTest()' style='cursor:pointer;'>angularTest</div>",
+            controller: ["$scope", "$http", function ($scope, $http) {
+                var ctrl = this;
+                $scope.angularTest = function () {
+                    $http({
+                        method: 'post',
+                        url: '[basehRef]api/testApi/sample'
+                    }).then(function successCallback(response) {
+                        alert(response.data);
+                    }, function errorCallback(response) {
+                    }); 
+                };
+            }]
+
+        })
+
+    </script>
+</head>
+<body>
+    <h1>hi</h1>
+    <div>
+        <button onclick="test1()">test1</button>
+        <button onclick="test2()">test2</button>
+    </div>
+    <div ng-app="sampleApp" style="margin-top:20px;">
+        <call-test></call-test>
+    </div>
+</body>
+</html>

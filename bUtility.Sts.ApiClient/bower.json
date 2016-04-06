@@ -1,0 +1,25 @@
+{
+  "name": "apiClient",
+  "homepage": "https://github.com/BikS2013/bUtility",
+  "authors": [
+    "Giorgos Marinos <biks@nbg.gr>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "^1.5.3"
+  },
+  "dependencies": {
+    "angular": "^1.5.3",
+    "jquery": "^2.2.3"
+  }
+}
