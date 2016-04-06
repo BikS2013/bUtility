@@ -161,7 +161,9 @@ node_modules/
 bower_components/
 public/
 [Cc]onfiguration/[Cc]urrent/
-/bUtility.Sts.ApiClient/[Cc]onfiguration/[Cc]urrent
-/bUtility.Sts.MvcClient/[Cc]onfiguration/[Cc]urrent
-/bUtility.Sts.MvcServer/[Cc]onfiguration/[Cc]urrent
+/bUtility.Sts.ApiClient/[Cc]onfiguration/[Cc]urrent/
+/bUtility.Sts.MvcClient/[Cc]onfiguration/[Cc]urrent/
+/bUtility.Sts.MvcServer/[Cc]onfiguration/[Cc]urrent/
 /CardActivation
+Current
+Current
