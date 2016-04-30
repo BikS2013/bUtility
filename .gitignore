@@ -14,7 +14,7 @@ x64/
 build/
 [Bb]in/
 [Oo]bj/
-_CreateNewNuGetPackage/
+## _CreateNewNuGetPackage/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
