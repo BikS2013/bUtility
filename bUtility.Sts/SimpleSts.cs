@@ -45,7 +45,7 @@ namespace bUtility.Sts
             }
 
             var rp = getRelyingParty();
-            if (rp?.Realm != request.AppliesTo.Uri.ToString())
+            if ( !string.Equals( rp?.Realm, request.AppliesTo.Uri.ToString(), StringComparison.InvariantCultureIgnoreCase) )
             {
                 throw new InvalidRequestException(string.Format($"The AppliesTo uri {request.AppliesTo.Uri} is not registered as a relying party."));
             }

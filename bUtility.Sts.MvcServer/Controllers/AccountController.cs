@@ -78,8 +78,9 @@ namespace bUtility.Sts.MvcServer.Controllers
                 if (result != null)
                     return result;
             }
-            catch
+            catch(Exception ex)
             {
+                throw;
                 return new RedirectResult(OnErrorRedirectUrl);
             }
 

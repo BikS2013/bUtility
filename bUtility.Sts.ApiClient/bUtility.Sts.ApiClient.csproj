@@ -93,7 +93,10 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="sample.html" />
-    <Content Include="Web.config" />
+    <Content Include="sampleToken.xml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\IndexController.cs" />
@@ -161,7 +164,9 @@
     <Content Include="Configuration\Debug\System.IdentityModel.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuration\Debug\System.IdentityModel.Services.config" />
+    <Content Include="Configuration\Debug\System.IdentityModel.Services.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bUtility.Sts\bUtility.Sts.csproj">
@@ -178,6 +183,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="api.model.local.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\Common\System.Web.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
