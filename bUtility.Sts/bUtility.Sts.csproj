@@ -68,6 +68,7 @@
     <Compile Include="constants\Federation.cs" />
     <Compile Include="GenericExtensions.cs" />
     <Compile Include="IgnoreCertificateErrorsValidator.cs" />
+    <Compile Include="JWTSecurityTokenHandlerFix.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelyingPartyExtensions.cs" />
     <Compile Include="RequestScope.cs" />

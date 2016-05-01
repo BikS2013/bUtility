@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Configuration;
@@ -15,9 +16,8 @@ namespace bUtility.Sts
 {
     public static class CertificateHelper
     {
-        public static X509Certificate2 GetCertificate(string assemblyName, string resourceName, string password)
+        public static X509Certificate2 GetCertificate(this Assembly assembly, string resourceName, string password=null)
         {
-            var assembly = assemblyName?.FindAssembly();
             if (assembly != null)
             {
                 var stream = assembly.GetManifestResourceStream(resourceName);
@@ -25,11 +25,27 @@ namespace bUtility.Sts
                 {
                     byte[] data = new byte[stream.Length];
                     stream.Read(data, 0, (int)stream.Length);
-                    X509Certificate2 certificate = new X509Certificate2(data, password);
+                    X509Certificate2 certificate = null;
+                    if ( password != null)
+                    {
+                        certificate = new X509Certificate2(data, password);
+                    }
+                    else
+                    {
+                        certificate = new X509Certificate2(data);
+                    }
                     return certificate;
                 }
             }
             return null;
+        }
+        public static X509Certificate2 GetCertificate(string assemblyName, string resourceName)
+        {
+            return assemblyName?.FindAssembly().GetCertificate(resourceName);
+        }
+        public static X509Certificate2 GetCertificate(string assemblyName, string resourceName, string password)
+        {
+            return assemblyName?.FindAssembly().GetCertificate(resourceName, password);
         }
 
         public static X509Certificate2 GetCertificate( this EmbeddedCertificate config)

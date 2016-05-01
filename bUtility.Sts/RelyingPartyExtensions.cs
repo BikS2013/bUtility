@@ -40,8 +40,9 @@ namespace bUtility.Sts
         public static SignInResponseMessage ProcessSignInRequest(this IRelyingParty rp, Uri baseUri, ClaimsPrincipal principal)
         {
             var sts = new SimpleSts(rp.GetStsConfiguration());
+            var rMessage = rp.GetSignInRequestMessage(baseUri);
             return FederatedPassiveSecurityTokenServiceOperations.ProcessSignInRequest(
-                rp.GetSignInRequestMessage(baseUri), principal, sts);
+                rMessage, principal, sts);
         }
 
         public static void HandleSignIn(this HttpResponse httpResponse, Uri baseUri, IRelyingParty rp, ClaimsPrincipal principal)

@@ -26,9 +26,15 @@ namespace bUtility.Sts.ApiClient
 
         X509Certificate2 getCertificate()
         {
-            var localCert =
-                bUtility.Sts.CertificateHelper.GetCertificate("bUtility.Sts.ApiClient, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                    "bUtility.Sts.ApiClient.api.model.local.pfx", "123456");
+            //το GetType().Assembly δεν δουλεύει (γιατί γίνεται build σε run-time)
+            var localCert = typeof(IndexController).Assembly.GetCertificate("bUtility.Sts.ApiClient.api.model.local.pfx", "123456");
+            return localCert;
+
+        }
+        X509Certificate2 getIssuerCertificate()
+        {
+            //το GetType().Assembly δεν δουλεύει (γιατί γίνεται build σε run-time)
+            var localCert = typeof(IndexController).Assembly.GetCertificate("bUtility.Sts.ApiClient.issuer.model.local.cer");
             return localCert;
 
         }
@@ -47,6 +53,7 @@ namespace bUtility.Sts.ApiClient
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            bUtility.Sts.JWTSecurityTokenHandlerFix.AddIssuerKey(getIssuerCertificate());
 
             GlobalConfiguration.Configure((httpConfiguration) =>
             {

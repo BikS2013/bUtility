@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bUtility.Sts;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace bUtility.Sts
             {
                 [TokenTypes.Saml11TokenProfile11] = () => new SamlSecurityTokenHandler(),
                 [TokenTypes.Saml2TokenProfile11] = () => new Saml2SecurityTokenHandler(),
-                [TokenTypes.JsonWebToken] = () => new JwtSecurityTokenHandler()
+                [TokenTypes.JsonWebToken] = () => new JWTSecurityTokenHandlerFix()
             };
 
         public static SecurityTokenHandler GetSecurityTokenHandler(this string name)
