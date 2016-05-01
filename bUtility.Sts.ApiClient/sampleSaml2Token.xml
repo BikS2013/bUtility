@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<trust:RequestSecurityTokenResponseCollection xmlns:trust="http://docs.oasis-open.org/ws-sx/ws-trust/200512">
+  <trust:RequestSecurityTokenResponse>
+    <trust:Lifetime>
+      <wsu:Created xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-05-01T18:49:13.975Z</wsu:Created>
+      <wsu:Expires xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-05-02T02:49:13.975Z</wsu:Expires>
+    </trust:Lifetime>
+    <wsp:AppliesTo xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+      <wsa:EndpointReference xmlns:wsa="http://www.w3.org/2005/08/addressing">
+        <wsa:Address>https://mystssampleapp/</wsa:Address>
+      </wsa:EndpointReference>
+    </wsp:AppliesTo>
+    <trust:RequestedSecurityToken>
+      <Assertion ID="_2ab7c648-9e6b-432c-8cb6-c997dab22f84" IssueInstant="2016-05-01T18:49:13.977Z" Version="2.0" xmlns="urn:oasis:names:tc:SAML:2.0:assertion">
+        <Issuer>simpleSTS@azure</Issuer>
+        <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+          <SignedInfo>
+            <CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+            <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" />
+            <Reference URI="#_2ab7c648-9e6b-432c-8cb6-c997dab22f84">
+              <Transforms>
+                <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+                <Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+              </Transforms>
+              <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+              <DigestValue>QacOBIe/ngF8tjUNDfgmg3FR38OfWz7ngWVMJKFlMDg=</DigestValue>
+            </Reference>
+          </SignedInfo>
+          <SignatureValue>hugH54qqHWn2TtUpyVfUZji0ZyfCQCSnM3ciA9eETqmdXYWDh5YvVjOwuGxWsO4UrUYGhZczf8AG/3gKjR1QYjWIWvQgV2mkFL8dOH2UlqZkDT5wwiN0oeRShx5c9sycrGhmULfEuPgu/D7MtABMCkKTFsgmCYO9zwuJAsMfpamKCUMRtjoH+R6c08M8/NtaaCWFnmQW0u6YtWreQ2VRtHV1YTzCJIAbiOZjBdaYPcoS9HeeENfhS3XtXKUPekBIDHVX4SPM0t5XLbD6jQMWrg89zyOGdJim/bjcmXQrbrytRleyfOUCitjTtbZc5w0wa2EG/0cotaoXb3YKfjfkLw==</SignatureValue>
+          <KeyInfo>
+            <X509Data>
+              <X509Certificate>MIIChTCCAfKgAwIBAgIQ62WLnlrFB4hHX4QYmN0znTAJBgUrDgMCHQUAMBkxFzAVBgNVBAMTDmNhLm1vZGVsLmxvY2FsMB4XDTE1MTAzMTA5Mjg1OVoXDTE5MTIzMTIyMDAwMFowHTEbMBkGA1UEAxMSaXNzdWVyLm1vZGVsLmxvY2FsMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq1l8b5qiI6PnfudQ4szbujsRa3p93FZfx2meM7BHL40zpa5emFI02ovnKEv1GV599i3+7NOLBLM0aI+0Xj0vYLFOUBQvvZXVpbeEeEgJgem3I6ICF6UmvgBCqInfWsNdzospuaZiODoeKwbopfyFgKPEBBI1Kc60/UFpwIZycHcTqyDqfBO2ev5PD6wxfN2X2q0URu6R4g3l4PrnHOYy4Ht6peM2B62QpztFFe9X2FGOOv4DvWHH0gfCgIzfOTXqZV8bmFntQnEB6cH4+3opgFQkZfBHQt6NAkekSBf0svrJ/isbbIfQTzS2fOVwIxEKXBggYgo+JpuW02ED/gMlewIDAQABo04wTDBKBgNVHQEEQzBBgBCTO1a3A0fZw1Po8fiHhgMJoRswGTEXMBUGA1UEAxMOY2EubW9kZWwubG9jYWyCEM0jTg7DlpCIQpUEXutMA8swCQYFKw4DAh0FAAOBgQBsiXdiedcPbLrD83+j31kJFOygi8BudCW94OkhpHSkGz3V8zxtdKD8u4pnjHh+I9gXevuNxkGgH8LOIM2+KyRvHAskViPsK3Th0N/k+ZSXZ85tvq5wkvMJO3ZxzZOGWC1FprDRnf3oLTmTbum8r2M8UrIoORrXNuMR+9X1rmHeFw==</X509Certificate>
+            </X509Data>
+          </KeyInfo>
+        </Signature>
+        <Subject>
+          <SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer" />
+        </Subject>
+        <Conditions NotBefore="2016-05-01T18:49:13.975Z" NotOnOrAfter="2016-05-02T02:49:13.975Z">
+          <AudienceRestriction>
+            <Audience>https://mystssampleapp/</Audience>
+          </AudienceRestriction>
+        </Conditions>
+        <AttributeStatement>
+          <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name">
+            <AttributeValue>a</AttributeValue>
+          </Attribute>
+        </AttributeStatement>
+        <AuthnStatement AuthnInstant="2016-05-01T18:49:13.000Z">
+          <AuthnContext>
+            <AuthnContextClassRef>https://localhost/bUtility.Sts.MvcServer/Account/index/testApiLocal</AuthnContextClassRef>
+          </AuthnContext>
+        </AuthnStatement>
+      </Assertion>
+    </trust:RequestedSecurityToken>
+    <trust:RequestedAttachedReference>
+      <SecurityTokenReference d4p1:TokenType="http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0" xmlns:d4p1="http://docs.oasis-open.org/wss/oasis-wss-wssecurity-secext-1.1.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+        <KeyIdentifier ValueType="http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLID">_2ab7c648-9e6b-432c-8cb6-c997dab22f84</KeyIdentifier>
+      </SecurityTokenReference>
+    </trust:RequestedAttachedReference>
+    <trust:RequestedUnattachedReference>
+      <SecurityTokenReference d4p1:TokenType="http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0" xmlns:d4p1="http://docs.oasis-open.org/wss/oasis-wss-wssecurity-secext-1.1.xsd" xmlns="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+        <KeyIdentifier ValueType="http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLID">_2ab7c648-9e6b-432c-8cb6-c997dab22f84</KeyIdentifier>
+      </SecurityTokenReference>
+    </trust:RequestedUnattachedReference>
+    <trust:TokenType>urn:oasis:names:tc:SAML:2.0:assertion</trust:TokenType>
+    <trust:RequestType>http://docs.oasis-open.org/ws-sx/ws-trust/200512/Issue</trust:RequestType>
+    <trust:KeyType>http://docs.oasis-open.org/ws-sx/ws-trust/200512/Bearer</trust:KeyType>
+  </trust:RequestSecurityTokenResponse>
+</trust:RequestSecurityTokenResponseCollection>

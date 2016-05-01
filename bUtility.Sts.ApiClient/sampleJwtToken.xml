@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<trust:RequestSecurityTokenResponseCollection xmlns:trust="http://docs.oasis-open.org/ws-sx/ws-trust/200512">
+  <trust:RequestSecurityTokenResponse>
+    <trust:Lifetime>
+      <wsu:Created xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-05-01T19:55:20.250Z</wsu:Created>
+      <wsu:Expires xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">2016-05-02T03:55:20.250Z</wsu:Expires>
+    </trust:Lifetime>
+    <wsp:AppliesTo xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+      <wsa:EndpointReference xmlns:wsa="http://www.w3.org/2005/08/addressing">
+        <wsa:Address>https://mystssampleapp/</wsa:Address>
+      </wsa:EndpointReference>
+    </wsp:AppliesTo>
+    <trust:RequestedSecurityToken>
+      <wsse:BinarySecurityToken ValueType="urn:ietf:params:oauth:token-type:jwt" EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKU1V6STFOaUlzSW5nMWRDSTZJa1IyYkhwa1ptWkhObkZtUTNoeVMwTTVPWGRLZHpORGMydGpXU0o5LmV5SmhkWFJvWDNScGJXVWlPaUl5TURFMkxUQTFMVEF4VkRFNU9qVTFPakl3V2lJc0ltRjFkR2h0WlhSb2IyUWlPaUpvZEhSd2N6b3ZMMnh2WTJGc2FHOXpkQzlpVlhScGJHbDBlUzVUZEhNdVRYWmpVMlZ5ZG1WeUwwRmpZMjkxYm5RdmFXNWtaWGd2ZEdWemRFRndhVXh2WTJGc0lpd2lkVzVwY1hWbFgyNWhiV1VpT2lMT3NTSXNJbWx6Y3lJNkluTnBiWEJzWlZOVVUwQmhlblZ5WlNJc0ltRjFaQ0k2SW1oMGRIQnpPaTh2YlhsemRITnpZVzF3YkdWaGNIQXZJaXdpWlhod0lqb3hORFl5TVRZeE16SXdMQ0p1WW1ZaU9qRTBOakl4TXpJMU1qQjkuSVNTRll6U1g0ZEZTUmhVdzZFRG1aek41clZoNVI0V19JUmR3TF90ZWkzUEZXa3BueW9pTHRZVHBCRzctYU1wdzg2cjZXc3J5V0YySU1hV05pcGRTbmhESjBpQkMxbXlTcFc1bWNDdEdLaEVDd2g5WUFWdU1IUzh4UlNGa3hOSll0akpPeTBzVlNJS1JTTUtxLUREMk9oNmphdUY2Uk8zb0V4cXJhWU8wSWV2b1pYZEhOUFdPcHBQRWNHYkoyT29yc19UcE9UUHUyVUdaME4xQjJfQXRVVzdHWEpWSXloYXNfODRBOVBEQmFKTlJlcnJ1UkNiSUJ3ZjBvNVZSazBKNEJVb2JOTjU2VS1yZFZDbVFhOGxYdllDalpydE4za3d1Uk55LVIzZm9TR3JCY3ZQclRMOF84ZFdtM2dmZXAyTGVIQlEyWUNwUlg5SDdJYi01LXVfdC13</wsse:BinarySecurityToken>
+    </trust:RequestedSecurityToken>
+    <trust:TokenType>urn:ietf:params:oauth:token-type:jwt</trust:TokenType>
+    <trust:RequestType>http://docs.oasis-open.org/ws-sx/ws-trust/200512/Issue</trust:RequestType>
+    <trust:KeyType>http://docs.oasis-open.org/ws-sx/ws-trust/200512/Bearer</trust:KeyType>
+  </trust:RequestSecurityTokenResponse>
+</trust:RequestSecurityTokenResponseCollection>
