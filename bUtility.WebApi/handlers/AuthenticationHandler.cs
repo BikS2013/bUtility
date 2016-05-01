@@ -1,7 +1,9 @@
-﻿using System;
+﻿using bUtility.Sts;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IdentityModel.Services;
+using System.IdentityModel.Tokens;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -18,11 +20,18 @@ namespace bUtility.WebApi
 {
     public class AuthenticationHandler : DelegatingHandler
     {
+        private string _cookieName = null;
         private string privateApiSegment = @"privateapi/";
+        private readonly Func<SecurityTokenDescriptor> _getTokenDescriptor = null;
         private Action<Exception, EventLogEntryType> _exceptionHandler = null;
-        public AuthenticationHandler(string privateApiSegment = @"privateapi/", 
+        public AuthenticationHandler(
+            string cookieName,
+            Func<SecurityTokenDescriptor> getTokenDescriptor,
+            string privateApiSegment = @"privateapi/", 
             Action<Exception, EventLogEntryType> exceptionHandler = null)
         {
+            _cookieName = cookieName;
+            _getTokenDescriptor = getTokenDescriptor;
             this.privateApiSegment = privateApiSegment;
             _exceptionHandler = exceptionHandler;
         }
@@ -45,12 +54,10 @@ namespace bUtility.WebApi
         {
             try
             {
-                var authZ = request.Headers.Authorization;
-
-                if (authZ != null)
+                var c = request.Headers.GetCookies(_cookieName).FirstOrDefault();
+                if ( c != null)
                 {
-                    var principal = AuthenticateAuthorizationHeader(authZ.Scheme, authZ.Parameter);
-
+                    var principal = c[_cookieName].Value.ReadJwtToken(_getTokenDescriptor());
                     if (principal.Identity.IsAuthenticated)
                     {
                         Thread.CurrentPrincipal = principal;
@@ -60,6 +67,7 @@ namespace bUtility.WebApi
                             HttpContext.Current.User = principal;
                         }
                     }
+
                 }
             }
             catch (Exception ex)
@@ -83,11 +91,11 @@ namespace bUtility.WebApi
                     {
                         _exceptionHandler(new Exception($"Unauthorized request:{request?.RequestUri?.ToString() ?? "RequestUri is Null"}"), EventLogEntryType.Warning);
                     }
+                    return SendUnauthorizedResponse(request);
                 }
             }
 
             return base.SendAsync(request, cancellationToken);
-            //return SendUnauthorizedResponse(request);
         }
 
         private Task<HttpResponseMessage> SendUnauthorizedResponse(HttpRequestMessage request)
@@ -100,48 +108,6 @@ namespace bUtility.WebApi
 
             return Task.FromResult(unauthorizedResponse);
         }
-        private ClaimsPrincipal AuthenticateAuthorizationHeader(string scheme, string credential)
-        {
-            try
-            {
-                if (!string.IsNullOrEmpty(credential))
-                {
-                    // Get the base64 encoded token (converted that way to make it http friendly)
-                    credential = Encoding.UTF8.GetString(Convert.FromBase64String(credential));
-                }
-                var handlers = FederatedAuthentication.FederationConfiguration.IdentityConfiguration.SecurityTokenHandlers;
 
-                using (var textReader = new StringReader(credential))
-                {
-                    using (var xmlReader = new XmlTextReader(textReader))
-                    {
-                        var tokens = handlers.ReadToken(xmlReader);
-                        if (tokens != null)
-                        {
-                            var identities = handlers.ValidateToken(tokens);
-                            if (identities != null)
-                            {
-                                var principal = new ClaimsPrincipal(identities);
-                                if (principal != null)
-                                {
-                                    return principal;
-                                }
-                            }
-                        }
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                if ( _exceptionHandler != null)
-                {
-                    _exceptionHandler(ex, EventLogEntryType.Error);
-                }
-            }
-
-
-            return Anonymous;
-        }
     }
 }

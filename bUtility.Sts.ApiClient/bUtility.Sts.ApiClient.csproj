@@ -176,6 +176,9 @@
   <ItemGroup>
     <Content Include="bower.json" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="api.model.local.pfx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

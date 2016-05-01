@@ -2,7 +2,12 @@
 using bUtility.WebApi;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IdentityModel.Protocols.WSTrust;
+using System.IdentityModel.Tokens;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
@@ -14,11 +19,40 @@ namespace bUtility.Sts.ApiClient
 {
     public class Global : System.Web.HttpApplication
     {
+        static void handleException(Exception ex, EventLogEntryType type)
+        {
+
+        }
+
+        X509Certificate2 getCertificate()
+        {
+            var localCert =
+                bUtility.Sts.CertificateHelper.GetCertificate("bUtility.Sts.ApiClient, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+                    "bUtility.Sts.ApiClient.api.model.local.pfx", "123456");
+            return localCert;
+
+        }
+        SecurityTokenDescriptor getTokenDescriptor()
+        {
+            var now = DateTime.UtcNow;
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                TokenIssuerName = "self",
+                AppliesToAddress = "https://localhost",
+                Lifetime = new Lifetime(now, now.AddMinutes(10)),
+                SigningCredentials = new X509SigningCredentials(getCertificate())
+            };
+            return tokenDescriptor;
+        }
 
         protected void Application_Start(object sender, EventArgs e)
         {
+
             GlobalConfiguration.Configure((httpConfiguration) =>
             {
+                httpConfiguration.MessageHandlers.Add(new bUtility.WebApi.StsPostHandler("identityToken", getTokenDescriptor));
+                httpConfiguration.MessageHandlers.Add(new bUtility.WebApi.AuthenticationHandler("identityToken", getTokenDescriptor, exceptionHandler: handleException));
+                httpConfiguration.Filters.Add(new bUtility.WebApi.RequireHttpsAttribute());
 
                 httpConfiguration.Routes.MapHttpRoute(
                        name: "DefaultPage",

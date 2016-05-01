@@ -15,22 +15,26 @@ namespace bUtility.Sts
 {
     public static class CertificateHelper
     {
-
-        public static X509Certificate2 GetCertificate( this EmbeddedCertificate config)
+        public static X509Certificate2 GetCertificate(string assemblyName, string resourceName, string password)
         {
-            var assembly = config?.AssemblyName?.FindAssembly();
+            var assembly = assemblyName?.FindAssembly();
             if (assembly != null)
             {
-                var stream = assembly.GetManifestResourceStream(config.ResourceName);
+                var stream = assembly.GetManifestResourceStream(resourceName);
                 if (stream != null)
                 {
                     byte[] data = new byte[stream.Length];
                     stream.Read(data, 0, (int)stream.Length);
-                    X509Certificate2 certificate = new X509Certificate2(data, config.Password);
+                    X509Certificate2 certificate = new X509Certificate2(data, password);
                     return certificate;
                 }
             }
             return null;
+        }
+
+        public static X509Certificate2 GetCertificate( this EmbeddedCertificate config)
+        {
+            return GetCertificate(config?.AssemblyName, config?.ResourceName, config?.Password);
         }
 
         public static X509Certificate2 GetCertificate(StoreName name, StoreLocation location, X509FindType findType, object findValue)

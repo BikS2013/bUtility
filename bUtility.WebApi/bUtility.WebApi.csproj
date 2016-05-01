@@ -80,9 +80,11 @@
     <Compile Include="actionFilters\ToLocalTimeFilterAttribute.cs" />
     <Compile Include="handlers\ThrottlingHandler.cs" />
     <Compile Include="handlers\ThrottlingException.cs" />
+    <Compile Include="stsClient\StsPostHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="AuthenticationHandler.cd" />
     <None Include="bUtility.snk" />
     <None Include="bUtility.WebApi.nuspec" />
     <None Include="packages.config" />
@@ -93,6 +95,10 @@
     <None Include="_CreateNewNuGetPackage\RunMeToUploadNuGetPackage.cmd" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\bUtility.Sts\bUtility.Sts.csproj">
+      <Project>{93159ed4-1d44-40d2-a928-2cab3e234974}</Project>
+      <Name>bUtility.Sts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\bUtility\bUtility.csproj">
       <Project>{f07af388-76dc-423a-a434-33bd0b2086b1}</Project>
       <Name>bUtility</Name>
