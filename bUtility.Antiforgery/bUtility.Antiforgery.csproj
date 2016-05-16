@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{12B7AE70-584C-4581-91A1-D522AE6A12EF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>bUtility.Antiforgery</RootNamespace>
+    <AssemblyName>bUtility.Antiforgery</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Microsoft.Internal.Web.Utils\CommonResources.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System.Web.Helpers.AntiXsrf\AntiForgeryConfigWrapper.cs" />
+    <Compile Include="System.Web.Helpers.AntiXsrf\AntiForgeryToken.cs" />
+    <Compile Include="System.Web.Helpers.AntiXsrf\AntiForgeryTokenSerializer.cs" />
+    <Compile Include="System.Web.Helpers.AntiXsrf\AntiForgeryTokenStore.cs" />
+    <Compile Include="System.Web.Helpers.AntiXsrf\AntiForgeryWorker.cs" />
+    <Compile Include="System.Web.Helpers.AntiXsrf\BinaryBlob.cs" />
+    <Compile Include="System.Web.Helpers.AntiXsrf\ClaimUidExtractor.cs" />
+    <Compile Include="System.Web.Helpers.AntiXsrf\IAntiForgeryConfig.cs" />
+    <Compile Include="System.Web.Helpers.AntiXsrf\IAntiForgeryTokenSerializer.cs" />
+    <Compile Include="System.Web.Helpers.AntiXsrf\IClaimUidExtractor.cs" />
+    <Compile Include="System.Web.Helpers.AntiXsrf\ICryptoSystem.cs" />
+    <Compile Include="System.Web.Helpers.AntiXsrf\ITokenStore.cs" />
+    <Compile Include="System.Web.Helpers.AntiXsrf\ITokenValidator.cs" />
+    <Compile Include="System.Web.Helpers.AntiXsrf\MachineKey45CryptoSystem.cs" />
+    <Compile Include="System.Web.Helpers.AntiXsrf\TokenValidator.cs" />
+    <Compile Include="System.Web.Helpers.Claims\Claim.cs" />
+    <Compile Include="System.Web.Helpers.Claims\ClaimsIdentity.cs" />
+    <Compile Include="System.Web.Helpers.Claims\ClaimsIdentityConverter.cs" />
+    <Compile Include="System.Web.Helpers.Mvc\HtmlHelper.cs" />
+    <Compile Include="System.Web.Helpers.Mvc\HttpAntiForgeryException.cs" />
+    <Compile Include="System.Web.Helpers.Mvc\TagBuilder.cs" />
+    <Compile Include="System.Web.Helpers.Mvc\TagRenderMode.cs" />
+    <Compile Include="System.Web.Helpers\AntiForgery.cs" />
+    <Compile Include="System.Web.Helpers\AntiForgeryConfig.cs" />
+    <Compile Include="System.Web.Helpers\CryptoUtil.cs" />
+    <Compile Include="System.Web.Helpers\IAntiForgeryAdditionalDataProvider.cs" />
+    <Compile Include="System.Web.Helpers\UnvalidatedRequestValues.cs" />
+    <Compile Include="System.Web.Helpers\Validation.cs" />
+    <Compile Include="System.Web.WebPage.Resources\WebPageResources.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
