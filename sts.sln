@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility", "bUtility\bUtility.csproj", "{F07AF388-76DC-423A-A434-33BD0B2086B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.WebApi", "bUtility.WebApi\bUtility.WebApi.csproj", "{CBC420BF-7799-4970-B6F3-E350DCB8543F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{87E30697-1A51-4B84-9039-81747F16E772}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D62CE562-5F34-4062-BA55-C6E6388AAC14}"
+	ProjectSection(SolutionItems) = preProject
+		docs\butility.dapper.md = docs\butility.dapper.md
+		docs\butility.sts.md = docs\butility.sts.md
+		butility.WebApi.md = butility.WebApi.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Sts", "bUtility.Sts\bUtility.Sts.csproj", "{93159ED4-1D44-40D2-A928-2CAB3E234974}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Sts.MvcClient", "bUtility.Sts.MvcClient\bUtility.Sts.MvcClient.csproj", "{CA8DD060-F005-4174-BE62-3E65A726632B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Sts.CommandLine", "bUtility.Sts.CommandLine\bUtility.Sts.CommandLine.csproj", "{EE8E3739-4A01-49E3-92F7-7DD100E389F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Sts.MvcServer", "bUtility.Sts.MvcServer\bUtility.Sts.MvcServer.csproj", "{29ADEC23-C6E2-4ADF-9FD8-6AC676AC0D2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Sts.ApiClient", "bUtility.Sts.ApiClient\bUtility.Sts.ApiClient.csproj", "{4837FA95-A4AE-442D-98F9-5A8896A75131}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		azure|Any CPU = azure|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F07AF388-76DC-423A-A434-33BD0B2086B1}.azure|Any CPU.ActiveCfg = Debug|Any CPU
+		{F07AF388-76DC-423A-A434-33BD0B2086B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F07AF388-76DC-423A-A434-33BD0B2086B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F07AF388-76DC-423A-A434-33BD0B2086B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F07AF388-76DC-423A-A434-33BD0B2086B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBC420BF-7799-4970-B6F3-E350DCB8543F}.azure|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBC420BF-7799-4970-B6F3-E350DCB8543F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBC420BF-7799-4970-B6F3-E350DCB8543F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBC420BF-7799-4970-B6F3-E350DCB8543F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBC420BF-7799-4970-B6F3-E350DCB8543F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93159ED4-1D44-40D2-A928-2CAB3E234974}.azure|Any CPU.ActiveCfg = Debug|Any CPU
+		{93159ED4-1D44-40D2-A928-2CAB3E234974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93159ED4-1D44-40D2-A928-2CAB3E234974}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93159ED4-1D44-40D2-A928-2CAB3E234974}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93159ED4-1D44-40D2-A928-2CAB3E234974}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA8DD060-F005-4174-BE62-3E65A726632B}.azure|Any CPU.ActiveCfg = azure|Any CPU
+		{CA8DD060-F005-4174-BE62-3E65A726632B}.azure|Any CPU.Build.0 = azure|Any CPU
+		{CA8DD060-F005-4174-BE62-3E65A726632B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA8DD060-F005-4174-BE62-3E65A726632B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA8DD060-F005-4174-BE62-3E65A726632B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA8DD060-F005-4174-BE62-3E65A726632B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE8E3739-4A01-49E3-92F7-7DD100E389F4}.azure|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE8E3739-4A01-49E3-92F7-7DD100E389F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE8E3739-4A01-49E3-92F7-7DD100E389F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE8E3739-4A01-49E3-92F7-7DD100E389F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE8E3739-4A01-49E3-92F7-7DD100E389F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29ADEC23-C6E2-4ADF-9FD8-6AC676AC0D2C}.azure|Any CPU.ActiveCfg = azure|Any CPU
+		{29ADEC23-C6E2-4ADF-9FD8-6AC676AC0D2C}.azure|Any CPU.Build.0 = azure|Any CPU
+		{29ADEC23-C6E2-4ADF-9FD8-6AC676AC0D2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29ADEC23-C6E2-4ADF-9FD8-6AC676AC0D2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29ADEC23-C6E2-4ADF-9FD8-6AC676AC0D2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29ADEC23-C6E2-4ADF-9FD8-6AC676AC0D2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4837FA95-A4AE-442D-98F9-5A8896A75131}.azure|Any CPU.ActiveCfg = Release|Any CPU
+		{4837FA95-A4AE-442D-98F9-5A8896A75131}.azure|Any CPU.Build.0 = Release|Any CPU
+		{4837FA95-A4AE-442D-98F9-5A8896A75131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4837FA95-A4AE-442D-98F9-5A8896A75131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4837FA95-A4AE-442D-98F9-5A8896A75131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4837FA95-A4AE-442D-98F9-5A8896A75131}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
