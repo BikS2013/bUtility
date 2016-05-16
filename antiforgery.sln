@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility", "bUtility\bUtility.csproj", "{F07AF388-76DC-423A-A434-33BD0B2086B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{87E30697-1A51-4B84-9039-81747F16E772}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D62CE562-5F34-4062-BA55-C6E6388AAC14}"
+	ProjectSection(SolutionItems) = preProject
+		docs\butility.dapper.md = docs\butility.dapper.md
+		docs\butility.sts.md = docs\butility.sts.md
+		butility.WebApi.md = butility.WebApi.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Antiforgery", "bUtility.Antiforgery\bUtility.Antiforgery.csproj", "{12B7AE70-584C-4581-91A1-D522AE6A12EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Antiforgery.Sample", "bUtility.Antiforgery.Sample\bUtility.Antiforgery.Sample.csproj", "{78312C46-AE02-42CB-8633-25963B6ED776}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		azure|Any CPU = azure|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F07AF388-76DC-423A-A434-33BD0B2086B1}.azure|Any CPU.ActiveCfg = Debug|Any CPU
+		{F07AF388-76DC-423A-A434-33BD0B2086B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F07AF388-76DC-423A-A434-33BD0B2086B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F07AF388-76DC-423A-A434-33BD0B2086B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F07AF388-76DC-423A-A434-33BD0B2086B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12B7AE70-584C-4581-91A1-D522AE6A12EF}.azure|Any CPU.ActiveCfg = Release|Any CPU
+		{12B7AE70-584C-4581-91A1-D522AE6A12EF}.azure|Any CPU.Build.0 = Release|Any CPU
+		{12B7AE70-584C-4581-91A1-D522AE6A12EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12B7AE70-584C-4581-91A1-D522AE6A12EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12B7AE70-584C-4581-91A1-D522AE6A12EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12B7AE70-584C-4581-91A1-D522AE6A12EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78312C46-AE02-42CB-8633-25963B6ED776}.azure|Any CPU.ActiveCfg = Release|Any CPU
+		{78312C46-AE02-42CB-8633-25963B6ED776}.azure|Any CPU.Build.0 = Release|Any CPU
+		{78312C46-AE02-42CB-8633-25963B6ED776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78312C46-AE02-42CB-8633-25963B6ED776}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78312C46-AE02-42CB-8633-25963B6ED776}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78312C46-AE02-42CB-8633-25963B6ED776}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
