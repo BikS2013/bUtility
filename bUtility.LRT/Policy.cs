@@ -47,6 +47,7 @@ namespace bUtility.LRT
                 if (action.Execute())
                 {
                     Actions.Add(action);
+                    Result = action.GetResult() as R;
                     action = action.NextAction();
                 }
                 else
@@ -59,7 +60,7 @@ namespace bUtility.LRT
                     }
                 }
             }
-            Result = action.GetResult() as R; 
+            //Result = action.GetResult() as R; 
             return Store.LogCompleted();
         }
 

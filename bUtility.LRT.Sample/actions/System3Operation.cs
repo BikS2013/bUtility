@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace bUtility.LRT.Sample
 {
-    public class System3Operation : PolicyAction<System2Result, System3Result>
+    public class System3Operation : PolicyAction<System2Result, Result>
     {
         ISystem System { get; set; }
         public System3Operation(IOperationStore store, ISystem system, System2Result data, int order) : base(store, data, order)
         {
             System = system;
         }
-        public override System3Result Ask()
+        public override Result Ask()
         {
             return System.System3Ask(Data);
         }
@@ -23,7 +23,7 @@ namespace bUtility.LRT.Sample
             return null;
         }
 
-        protected override System3Result ExecuteInternal()
+        protected override Result ExecuteInternal()
         {
             return System.System3Execute(Data);
         }

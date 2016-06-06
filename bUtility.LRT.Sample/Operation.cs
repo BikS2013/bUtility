@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace bUtility.LRT.Sample
 {
-    public class Operation : Policy<Request, System3Result>
+    public class Operation : Policy<Request, Result>
     {
         ISystem System { get; set; }
         public Operation(IOperationStore store, ISystem system, Request request) : base(store, request)

@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.LRT.InMemoryStore"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.LRT.Sample", "bUtility.LRT.Sample\bUtility.LRT.Sample.csproj", "{543FC04D-26FC-4665-9E55-FAE44798C632}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.LRT.Sample.Test", "bUtility.LRT.Sample.Test\bUtility.LRT.Sample.Test.csproj", "{4DBD0469-C06B-450D-93BC-403AB849B907}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		azure|Any CPU = azure|Any CPU
@@ -67,6 +69,12 @@ Global
 		{543FC04D-26FC-4665-9E55-FAE44798C632}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{543FC04D-26FC-4665-9E55-FAE44798C632}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{543FC04D-26FC-4665-9E55-FAE44798C632}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DBD0469-C06B-450D-93BC-403AB849B907}.azure|Any CPU.ActiveCfg = Release|Any CPU
+		{4DBD0469-C06B-450D-93BC-403AB849B907}.azure|Any CPU.Build.0 = Release|Any CPU
+		{4DBD0469-C06B-450D-93BC-403AB849B907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DBD0469-C06B-450D-93BC-403AB849B907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DBD0469-C06B-450D-93BC-403AB849B907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DBD0469-C06B-450D-93BC-403AB849B907}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,5 +13,6 @@ namespace bUtility.LRT
 
         bool LogCompleted();
         bool LogReversed();
+
     }
 }

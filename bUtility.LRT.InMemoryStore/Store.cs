@@ -8,14 +8,14 @@ namespace bUtility.LRT.InMemoryStore
 {
     public class Store : IOperationStore
     {
-        enum opStatus
+        public enum opStatus
         {
             inProgress,
             completed,
             reversed,
             pendingFailed
         }
-        class OperationInfo
+        public class OperationInfo
         {
             public Guid BID { get; set; }
             public Guid ID { get; set; }
@@ -24,7 +24,7 @@ namespace bUtility.LRT.InMemoryStore
 
             public List<ActionInfo> Actions { get; set; }
         }
-        class ActionInfo
+        public class ActionInfo
         {
             public Guid BID { get; set; }
             public Guid ID { get; set; }
@@ -127,6 +127,11 @@ namespace bUtility.LRT.InMemoryStore
                 actionStore[ID].Status = opStatus.reversed;
             }
             return true;
+        }
+
+        public OperationInfo GetInfo()
+        {
+            return actionStore[ID];
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace bUtility.LRT.Sample
 {
-    public class ValidationResult:IOperationResult
+    public class Result : IOperationResult
     {
         public bool Completed { get; set; }
     }

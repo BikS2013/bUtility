@@ -46,7 +46,7 @@
     <Compile Include="actions\System1Operation.cs" />
     <Compile Include="actions\System2Operation.cs" />
     <Compile Include="actions\System3Operation.cs" />
-    <Compile Include="types\System3Result.cs" />
+    <Compile Include="types\Result.cs" />
     <Compile Include="types\System1Result.cs" />
     <Compile Include="types\System2Result.cs" />
     <Compile Include="types\Request.cs" />

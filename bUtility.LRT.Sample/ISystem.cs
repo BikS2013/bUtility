@@ -18,8 +18,8 @@ namespace bUtility.LRT.Sample
         bool System2Reverse(System1Result data);
         System2Result System2Ask(System1Result data);
 
-        System3Result System3Execute(System2Result data);
+        Result System3Execute(System2Result data);
         bool System3Reverse(System2Result data);
-        System3Result System3Ask(System2Result data);
+        Result System3Ask(System2Result data);
     }
 }

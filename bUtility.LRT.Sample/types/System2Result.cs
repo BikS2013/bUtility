@@ -8,12 +8,6 @@ namespace bUtility.LRT.Sample
 {
     public class System2Result : IOperationResult
     {
-        public bool Completed
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public bool Completed { get; set; }
     }
 }
