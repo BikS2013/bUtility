@@ -45,6 +45,7 @@
     <Compile Include="IOperationResult.cs" />
     <Compile Include="IOperationStore.cs" />
     <Compile Include="IPolicy.cs" />
+    <Compile Include="Policy.cs" />
     <Compile Include="PolicyAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

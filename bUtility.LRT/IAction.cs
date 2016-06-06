@@ -8,6 +8,8 @@ namespace bUtility.LRT
 {
     public interface IAction
     {
+        int Order { get; }
+
         bool IsCompleted();
         bool IsReversed();
 
