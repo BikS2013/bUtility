@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bUtility.WebApi
+namespace bUtility.LRT.Sample
 {
-    public class SimpleRequest<T> : Request<T> where T : class
+    public class Request
     {
-        public override string UserID { get; set; }
     }
 }

@@ -8,14 +8,14 @@ namespace bUtility.LRT.InMemoryStore
 {
     public class Store : IOperationStore
     {
-        enum opStatus
+        public enum opStatus
         {
             inProgress,
             completed,
-            cancelled,
+            reversed,
             pendingFailed
         }
-        class OperationInfo
+        public class OperationInfo
         {
             public Guid BID { get; set; }
             public Guid ID { get; set; }
@@ -24,7 +24,7 @@ namespace bUtility.LRT.InMemoryStore
 
             public List<ActionInfo> Actions { get; set; }
         }
-        class ActionInfo
+        public class ActionInfo
         {
             public Guid BID { get; set; }
             public Guid ID { get; set; }
@@ -33,6 +33,10 @@ namespace bUtility.LRT.InMemoryStore
             public string Result { get; set; }
             public string Exception { get; set; }
             public int Order { get; set; }
+            public bool Completed { get; set; }
+            public bool Reversed { get; set; }
+            public DateTime VersionTime { get; set; }
+            public bool IsLast { get; set; }
         }
 
         static object lockObj = new object();
@@ -61,18 +65,29 @@ namespace bUtility.LRT.InMemoryStore
             }
         }
 
-        public bool LogExecution(IAction action, Exception ex)
+        ActionInfo get(IAction action)
         {
-            Order++;
+            lock (lockObj)
+            {
+                return actionStore[ID].Actions.FirstOrDefault( a => a.Order == action.Order && a.IsLast);
+            }
+        }
+
+        bool log(IAction action, bool completed, bool reversed, Exception ex)
+        {
             var info = new ActionInfo
             {
                 ID = ID,
                 BID = BID,
-                Order = Order,
+                Order = action.Order,
                 Data = action.GetData().Serialize(),
                 Result = action.GetResult().Serialize(),
                 Action = action.GetType().Name,
-                Exception = ex.Serialize()
+                Exception = ex.Serialize(),
+                Completed = (ex== null) && completed,
+                Reversed = (ex == null) && reversed,
+                VersionTime = DateTime.Now,
+                IsLast = true
             };
             lock (lockObj)
             {
@@ -80,10 +95,43 @@ namespace bUtility.LRT.InMemoryStore
             }
             return true;
         }
-        public bool LogReversal(IAction action, Exception ex)
+
+        public bool LogExecution(IAction action, bool completed, Exception ex)
         {
-            throw new NotImplementedException();
+            return log(action, completed, false, ex);
+        }
+        public bool LogReversal(IAction action, bool reversed, Exception ex)
+        {
+            var info = get(action);
+            var result = log(action, false, reversed, ex);
+            if (result && info != null)
+            {
+                info.IsLast = false; 
+            }
+            return result;
         }
 
+        public bool LogCompleted()
+        {
+            lock (lockObj)
+            {
+                actionStore[ID].Status = opStatus.completed;
+            }
+            return true;
+        }
+
+        public bool LogReversed()
+        {
+            lock (lockObj)
+            {
+                actionStore[ID].Status = opStatus.reversed;
+            }
+            return true;
+        }
+
+        public OperationInfo GetInfo()
+        {
+            return actionStore[ID];
+        }
     }
 }

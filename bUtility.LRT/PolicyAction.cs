@@ -8,13 +8,16 @@ namespace bUtility.LRT
 {
     public abstract class PolicyAction<T, R> : IAction<T, R> where R :IOperationResult
     {
+        public int Order { get; private set; }
+
         protected IOperationStore Store { get; set; }
         protected T Data { get; set; }
         protected R Result { get; set; }
         protected bool Reversed { get; set; }
 
-        public PolicyAction(IOperationStore store, T data)
+        public PolicyAction(IOperationStore store, T data, int order)
         {
+            Order = order; 
             Store = store;
             Data = data;
         }
@@ -47,7 +50,7 @@ namespace bUtility.LRT
         {
             return Result;
         }
-        public abstract bool Ask();
+        public abstract R Ask();
 
         protected abstract bool ReverseInternal();
         public bool Reverse()
@@ -57,14 +60,14 @@ namespace bUtility.LRT
             }
             catch(Exception ex)
             {
-                Store.LogReversal(this, ex);
-                return false;
+                Store.LogReversal(this, IsReversed(), ex);
+                return IsReversed();
             }
-            if (Reversed && !Store.LogReversal(this, null))
+            if (Reversed && !Store.LogReversal(this, IsReversed(), null))
             {
                 return false; 
             }
-            return Reversed; 
+            return IsReversed(); 
         }
 
         protected abstract R ExecuteInternal();
@@ -75,15 +78,14 @@ namespace bUtility.LRT
             }
             catch(Exception ex)
             {
-                Store.LogExecution(this, ex);
-                return false; 
+                Store.LogExecution(this, IsCompleted(), ex);
             }
-            if ( !Store.LogExecution(this, null))
+            if ( !Store.LogExecution(this, IsCompleted(), null))
             {
                 Reverse();
                 return false;
             }
-            return Result?.Completed == true;
+            return IsCompleted();
         }
 
         public abstract IAction NextAction();

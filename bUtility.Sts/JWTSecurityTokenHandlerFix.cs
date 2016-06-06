@@ -49,7 +49,6 @@ namespace bUtility.Sts
 
                 // Get the certificate to validate signing from the certificate store (if configured).
                 IssuerSigningKey = getCertificate(issuingAuthority.Thumbprints.FirstOrDefault()),
-                //IssuerSigningKey = _IssuerKey, 
 
                 // Get the symmetric key token that is used to sign (if configured).
                 // Did not get this one working though.
