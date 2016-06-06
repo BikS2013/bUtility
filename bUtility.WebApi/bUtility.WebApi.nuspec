@@ -16,7 +16,7 @@
     <tags>biks webApi utility</tags>
     <dependencies>
       <group>
-        <dependency id="butility" version="0.0.0.4" />
+        <dependency id="butility" version="0.0.0.5" />
       </group>
     </dependencies>
   </metadata>
