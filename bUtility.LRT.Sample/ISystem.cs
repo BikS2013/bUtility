@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace bUtility.LRT.Sample
 {
-    interface ISystem
+    public interface ISystem
     {
+        ValidationResult Validate(Request data);
+
+        System1Result System1Execute(ValidationResult data);
+        bool System1Reverse(ValidationResult data);
+        System1Result System1Ask(ValidationResult data);
+
+        System2Result System2Execute(System1Result data);
+        bool System2Reverse(System1Result data);
+        System2Result System2Ask(System1Result data);
+
+        System3Result System3Execute(System2Result data);
+        bool System3Reverse(System2Result data);
+        System3Result System3Ask(System2Result data);
     }
 }

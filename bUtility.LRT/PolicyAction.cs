@@ -50,7 +50,7 @@ namespace bUtility.LRT
         {
             return Result;
         }
-        public abstract bool Ask();
+        public abstract R Ask();
 
         protected abstract bool ReverseInternal();
         public bool Reverse()

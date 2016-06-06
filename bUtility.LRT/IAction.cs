@@ -14,7 +14,7 @@ namespace bUtility.LRT
         bool IsReversed();
 
         bool Execute();
-        bool Ask();
+        //bool Ask();
         bool Reverse();
 
         IAction NextAction();
