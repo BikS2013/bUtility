@@ -6,31 +6,39 @@ using System.Threading.Tasks;
 
 namespace bUtility.LRT.Sample
 {
-    public class Validation : PolicyAction<Request, ValidationResult>
+    public class Validation : IAction<ValidationResult>
     {
         ISystem System { get; set; }
-        public Validation(IOperationStore store, ISystem system, Request data, int order) : base(store, data, order)
+
+        public Request Data { get; set; }
+
+        public object GetData()
         {
-            System = system; 
+            return Data;
         }
-        public override ValidationResult Ask()
+        public Validation(ISystem system, Request data) 
+        {
+            System = system;
+            Data = data;
+        }
+        public ValidationResult Ask()
         {
             return System.Validate(Data);
         }
 
-        public override IAction NextAction()
-        {
-            return new System1Operation(Store, System, Result, Order + 1);
-        }
-
-        protected override ValidationResult ExecuteInternal()
+        public ValidationResult Execute()
         {
             return System.Validate(Data);
         }
 
-        protected override bool ReverseInternal()
+        public bool Reverse()
         {
-            return true; 
+            return true;
+        }
+
+        public IPolicyAction NextPolicyAction(IOperationStore store, object data, int order)
+        {
+            return new PolicyAction<System1Result>( store, new System1Operation(System, data as ValidationResult), order);
         }
     }
 }

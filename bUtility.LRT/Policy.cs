@@ -12,18 +12,18 @@ namespace bUtility.LRT
         protected T Request { get; set; }
         protected R Result { get; set; }
 
-        public List<IAction> Actions { get; set; }
+        public List<IPolicyAction> Actions { get; set; }
 
         public Policy(IOperationStore store, T request)
         {
             Store = store;
             Request = request;
-            Actions = new List<IAction>();
+            Actions = new List<IPolicyAction>();
         }
 
         public bool Reverse()
         {
-            IAction action = Actions.LastOrDefault();
+            IPolicyAction action = Actions.LastOrDefault();
             while (action != null)
             {
                 if (action.Reverse())
@@ -39,9 +39,9 @@ namespace bUtility.LRT
             return Store.LogReversed();
         }
 
-        public bool Execute( IAction initialAction )
+        public bool Execute( IPolicyAction initialAction )
         {
-            IAction action = initialAction;
+            IPolicyAction action = initialAction;
             while (action != null)
             {
                 if (action.Execute())

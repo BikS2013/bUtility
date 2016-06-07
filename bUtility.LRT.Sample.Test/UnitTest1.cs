@@ -9,7 +9,7 @@ namespace bUtility.LRT.Sample.Test
     public class UnitTest1
     {
 
-        void testAction(IAction action)
+        void testAction(IPolicyAction action)
         {
             Assert.IsNotNull(action);
 

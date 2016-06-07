@@ -15,7 +15,7 @@ namespace bUtility.LRT.Sample
         }
         public override bool Execute()
         {
-            return Execute(new Validation(Store, System, Request, 0));
+            return Execute(new PolicyAction<ValidationResult>(Store, new Validation(System, Request), 0));
         }
     }
 }

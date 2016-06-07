@@ -8,8 +8,8 @@ namespace bUtility.LRT
 {
     public interface IOperationStore
     {
-        bool LogExecution(IAction action, bool completed, Exception ex);
-        bool LogReversal(IAction action, bool reversed, Exception ex);
+        bool LogExecution(IPolicyAction action, bool completed, Exception ex);
+        bool LogReversal(IPolicyAction action, bool reversed, Exception ex);
 
         bool LogCompleted();
         bool LogReversed();

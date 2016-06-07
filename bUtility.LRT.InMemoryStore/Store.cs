@@ -65,7 +65,7 @@ namespace bUtility.LRT.InMemoryStore
             }
         }
 
-        ActionInfo get(IAction action)
+        ActionInfo get(IPolicyAction action)
         {
             lock (lockObj)
             {
@@ -73,7 +73,7 @@ namespace bUtility.LRT.InMemoryStore
             }
         }
 
-        bool log(IAction action, bool completed, bool reversed, Exception ex)
+        bool log(IPolicyAction action, bool completed, bool reversed, Exception ex)
         {
             var info = new ActionInfo
             {
@@ -96,11 +96,11 @@ namespace bUtility.LRT.InMemoryStore
             return true;
         }
 
-        public bool LogExecution(IAction action, bool completed, Exception ex)
+        public bool LogExecution(IPolicyAction action, bool completed, Exception ex)
         {
             return log(action, completed, false, ex);
         }
-        public bool LogReversal(IAction action, bool reversed, Exception ex)
+        public bool LogReversal(IPolicyAction action, bool reversed, Exception ex)
         {
             var info = get(action);
             var result = log(action, false, reversed, ex);

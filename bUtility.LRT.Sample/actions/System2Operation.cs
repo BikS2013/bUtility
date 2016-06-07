@@ -6,31 +6,39 @@ using System.Threading.Tasks;
 
 namespace bUtility.LRT.Sample
 {
-    public class System2Operation : PolicyAction<System1Result, System2Result>
+    public class System2Operation : IAction<System2Result>
     {
         ISystem System { get; set; }
-        public System2Operation(IOperationStore store, ISystem system, System1Result data, int order) : base(store, data, order)
+
+        public System1Result Data { get; set; }
+
+        public object GetData()
         {
+            return Data;
+        }
+        public System2Operation(ISystem system, System1Result data)
+        {
+            Data = data;
             System = system;
         }
-        public override System2Result Ask()
+        public System2Result Ask()
         {
             return System.System2Execute(Data);
         }
 
-        public override IAction NextAction()
-        {
-            return new System3Operation(Store, System, Result, Order + 1);
-        }
-
-        protected override System2Result ExecuteInternal()
+        public System2Result Execute()
         {
             return System.System2Execute(Data);
         }
 
-        protected override bool ReverseInternal()
+        public bool Reverse()
         {
             return System.System2Reverse(Data);
+        }
+
+        public IPolicyAction NextPolicyAction(IOperationStore store, object data, int order)
+        {
+            return new PolicyAction<Result>(store, new System3Operation(System, data as System2Result), order);
         }
     }
 }

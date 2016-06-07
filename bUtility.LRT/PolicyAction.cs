@@ -6,20 +6,51 @@ using System.Threading.Tasks;
 
 namespace bUtility.LRT
 {
-    public abstract class PolicyAction<T, R> : IAction<T, R> where R :IOperationResult
+    public interface IPolicyAction
+    {
+        int Order { get; }
+        bool Reverse();
+        bool Execute();
+
+        object GetData();
+        object GetResult();
+
+        bool IsCompleted();
+        bool IsReversed();
+
+        IPolicyAction NextAction();
+
+    }
+
+    public class PolicyAction<R>:IPolicyAction where R :IOperationResult
     {
         public int Order { get; private set; }
 
+        public IAction<R> Action { get; private set; }
+
+        object IPolicyAction.GetData(){
+            return Action.GetData();
+        }
+
+        public R Result { get; private set; }
+
+        object IPolicyAction.GetResult()
+        {
+            return Result;
+        }
+        public R GetResult()
+        {
+            return Result;
+        }
+
         protected IOperationStore Store { get; set; }
-        protected T Data { get; set; }
-        protected R Result { get; set; }
         protected bool Reversed { get; set; }
 
-        public PolicyAction(IOperationStore store, T data, int order)
+        public PolicyAction(IOperationStore store, IAction<R> action, int order)
         {
             Order = order; 
             Store = store;
-            Data = data;
+            Action = action;
         }
 
         public bool IsCompleted()
@@ -32,31 +63,12 @@ namespace bUtility.LRT
             return Reversed;
         }
 
-        object IAction.GetData()
-        {
-            return Data;
-        }
+        //public abstract R Ask();
 
-        object IAction.GetResult()
-        {
-            return Result;
-        }
-        public T GetData()
-        {
-            return Data;
-        }
-
-        public R GetResult()
-        {
-            return Result;
-        }
-        public abstract R Ask();
-
-        protected abstract bool ReverseInternal();
         public bool Reverse()
         {
             try {
-                Reversed = ReverseInternal();
+                Reversed = Action.Reverse();
             }
             catch(Exception ex)
             {
@@ -70,11 +82,10 @@ namespace bUtility.LRT
             return IsReversed(); 
         }
 
-        protected abstract R ExecuteInternal();
         public bool Execute()
         {
             try {
-                Result = ExecuteInternal();
+                Result = Action.Execute();
             }
             catch(Exception ex)
             {
@@ -88,7 +99,10 @@ namespace bUtility.LRT
             return IsCompleted();
         }
 
-        public abstract IAction NextAction();
+        public IPolicyAction NextAction()
+        {
+            return Action.NextPolicyAction(Store, Result, Order+1);
+        }
 
     }
 }
