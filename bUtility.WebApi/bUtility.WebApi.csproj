@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="handlers\AuthenticationHandler.cs" />
     <Compile Include="authorizationFilters\ClaimsAuthorizeAttribute.cs" />
+    <Compile Include="NoCacheAttribute.cs" />
     <Compile Include="NotFoundResolution\ActionSelector.cs" />
     <Compile Include="NotFoundResolution\ControllerSelector.cs" />
     <Compile Include="NotFoundResolution\ErrorController.cs" />
