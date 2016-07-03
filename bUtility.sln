@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility", "bUtility\bUtility.csproj", "{F07AF388-76DC-423A-A434-33BD0B2086B1}"
 EndProject
@@ -42,6 +42,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Sts.ApiClient", "bUtility.Sts.ApiClient\bUtility.Sts.ApiClient.csproj", "{4837FA95-A4AE-442D-98F9-5A8896A75131}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Antiforgery", "bUtility.Antiforgery\bUtility.Antiforgery.csproj", "{12B7AE70-584C-4581-91A1-D522AE6A12EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Logging", "bUtility.Logging\bUtility.Logging.csproj", "{F1EB3EDC-9862-4879-845E-2836F52D694C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -126,6 +128,12 @@ Global
 		{12B7AE70-584C-4581-91A1-D522AE6A12EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12B7AE70-584C-4581-91A1-D522AE6A12EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12B7AE70-584C-4581-91A1-D522AE6A12EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1EB3EDC-9862-4879-845E-2836F52D694C}.azure|Any CPU.ActiveCfg = Release|Any CPU
+		{F1EB3EDC-9862-4879-845E-2836F52D694C}.azure|Any CPU.Build.0 = Release|Any CPU
+		{F1EB3EDC-9862-4879-845E-2836F52D694C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1EB3EDC-9862-4879-845E-2836F52D694C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1EB3EDC-9862-4879-845E-2836F52D694C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1EB3EDC-9862-4879-845E-2836F52D694C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
