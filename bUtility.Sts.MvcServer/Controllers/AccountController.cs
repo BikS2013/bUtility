@@ -24,7 +24,8 @@ namespace bUtility.Sts.MvcServer.Controllers
             ClaimsIdentity i = new ClaimsIdentity(
                 new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, model.UserName )
+                    new Claim(ClaimTypes.Name, model.UserName ),
+                    new Claim(ClaimTypes.NameIdentifier, model.UserName )
                 },
                 "simpleSts");
 
