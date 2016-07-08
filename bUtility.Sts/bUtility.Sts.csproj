@@ -79,6 +79,7 @@
     <Compile Include="client\ValidatingIssuerNameRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bUtility.Sts.nuspec" />
     <None Include="bUtility.snk" />
     <None Include="packages.config" />
     <None Include="_CreateNewNuGetPackage\Config.ps1" />

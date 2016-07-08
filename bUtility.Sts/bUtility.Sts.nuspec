@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://biks.lcl</licenseUrl>
+    <projectUrl>https://github.com/BikS2013/bUtility</projectUrl>
+    <iconUrl>http://biks.lcl</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>STS utility library</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>biks utility sts</tags>
+    <dependencies>
+      <group>
+        <dependency id="bUtility" version="0.0.0.5" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
+
