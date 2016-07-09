@@ -17,6 +17,18 @@ namespace bUtility
             return value.Trim();
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value">
+        /// the result is false for null value
+        /// </param>
+        /// <param name="list">
+        /// the result is false for null or empty list
+        /// </param>
+        /// <returns></returns>
         public static bool In<T>(this T value, params T[] list)
         {
             if (list == null || list.Length == 0 || value == null) return false;
