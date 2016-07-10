@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Logging", "bUtilit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Logging.Test", "bUtility.Logging.Test\bUtility.Logging.Test.csproj", "{736BA50E-DE63-47CA-9C40-63AA2292E42F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Json", "bUtility.Json\bUtility.Json.csproj", "{A8621CFF-9E01-4552-BE3C-5D813C95DF0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		azure|Any CPU = azure|Any CPU
@@ -142,6 +144,12 @@ Global
 		{736BA50E-DE63-47CA-9C40-63AA2292E42F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{736BA50E-DE63-47CA-9C40-63AA2292E42F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{736BA50E-DE63-47CA-9C40-63AA2292E42F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8621CFF-9E01-4552-BE3C-5D813C95DF0A}.azure|Any CPU.ActiveCfg = Release|Any CPU
+		{A8621CFF-9E01-4552-BE3C-5D813C95DF0A}.azure|Any CPU.Build.0 = Release|Any CPU
+		{A8621CFF-9E01-4552-BE3C-5D813C95DF0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8621CFF-9E01-4552-BE3C-5D813C95DF0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8621CFF-9E01-4552-BE3C-5D813C95DF0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8621CFF-9E01-4552-BE3C-5D813C95DF0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
