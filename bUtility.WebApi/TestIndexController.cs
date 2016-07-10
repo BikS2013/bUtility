@@ -14,12 +14,12 @@ namespace bUtility.WebApi
 				<head>
 					<title>test controller</title>
 					<meta charset='utf - 8' />
-				  </ head >
-				  < body >
+				  </head>
+				  <body>
   
-					  < h1 > hello test </ h1 >
-				  </ body >
-				  </ html >
+					  <h1> hello test </h1>
+				  </body>
+				  </html>
 			  ";
 
 		HttpResponseMessage GetResponse(string content)
