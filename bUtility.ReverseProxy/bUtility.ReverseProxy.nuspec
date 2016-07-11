@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://biks.lcl</licenseUrl>
+    <projectUrl>https://github.com/BikS2013/bUtility</projectUrl>
+    <iconUrl>http://biks.lcl</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>simple reverse proxy utility.</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>biks reverse proxy utility</tags>
+    <dependencies>
+      <group>
+        <dependency id="bUtility" version="0.0.0.5" />
+        <dependency id="bUtility.Logging" version="0.0.0.1" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
+
