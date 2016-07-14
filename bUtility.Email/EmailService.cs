@@ -9,47 +9,29 @@ namespace bUtility
     {
         readonly MailAddress Sender;
         readonly MailAddress From;
-        readonly string SMTP;
-        readonly int Port;
-        readonly bool EnableSSL;
         bool UseAuthentication;
         string UserName;
         string Password;
         string Domain;
+        readonly EmailServiceParams ServiceParams;
         readonly IResourceResolver ResourceResolver;
 
-        public EmailService(string from, string fromDisplayName, string sender, string senderDisplayName, string smtp, int port, bool enableSSL, IResourceResolver resourceResolver)
+        public EmailService(EmailServiceParams serviceParams, IResourceResolver resourceResolver)
         {
-            if (from.Clear() == null)
+            if (serviceParams.FromAddress.Clear() == null)
             {
                 throw new Exception("From address cannot be null or empty");
             }
-            if (smtp.Clear() == null || port == 0)
+            if (serviceParams.SmtpAddress.Clear() == null || serviceParams.SmtpPort == 0)
             {
                 throw new Exception("Invalid SMTP server configuration");
             }
-            From = ExtensionsLocal.GetMailAddress(from, fromDisplayName);
-            Sender = ExtensionsLocal.GetMailAddress(sender, senderDisplayName) ?? From;
-            SMTP = smtp.Clear();
-            Port = port;
-            EnableSSL = enableSSL;
+            ServiceParams = serviceParams;
+            From = ExtensionsLocal.GetMailAddress(serviceParams.FromAddress, serviceParams.FromDisplayName);
+            Sender = ExtensionsLocal.GetMailAddress(serviceParams.SenderAddress, serviceParams.SenderDisplayName) ?? From;
             UseAuthentication = false;
             ResourceResolver = resourceResolver;
         }
-
-        public EmailService(string from, string fromDisplayName, string sender, string senderDisplayName, string smtp, int port, bool enableSSL) : this(from, fromDisplayName, sender, senderDisplayName, smtp, port, enableSSL, null)
-        { }
-
-        public EmailService(string from, string fromDisplayName, string smtp, int port, bool enableSSL, IResourceResolver resourceResolver) : this(from, fromDisplayName, null, null, smtp, port, enableSSL, resourceResolver)
-        { }
-
-        public EmailService(string from, string fromDisplayName, string smtp, int port, bool enableSSL) : this(from, fromDisplayName, null, null, smtp, port, enableSSL)
-        { }
-
-        public EmailService(string from, string smtp, int port, bool enableSSL, IResourceResolver resourceResolver) : this(from, null, smtp, port, enableSSL, resourceResolver)
-        { }
-        public EmailService(string from, string smtp, int port, bool enableSSL) : this(from, null, smtp, port, enableSSL)
-        { }
 
         public void SetCredentials(string userName, string password, string domain)
         {
@@ -90,9 +72,9 @@ namespace bUtility
         {
             if (mail != null)
             {
-                using (SmtpClient client = new SmtpClient(SMTP, Port))
+                using (SmtpClient client = new SmtpClient(ServiceParams.SmtpAddress, ServiceParams.SmtpPort))
                 {
-                    client.EnableSsl = EnableSSL;
+                    client.EnableSsl = ServiceParams.Ssl;
                     if (UseAuthentication)
                     {
                         client.Credentials = new System.Net.NetworkCredential(UserName, Password, Domain);

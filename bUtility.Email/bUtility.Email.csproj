@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmailService.cs" />
+    <Compile Include="EmailServiceParams.cs" />
     <Compile Include="ExtensionsLocal.cs" />
     <Compile Include="HtmlResource.cs" />
     <Compile Include="IEmailService.cs" />
