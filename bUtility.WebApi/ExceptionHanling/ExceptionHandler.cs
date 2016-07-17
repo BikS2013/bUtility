@@ -19,7 +19,7 @@ namespace bUtility
             BusinessExceptions = businessExceptionTypes ?? new Type[] { };
         }
 
-        Response<R> Log<R>(Exception ex) where R : class
+        ResponseMessage Log(Exception ex)
         {
             try
             {
@@ -28,31 +28,26 @@ namespace bUtility
             }
             catch (Exception xx)
             {
-                return new Response<R>
+                return new ResponseMessage
                 {
-                    Exception = new ResponseMessage
-                    {
-                        Category = ErrorCategory.Technical,
-                        Code = null,
-                        Description = xx.Message,
-                        Severity = ErrorSeverity.Error
-                    }
+                    Category = ErrorCategory.Technical,
+                    Code = null,
+                    Description = xx.Message,
+                    Severity = ErrorSeverity.Error
                 };
             }
         }
-        public Response<R> HandleException<R>(Func<Response<R>> action) where R : class
+        public Tuple<R, ResponseMessage> HandleException<R>(Func<R> action) where R : class
         {
             try
             {
-                return action();
+                return new Tuple<R, ResponseMessage> ( action(), null );
             }
             catch (Exception ex) when ( BusinessExceptions.FirstOrDefault( t => t.IsInstanceOfType(ex)) != null )
             {
-                var r = Log<R>(ex);
-                if ( r != null ) { return r; }
-                return new Response<R>
-                {
-                    Exception =
+                var r = Log(ex);
+                if ( r != null ) { return new Tuple<R, ResponseMessage>(null, r); }
+                return new Tuple<R, ResponseMessage>( null,
                     new ResponseMessage
                     {
                         Category = ErrorCategory.Business,
@@ -60,22 +55,20 @@ namespace bUtility
                         Description = ex.Message,
                         Severity = ErrorSeverity.Error
                     }
-                };
+                );
             }
             catch (Exception ex)
             {
-                var r = Log<R>(ex);
-                if (r != null) { return r; }
-                return new Response<R>
-                {
-                    Exception =
+                var r = Log(ex);
+                if (r != null) { return new Tuple<R, ResponseMessage>(null, r); }
+                return new Tuple<R, ResponseMessage>(null,
                     new ResponseMessage
                     {
                         Category = ErrorCategory.Technical,
                         Description = ex.Message,
                         Severity = ErrorSeverity.Error
                     }
-                };
+                );
             }
         }
 
