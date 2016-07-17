@@ -5,11 +5,31 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace bUtility.WebApi
 {
     public static class ReflectionExtensions
     {
+        public static MethodInfo GetAction(this Type controllerType, string actionName)
+        {
+            if (controllerType != null)
+            {
+                var methods = controllerType.GetMethods(BindingFlags.Instance | BindingFlags.Public);
+                if (methods != null)
+                {
+                    foreach (var m in methods)
+                    {
+                        var attr = m.GetCustomAttribute(typeof(ActionNameAttribute));
+                        if (attr != null && (attr as ActionNameAttribute).Name == actionName)
+                        {
+                            return m;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
         public static void PropertyUpdate(this object obj, Action<object, PropertyInfo> updateAction)
         {
             if (obj == null) return;
