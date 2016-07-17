@@ -63,22 +63,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="exceptionFilters\ExceptionHandlingAttribute.cs" />
+    <Compile Include="ExceptionHanling\ExceptionHandler.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="handlers\AuthenticationHandler.cs" />
     <Compile Include="authorizationFilters\ClaimsAuthorizeAttribute.cs" />
+    <Compile Include="types\IExceptionContainer.cs" />
     <Compile Include="NoCacheAttribute.cs" />
     <Compile Include="NotFoundResolution\ActionSelector.cs" />
     <Compile Include="NotFoundResolution\ControllerSelector.cs" />
     <Compile Include="NotFoundResolution\ErrorController.cs" />
-    <Compile Include="ExceptionHandler.cs" />
+    <Compile Include="ExceptionHanling\ExceptionHandler.Simple.cs" />
     <Compile Include="ReflectionExtensions.cs" />
-    <Compile Include="IUserIDProvider.cs" />
+    <Compile Include="types\ResponseMessage.cs" />
+    <Compile Include="types\IUserIDProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Request.cs" />
-    <Compile Include="RequestHeader.cs" />
+    <Compile Include="types\Request.cs" />
+    <Compile Include="types\RequestHeader.cs" />
     <Compile Include="authorizationFilters\RequireHttpsAttribute.cs" />
-    <Compile Include="Response.cs" />
-    <Compile Include="SimpleRequest.cs" />
+    <Compile Include="types\Response.cs" />
+    <Compile Include="types\SimpleRequest.cs" />
     <Compile Include="actionFilters\ToLocalTimeFilterAttribute.cs" />
     <Compile Include="handlers\ThrottlingHandler.cs" />
     <Compile Include="handlers\ThrottlingException.cs" />
