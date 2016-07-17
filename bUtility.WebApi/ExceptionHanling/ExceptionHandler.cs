@@ -37,7 +37,19 @@ namespace bUtility
                 };
             }
         }
-        public Tuple<R, ResponseMessage> HandleException<R>(Func<R> action) where R : class
+        public Tuple<R, ResponseMessage> HandleException<R>(Func<R> action) where R:class
+        {
+            return HandleException(action, null);
+        }
+
+        /// <summary>
+        /// This version can be used when R is value type i.e. int, bool etc
+        /// </summary>
+        /// <typeparam name="R"></typeparam>
+        /// <param name="action"></param>
+        /// <param name="nullValue"></param>
+        /// <returns></returns>
+        public Tuple<R, ResponseMessage> HandleException<R>(Func<R> action, R nullValue) 
         {
             try
             {
@@ -46,8 +58,8 @@ namespace bUtility
             catch (Exception ex) when ( BusinessExceptions.FirstOrDefault( t => t.IsInstanceOfType(ex)) != null )
             {
                 var r = Log(ex);
-                if ( r != null ) { return new Tuple<R, ResponseMessage>(null, r); }
-                return new Tuple<R, ResponseMessage>( null,
+                if ( r != null ) { return new Tuple<R, ResponseMessage>(nullValue, r); }
+                return new Tuple<R, ResponseMessage>(nullValue,
                     new ResponseMessage
                     {
                         Category = ErrorCategory.Business,
@@ -60,8 +72,8 @@ namespace bUtility
             catch (Exception ex)
             {
                 var r = Log(ex);
-                if (r != null) { return new Tuple<R, ResponseMessage>(null, r); }
-                return new Tuple<R, ResponseMessage>(null,
+                if (r != null) { return new Tuple<R, ResponseMessage>(nullValue, r); }
+                return new Tuple<R, ResponseMessage>(nullValue,
                     new ResponseMessage
                     {
                         Category = ErrorCategory.Technical,
