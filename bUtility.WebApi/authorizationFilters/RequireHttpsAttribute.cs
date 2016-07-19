@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bUtility.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,11 +13,18 @@ namespace bUtility.WebApi
 {
     public class RequireHttpsAttribute:AuthorizationFilterAttribute
     {
+        readonly ILogger Logger; 
+        public RequireHttpsAttribute(ILogger logger)
+        {
+            Logger = logger; 
+        }
+
         public override void OnAuthorization(HttpActionContext actionContext)
         {
             var request = actionContext.Request;
             if (request.RequestUri.Scheme != Uri.UriSchemeHttps)
             {
+                Logger.Error(new Exception($"Request Uri:{request.RequestUri.AbsoluteUri}, method:{request.Method.Method} is not https."));
                 string message = "Https is required";
                 if (request.Method.Method == "GET")
                 {

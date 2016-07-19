@@ -59,7 +59,7 @@ namespace bUtility.Sts.ApiClient
             {
                 //httpConfiguration.MessageHandlers.Add(new bUtility.WebApi.StsPostHandler("identityToken", getTokenDescriptor));
                 //httpConfiguration.MessageHandlers.Add(new bUtility.WebApi.AuthenticationHandler("identityToken", getTokenDescriptor, exceptionHandler: handleException));
-                httpConfiguration.Filters.Add(new bUtility.WebApi.RequireHttpsAttribute());
+                //httpConfiguration.Filters.Add(new bUtility.WebApi.RequireHttpsAttribute());
 
                 httpConfiguration.Routes.MapHttpRoute(
                        name: "DefaultPage",
