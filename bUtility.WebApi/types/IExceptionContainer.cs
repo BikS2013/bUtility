@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bUtility.WebApi
+namespace bUtility
 {
-    public class SimpleRequest<T> : Request<T> where T : class
+    public interface IExceptionContainer
     {
-        public override string UserID { get; set; }
+        ResponseMessage Exception { get; set; }
     }
 }
