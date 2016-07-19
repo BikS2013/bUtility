@@ -16,6 +16,17 @@ namespace bUtility.Sts
 {
     public static class CertificateHelper
     {
+        static X509Certificate2 GetCertificate(byte[] data, string password)
+        {
+            if (password != null)
+            {
+                return new X509Certificate2(data, password);
+            }
+            else
+            {
+                return new X509Certificate2(data);
+            }
+        }
         public static X509Certificate2 GetCertificate(this Assembly assembly, string resourceName, string password=null)
         {
             if (assembly != null)
@@ -25,16 +36,7 @@ namespace bUtility.Sts
                 {
                     byte[] data = new byte[stream.Length];
                     stream.Read(data, 0, (int)stream.Length);
-                    X509Certificate2 certificate = null;
-                    if ( password != null)
-                    {
-                        certificate = new X509Certificate2(data, password);
-                    }
-                    else
-                    {
-                        certificate = new X509Certificate2(data);
-                    }
-                    return certificate;
+                    return GetCertificate(data, password);
                 }
             }
             return null;
@@ -53,6 +55,33 @@ namespace bUtility.Sts
             return GetCertificate(config?.AssemblyName, config?.ResourceName, config?.Password);
         }
 
+
+        static X509Certificate2Collection FilterCertificates(X509Certificate2Collection found, X509FindType findType, object findValue)
+        {
+            if (found.Count > 1 && findType == X509FindType.FindBySubjectName)
+            {
+                X509Certificate2Collection foundBuffer = new X509Certificate2Collection();
+                foreach (var item in found)
+                {
+                    if (item.Subject == $"CN={findValue}")
+                    {
+                        foundBuffer.Add(item);
+                    }
+                }
+                return foundBuffer;
+            }
+            return found;
+        }
+        static void ResetCertificates(X509Certificate2Collection found)
+        {
+            if (found != null)
+            {
+                foreach (X509Certificate2 cert in found)
+                {
+                    cert.Reset();
+                }
+            }
+        }
         public static X509Certificate2 GetCertificate(StoreName name, StoreLocation location, X509FindType findType, object findValue)
         {
             X509Store store = new X509Store(name, location);
@@ -66,19 +95,7 @@ namespace bUtility.Sts
                 if (found.Count == 0)
                     throw new Exception($"No certificate was found matching the specified criteria. Type: {findType} Value: {findValue}");
 
-
-                if (found.Count > 1 && findType == X509FindType.FindBySubjectName)
-                {
-                    X509Certificate2Collection foundBuffer = new X509Certificate2Collection();
-                    foreach (var item in found)
-                    {
-                        if (item.Subject == $"CN={findValue}" )
-                        {
-                            foundBuffer.Add(item);
-                        }
-                    }
-                    found = foundBuffer;
-                }
+                found = FilterCertificates(found, findType, findValue);
 
                 if (found.Count > 1)
                     throw new ArgumentException("There are more than one certificate matching the specified criteria.");
@@ -87,14 +104,7 @@ namespace bUtility.Sts
             }
             finally
             {
-                if (found != null)
-                {
-                    foreach (X509Certificate2 cert in found)
-                    {
-                        cert.Reset();
-                    }
-                }
-
+                ResetCertificates(found);
                 store.Close();
             }
         }

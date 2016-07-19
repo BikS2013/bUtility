@@ -50,7 +50,9 @@ namespace System.Web.Helpers.AntiXsrf
 			{
 				antiForgeryToken.AdditionalData = this._config.AdditionalDataProvider.GetAdditionalData(httpContext);
 			}
-			if (flag && string.IsNullOrEmpty(antiForgeryToken.Username) && antiForgeryToken.ClaimUid == null && string.IsNullOrEmpty(antiForgeryToken.AdditionalData))
+			if (flag && string.IsNullOrEmpty(antiForgeryToken.Username) && 
+				antiForgeryToken.ClaimUid == null && 
+				string.IsNullOrEmpty(antiForgeryToken.AdditionalData))
 			{
 				throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, WebPageResources.TokenValidator_AuthenticatedUserWithoutUsername, new object[]
 				{
@@ -64,6 +66,7 @@ namespace System.Web.Helpers.AntiXsrf
 		{
 			return cookieToken != null && cookieToken.IsSessionToken;
 		}
+
 
 		public void ValidateTokens(HttpContextBase httpContext, IIdentity identity, AntiForgeryToken sessionToken, AntiForgeryToken fieldToken)
 		{

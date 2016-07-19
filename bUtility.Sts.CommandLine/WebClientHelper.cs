@@ -11,6 +11,7 @@ namespace bUtility.Sts.CommandLine
     static class WebClientHelper
     {
         const string UserAgent = "WindowsNT/7";
+
         private static WebResponse ExecuteHttpVerb(string url, string verbData, CookieContainer cookieContainer = null, string contentType = "application/x-www-form-urlencoded", string verb = "POST")
         {
             try
