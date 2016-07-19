@@ -16,7 +16,13 @@ namespace bUtility.Sts
 {
     public static class CertificateHelper
     {
-        static X509Certificate2 GetCertificate(byte[] data, string password)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="password">the password can be null</param>
+        /// <returns></returns>
+        public static X509Certificate2 GetCertificate(this byte[] data, string password)
         {
             if (password != null)
             {
@@ -27,7 +33,15 @@ namespace bUtility.Sts
                 return new X509Certificate2(data);
             }
         }
-        public static X509Certificate2 GetCertificate(this Assembly assembly, string resourceName, string password=null)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="assembly"></param>
+        /// <param name="resourceName"></param>
+        /// <param name="password"> the password can be null</param>
+        /// <returns></returns>
+        public static X509Certificate2 GetCertificate(this Assembly assembly, string resourceName, string password)
         {
             if (assembly != null)
             {
@@ -43,8 +57,16 @@ namespace bUtility.Sts
         }
         public static X509Certificate2 GetCertificate(string assemblyName, string resourceName)
         {
-            return assemblyName?.FindAssembly().GetCertificate(resourceName);
+            return assemblyName?.FindAssembly().GetCertificate(resourceName, null);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="assemblyName"></param>
+        /// <param name="resourceName"></param>
+        /// <param name="password">the password can be null</param>
+        /// <returns></returns>
         public static X509Certificate2 GetCertificate(string assemblyName, string resourceName, string password)
         {
             return assemblyName?.FindAssembly().GetCertificate(resourceName, password);

@@ -34,7 +34,7 @@ namespace bUtility.Sts.ApiClient
         X509Certificate2 getIssuerCertificate()
         {
             //το GetType().Assembly δεν δουλεύει (γιατί γίνεται build σε run-time)
-            var localCert = typeof(IndexController).Assembly.GetCertificate("bUtility.Sts.ApiClient.issuer.model.local.cer");
+            var localCert = typeof(IndexController).Assembly.GetCertificate("bUtility.Sts.ApiClient.issuer.model.local.cer", null);
             return localCert;
 
         }
