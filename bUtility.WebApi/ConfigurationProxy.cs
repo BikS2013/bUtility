@@ -9,11 +9,11 @@ namespace bUtility.WebApi
 {
     public class ConfigurationProxy
     {
-        private static string LoadString(string key)
+        public static string LoadString(string key)
         {
             return ConfigurationManager.AppSettings[key].Clear();
         }
-        private static bool LoadBool(string key, bool defaultValue = false)
+        public static bool LoadBool(string key, bool defaultValue = false)
         {
             var configValue = ConfigurationManager.AppSettings[key];
             bool value;
@@ -32,7 +32,7 @@ namespace bUtility.WebApi
             return defaultValue;
         }
 
-        private static TEnum LoadEnumValue<TEnum>(string enumValue)
+        public static TEnum LoadEnumValue<TEnum>(string enumValue)
             where TEnum : struct
         {
             var configValue = ConfigurationManager.AppSettings[enumValue];
