@@ -41,6 +41,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Services" />
@@ -62,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationProxy.cs" />
     <Compile Include="exceptionFilters\ExceptionHandlingAttribute.cs" />
     <Compile Include="ExceptionHanling\ExceptionHandler.cs" />
     <Compile Include="Extensions.cs" />
