@@ -53,23 +53,23 @@ namespace bUtility.Dapper
         {
             return con.Query<T>(Statements<T>.GetSelect());
         }
-        public static T SelectSingle<T>(this IDbConnection con, object whereObject)
+        public static T SelectSingle<T>(this IDbConnection con, object whereObject, IDbTransaction trn = null, bool buffered=true, int? timeout = 0, CommandType? commandType = null)
         {
-            return con.Query<T>(Statements<T>.GetSelect(whereObject), whereObject).FirstOrDefault();
+            return con.Query<T>(Statements<T>.GetSelect(whereObject), whereObject, trn, buffered, timeout, commandType).FirstOrDefault();
         }
-        public static IEnumerable<T> Select<T>(this IDbConnection con, object whereObject)
+        public static IEnumerable<T> Select<T>(this IDbConnection con, object whereObject, IDbTransaction trn = null, bool buffered = true, int? timeout = 0, CommandType? commandType = null)
         {
-            return con.Query<T>(Statements<T>.GetSelect(whereObject), whereObject);
-        }
-
-        public static int Insert<T>(this IDbConnection con, T data)
-        {
-            return con.Execute(Statements<T>.GetInsert(), data);
+            return con.Query<T>(Statements<T>.GetSelect(whereObject), whereObject, trn, buffered, timeout, commandType);
         }
 
-        public static int Delete<T>(this IDbConnection con, object whereObject)
+        public static int Insert<T>(this IDbConnection con, T data, IDbTransaction trn=null, int? timeout=0, CommandType? commandType=null)
         {
-            return con.Execute(Statements<T>.GetDelete(whereObject), whereObject);
+            return con.Execute(Statements<T>.GetInsert(), data, trn, timeout, commandType);
+        }
+
+        public static int Delete<T>(this IDbConnection con, object whereObject, IDbTransaction trn = null, int? timeout = 0, CommandType? commandType = null)
+        {
+            return con.Execute(Statements<T>.GetDelete(whereObject), whereObject, trn, timeout, commandType);
         }
     }
 }
