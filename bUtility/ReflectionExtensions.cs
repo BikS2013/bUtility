@@ -85,6 +85,10 @@ namespace bUtility.Reflection
             }
         }
 
+        public static IEnumerable<T> GetMembers<T>(this object data, Func<T, Boolean> filter = null) where T : MemberInfo
+        {
+            return data.GetType().GetMembers(filter);
+        }
         public static IEnumerable<T> GetMembers<T>(this Type type, Func<T, Boolean> filter = null) where T :MemberInfo
         {
             foreach (var p in type?.GetMembers(defaultBindings))
@@ -116,6 +120,17 @@ namespace bUtility.Reflection
         public static T GetMemberInfo<T>(this object obj, string memberName) where T : MemberInfo
         {
             return obj?.GetType().GetMemberInfo<T>(memberName);
+        }
+
+        public static T Copy<T>(this T data) where T : new()
+        {
+            return Copy<T, T>(data);
+        }
+        public static T Copy<T, R>(this R data) where T : R, new()
+        {
+            var copy = new T();
+            typeof(R).GetMembers<PropertyInfo>().ToList().ForEach(p => copy.SetValue(p.Name, data.GetValue(p.Name)));
+            return copy;
         }
 
         public static T GetCustomAttribute<T>(this MemberInfo memberInfo) where T : System.Attribute
