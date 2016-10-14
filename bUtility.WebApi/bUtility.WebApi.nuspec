@@ -17,6 +17,7 @@
     <dependencies>
       <group>
         <dependency id="butility" version="0.0.0.5" />
+        <dependency id="butility.SecurityToken" version="0.0.0.2" />
       </group>
     </dependencies>
   </metadata>
