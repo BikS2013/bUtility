@@ -7,7 +7,7 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <licenseUrl>http://biks.lcl</licenseUrl>
-    <projectUrl>https://github.com/BikS2013/bUtility</projectUrl>
+    <projectUrl>https://github.com/BikS2013/bUtility/tree/master/bUtility.Dapper</projectUrl>
     <iconUrl>http://biks.lcl</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
