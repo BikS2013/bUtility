@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Test", "bUtility.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.CookieHandler", "bUtility.CookieHandler\bUtility.CookieHandler.csproj", "{F5BFA0EA-C308-460C-B633-F3E613CE6839}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.SecurityToken", "bUtility.SecurityToken\bUtility.SecurityToken.csproj", "{162B6672-77F1-4037-81A0-A7D9318A857F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		azure|Any CPU = azure|Any CPU
@@ -174,6 +176,12 @@ Global
 		{F5BFA0EA-C308-460C-B633-F3E613CE6839}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5BFA0EA-C308-460C-B633-F3E613CE6839}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5BFA0EA-C308-460C-B633-F3E613CE6839}.Release|Any CPU.Build.0 = Release|Any CPU
+		{162B6672-77F1-4037-81A0-A7D9318A857F}.azure|Any CPU.ActiveCfg = Release|Any CPU
+		{162B6672-77F1-4037-81A0-A7D9318A857F}.azure|Any CPU.Build.0 = Release|Any CPU
+		{162B6672-77F1-4037-81A0-A7D9318A857F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{162B6672-77F1-4037-81A0-A7D9318A857F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{162B6672-77F1-4037-81A0-A7D9318A857F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{162B6672-77F1-4037-81A0-A7D9318A857F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
