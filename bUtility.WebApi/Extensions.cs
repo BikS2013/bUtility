@@ -6,12 +6,20 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http.Controllers;
 
 namespace bUtility.WebApi
 {
     public static class Extensions
     {
+        public static string GetRequestPath(this HttpRequest request)
+        {
+            if (request.ApplicationPath.Length == 1)
+                return request.Path;
+
+            return request.Path.Substring(request.ApplicationPath.Length);
+        }
         public static void GenerateExceptionResponse(this HttpActionContext actionContext, Type responsePayloadType, ResponseMessage message)
         {
             var response = responsePayloadType.GetConstructor(System.Type.EmptyTypes).Invoke(null);

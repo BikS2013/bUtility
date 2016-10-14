@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationProxy.cs" />
+    <Compile Include="CustomAssembliesResolver.cs" />
     <Compile Include="exceptionFilters\ExceptionHandlingAttribute.cs" />
     <Compile Include="ExceptionHanling\ExceptionHandler.cs" />
     <Compile Include="Extensions.cs" />
