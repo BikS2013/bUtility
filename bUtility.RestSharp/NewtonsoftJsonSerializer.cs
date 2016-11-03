@@ -4,7 +4,9 @@ using Newtonsoft.Json;
 using RestSharp.Serializers;
 using System.IO;
 using RestSharp.Deserializers;
-namespace ibank.ApiClient
+using RestSharp;
+
+namespace bUtility.RestSharp
 {
     public class NewtonsoftJsonSerializer : ISerializer, IDeserializer
     {
@@ -29,7 +31,7 @@ namespace ibank.ApiClient
                 }
             }
         }
-        public T Deserialize<T>(RestSharp.IRestResponse response)
+        public T Deserialize<T>(IRestResponse response)
         {
             var content = response.Content;
             using (var stringReader = new StringReader(content))
