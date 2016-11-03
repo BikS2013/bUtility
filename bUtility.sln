@@ -61,6 +61,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.SimpleInjector", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.SimpleInjector.Test", "bUtility.SimpleInjector.Test\bUtility.SimpleInjector.Test.csproj", "{0A3AFB75-2578-410B-A39C-5810845C6A60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.RestSharp", "bUtility.RestSharp\bUtility.RestSharp.csproj", "{C71C0A41-7372-4027-82DF-414B4872C8B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		azure|Any CPU = azure|Any CPU
@@ -198,6 +200,12 @@ Global
 		{0A3AFB75-2578-410B-A39C-5810845C6A60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A3AFB75-2578-410B-A39C-5810845C6A60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A3AFB75-2578-410B-A39C-5810845C6A60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C71C0A41-7372-4027-82DF-414B4872C8B1}.azure|Any CPU.ActiveCfg = Release|Any CPU
+		{C71C0A41-7372-4027-82DF-414B4872C8B1}.azure|Any CPU.Build.0 = Release|Any CPU
+		{C71C0A41-7372-4027-82DF-414B4872C8B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C71C0A41-7372-4027-82DF-414B4872C8B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C71C0A41-7372-4027-82DF-414B4872C8B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C71C0A41-7372-4027-82DF-414B4872C8B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
