@@ -17,7 +17,6 @@ namespace bUtility
             return value.Trim();
         }
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -29,11 +28,27 @@ namespace bUtility
         /// the result is false for null or empty list
         /// </param>
         /// <returns></returns>
-        public static bool In<T>(this T value, params T[] list)
+        public static bool In<T>(this T value, IEnumerable<T> list)
         {
-            if (list == null || list.Length == 0 || value == null) return false;
+            if (!list.HasAny() || value == null) return false;
             var found = list.Contains(value);
             return found;
+        }
+
+        public static bool In<T>(this T? value, IEnumerable<T> list) where T : struct
+        {
+            if (value == null) return false;
+            return value.Value.In(list);
+        }
+
+        public static bool In<T>(this T value, params T[] list)
+        {
+            return value.In((IEnumerable<T>)list);
+        }
+
+        public static bool In<T>(this T? value, params T[] list) where T : struct
+        {
+            return value.In((IEnumerable<T>)list);
         }
 
         public static bool HasAny<T>(this IEnumerable<T> collection)
