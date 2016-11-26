@@ -63,6 +63,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.SimpleInjector.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.RestSharp", "bUtility.RestSharp\bUtility.RestSharp.csproj", "{C71C0A41-7372-4027-82DF-414B4872C8B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Json.Test", "bUtility.Json.Test\bUtility.Json.Test.csproj", "{B0888DD4-EAF9-481D-BE98-B5442ED9B98D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		azure|Any CPU = azure|Any CPU
@@ -206,6 +208,12 @@ Global
 		{C71C0A41-7372-4027-82DF-414B4872C8B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C71C0A41-7372-4027-82DF-414B4872C8B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C71C0A41-7372-4027-82DF-414B4872C8B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0888DD4-EAF9-481D-BE98-B5442ED9B98D}.azure|Any CPU.ActiveCfg = Release|Any CPU
+		{B0888DD4-EAF9-481D-BE98-B5442ED9B98D}.azure|Any CPU.Build.0 = Release|Any CPU
+		{B0888DD4-EAF9-481D-BE98-B5442ED9B98D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0888DD4-EAF9-481D-BE98-B5442ED9B98D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0888DD4-EAF9-481D-BE98-B5442ED9B98D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0888DD4-EAF9-481D-BE98-B5442ED9B98D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
