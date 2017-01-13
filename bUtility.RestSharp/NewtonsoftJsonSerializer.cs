@@ -52,5 +52,11 @@ namespace bUtility.RestSharp
                 });
             }
         }
+
+        public void AddConverter(JsonConverter converter)
+        {
+            if (serializer == null) throw new System.Exception("Null Serializer");
+            serializer.Converters.Add(converter);
+        }
     }
 }
