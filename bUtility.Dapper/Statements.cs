@@ -9,37 +9,55 @@ namespace bUtility.Dapper
     public class Statements<T>
     {
         protected Statements() { }
-
-        public static readonly string Table = typeof(T).Name;
-        public static readonly string Columns = typeof(T).GetColumnList();
-        public static readonly string Parameters = typeof(T).GetColumnList().GetParameterList();
-
-        public static string GetSelect()
+        
+        public static string Table(DMLOptions options = null)
         {
-            return $"select {Columns} from {Table}";
-        }
-        public static string GetSelect(object whereObject)
-        {
-            return $"select {Columns} from {Table} where {whereObject.GetWhereClause()}";
-        }
-        public static string GetSelect(string whereClause)
-        {
-            return $"select {Columns} from {Table} where {whereClause}";
-        }
-        public static string GetInsert()
-        {
-            return $"insert into {Table}({Columns}) values({Parameters})";
+            return typeof(T).GetTableName(options);
         }
 
-        public static string GetUpdate(string updateClause, string whereClause)
+        public static string Columns(DMLOptions options = null)
         {
-            return $"update {Table} set {updateClause} where {whereClause}";
-
-        }
-        public static string GetDelete(object whereObject)
-        {
-            return $"delete from {Table} where {whereObject.GetWhereClause()}";
+            return typeof(T).GetColumnList(options);
         }
 
+        public static string Parameters(DMLOptions options = null)
+        {
+            return typeof(T).GetParameterList(options);
+        }
+
+        public static string GetSelect(DMLOptions options = null)
+        {
+            return $"select {Columns(options)} from {Table(options)}";
+        }
+
+        public static string GetSelect(object whereObject, DMLOptions options = null)
+        {
+            return $"select {Columns(options)} from {Table(options)} where {whereObject.GetWhereClause(options: options)}";
+        }
+        
+        public static string GetSelect(string whereClause, DMLOptions options = null)
+        {
+            return $"select {Columns(options)} from {Table(options)} where {whereClause}";
+        }
+        
+        public static string GetInsert(DMLOptions options = null)
+        {
+            return $"insert into {Table(options)}({Columns(options)}) values({Parameters(options)})";
+        }
+        
+        public static string GetUpdate(string updateClause, string whereClause, DMLOptions options = null)
+        {
+            return $"update {Table(options)} set {updateClause} where {whereClause}";
+        }
+
+        public static string GetUpdate(object updateObject, object whereObject, DMLOptions options = null)
+        {
+            return $"update {Table(options)} set {updateObject.GetUpdateClause(options: options)} where {whereObject.GetWhereClause(options: options)}";
+        }
+
+        public static string GetDelete(object whereObject, DMLOptions options = null)
+        {
+            return $"delete from {Table(options)} where {whereObject.GetWhereClause(options: options)}";
+        }
     }
 }
