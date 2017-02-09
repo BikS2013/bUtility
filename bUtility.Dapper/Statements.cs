@@ -50,6 +50,11 @@ namespace bUtility.Dapper
             return $"update {Table(options)} set {updateClause} where {whereClause}";
         }
 
+        public static string GetUpdate(object updateObject, object whereObject, DMLOptions options = null)
+        {
+            return $"update {Table(options)} set {updateObject.GetUpdateClause(options: options)} where {whereObject.GetWhereClause(options: options)}";
+        }
+
         public static string GetDelete(object whereObject, DMLOptions options = null)
         {
             return $"delete from {Table(options)} where {whereObject.GetWhereClause(options: options)}";

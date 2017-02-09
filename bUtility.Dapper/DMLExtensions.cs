@@ -21,6 +21,15 @@ namespace bUtility.Dapper
         {
             return (options ?? DMLOptions.CurrentOptions).ParameterDelimeter + value.Trim();
         }
+        
+        public static string SetUpdateParameterName(this string value, DMLOptions options = null)
+        {
+            return (options ?? DMLOptions.CurrentOptions).UpdateParameterDelimeter + value.Trim();
+        }
+        public static string SetUpdateParameterDelimeter(this string value, DMLOptions options = null)
+        {
+            return value.SetUpdateParameterName(options).SetParameterDelimeter(options);
+        }
 
         public static string GetTableName(this Type type, DMLOptions options = null)
         {
@@ -47,6 +56,16 @@ namespace bUtility.Dapper
             return type.GetMemberNames<PropertyInfo>(filter).Select(c => $"{c}={c.SetParameterDelimeter(options)}").Concatenate((c, n) => $"{c}, {n}");
         }
 
+        public static string GetUpdateClause(this object obj, bool includeNulls = false, DMLOptions options = null)
+        {
+            var part1 = obj?.GetMemberNames<PropertyInfo>((PropertyInfo pInfo) => pInfo.GetValue(obj) != null)?
+                .Select(c => $"{c.SetIdentifierDelimeters(options)} = {c.SetUpdateParameterDelimeter(options)}").Concatenate((c, n) => $"{c} and {n}");
+            if (!includeNulls) return part1;
+            var part2 = obj.GetMemberNames<PropertyInfo>((PropertyInfo pInfo) => pInfo.GetValue(obj) == null)?.Select(c => $"{c.SetIdentifierDelimeters(options)} is null")?.Concatenate((c, n) => $"{c} and {n}");
+            if (part1.Clear() != null && part2.Clear() != null) return $"{part1} and {part2}";
+            return part1 ?? part2;
+        }
+
         public static string GetWhereClause(this object obj, bool includeNulls = false, DMLOptions options = null)
         {
             var part1 = obj?.GetMemberNames<PropertyInfo>((PropertyInfo pInfo) => pInfo.GetValue(obj) != null)?
@@ -69,8 +88,8 @@ namespace bUtility.Dapper
         {
             return con.Query<T>(Statements<T>.GetSelect(options));
         }
-        
-        public static T SelectSingle<T>(this IDbConnection con, object whereObject, IDbTransaction trn = null, bool buffered=true, int? timeout = 0, CommandType? commandType = null, DMLOptions options = null)
+
+        public static T SelectSingle<T>(this IDbConnection con, object whereObject, IDbTransaction trn = null, bool buffered = true, int? timeout = 0, CommandType? commandType = null, DMLOptions options = null)
         {
             return con.Query<T>(Statements<T>.GetSelect(whereObject, options), whereObject, trn, buffered, timeout, commandType).FirstOrDefault();
         }
@@ -79,8 +98,8 @@ namespace bUtility.Dapper
         {
             return con.Query<T>(Statements<T>.GetSelect(whereObject, options), whereObject, trn, buffered, timeout, commandType);
         }
-        
-        public static int Insert<T>(this IDbConnection con, T data, IDbTransaction trn=null, int? timeout=0, CommandType? commandType=null, DMLOptions options = null)
+
+        public static int Insert<T>(this IDbConnection con, T data, IDbTransaction trn = null, int? timeout = 0, CommandType? commandType = null, DMLOptions options = null)
         {
             return con.Execute(Statements<T>.GetInsert(options), data, trn, timeout, commandType);
         }
@@ -88,6 +107,21 @@ namespace bUtility.Dapper
         public static int Delete<T>(this IDbConnection con, object whereObject, IDbTransaction trn = null, int? timeout = 0, CommandType? commandType = null, DMLOptions options = null)
         {
             return con.Execute(Statements<T>.GetDelete(whereObject, options), whereObject, trn, timeout, commandType);
+        }
+
+        public static int Update<T>(this IDbConnection con, object updateObject, object whereObject, IDbTransaction trn = null, int? timeout = 0, CommandType? commandType = null, DMLOptions options = null)
+        {
+            return con.Execute(Statements<T>.GetUpdate(updateObject, whereObject, options), GetMergedDynamicParams(updateObject, whereObject), trn, timeout, commandType);
+        }
+
+        public static DynamicParameters GetMergedDynamicParams(object updateObject, object whereObject, bool keepNulls = false, DMLOptions options = null)
+        {
+            if (updateObject == null && whereObject == null) return null;
+            var pars = new DynamicParameters();
+            Dictionary<string, object> members = new Dictionary<string, object>();
+            updateObject?.GetMembers<PropertyInfo>(pi => { return keepNulls || pi.GetValue(updateObject) != null; }).ToList().ForEach(pi => pars.Add(pi.Name.SetUpdateParameterName(options), pi.GetValue(updateObject)));
+            whereObject?.GetMembers<PropertyInfo>(pi => { return keepNulls || pi.GetValue(whereObject) != null; }).ToList().ForEach(pi => pars.Add(pi.Name, pi.GetValue(whereObject)));
+            return pars;
         }
     }
 }

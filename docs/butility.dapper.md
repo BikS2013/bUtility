@@ -55,3 +55,8 @@ int Insert<T>(this IDbConnection con, T data)
 ```c#
 int Delete<T>(this IDbConnection con, object whereObject)
 ```
+
+**Update**
+```c#
+int Update<T>(this IDbConnection con, object updateObject, object whereObject)
+```
