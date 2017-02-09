@@ -2,6 +2,16 @@
 
 ## bUtility.Dapper
 Dapper related utilities:
+
+**DMLOptions**
+
+Options for query contruction, including identifier (tables and columns) delimeters and parameter delimeters.
+Can be set to ```DMLOptions.CurrentOptions``` for static use.
+
+Eg:
+* for SqlServer ```DMLOptions.DefaultOptions``` can be used (or left null)
+* for OracleDB ```new DMLOptions(':')```, if case sensitive ```new DMLOptions(':', '"')```
+
 ####Extension functions:
 
 **GetColumnList**
