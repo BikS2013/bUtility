@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DDLInfo.cs" />
+    <Compile Include="DMLOptions.cs" />
     <Compile Include="Guid2StringMapper.cs" />
     <Compile Include="DMLExtensions.cs" />
     <Compile Include="Object2StringMapper.cs" />

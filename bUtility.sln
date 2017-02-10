@@ -65,6 +65,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.RestSharp", "bUtil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Json.Test", "bUtility.Json.Test\bUtility.Json.Test.csproj", "{B0888DD4-EAF9-481D-BE98-B5442ED9B98D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility.Dapper.Test", "bUtility.Dapper.Test\bUtility.Dapper.Test.csproj", "{D705A39C-16A7-480C-8134-F60B865809AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		azure|Any CPU = azure|Any CPU
@@ -214,6 +216,12 @@ Global
 		{B0888DD4-EAF9-481D-BE98-B5442ED9B98D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0888DD4-EAF9-481D-BE98-B5442ED9B98D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0888DD4-EAF9-481D-BE98-B5442ED9B98D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D705A39C-16A7-480C-8134-F60B865809AF}.azure|Any CPU.ActiveCfg = Release|Any CPU
+		{D705A39C-16A7-480C-8134-F60B865809AF}.azure|Any CPU.Build.0 = Release|Any CPU
+		{D705A39C-16A7-480C-8134-F60B865809AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D705A39C-16A7-480C-8134-F60B865809AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D705A39C-16A7-480C-8134-F60B865809AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D705A39C-16A7-480C-8134-F60B865809AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
