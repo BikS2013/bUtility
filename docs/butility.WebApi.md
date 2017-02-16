@@ -1,4 +1,4 @@
-#### [bUtility](../README.md), [bUtility.Sts](butility.sts.md), [bUtility.Dapper](butility.dapper.md)
+#### [bUtility](../README.md), [bUtility.Sts](butility.sts.md), [bUtility.Dapper](butility.dapper.md), [bUtility.Dapper.Sql](butility.Dapper.Sql.md), [bUtility.Dapper.Oracle](butility.Dapper.Oracle.md)
 
 ## bUtility.WebApi
 

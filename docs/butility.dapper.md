@@ -1,4 +1,4 @@
-#### [bUtility](../README.md), [bUtility.WebApi](docs/butility.WebApi.md), [bUtility.Sts](butility.sts.md)
+#### [bUtility](../README.md), [bUtility.Dapper.Sql](butility.Dapper.Sql.md), [bUtility.Dapper.Oracle](butility.Dapper.Oracle.md), [bUtility.WebApi](butility.WebApi.md), [bUtility.Sts](butility.sts.md)
 
 ## bUtility.Dapper
 Dapper related utilities:
@@ -59,4 +59,9 @@ int Delete<T>(this IDbConnection con, object whereObject)
 **Update**
 ```c#
 int Update<T>(this IDbConnection con, object updateObject, object whereObject)
+```
+
+**MultipleInsert**
+```c#
+int MultipleInsert<T>(this IDbConnection con, IEnumerable<T> dataList)
 ```
