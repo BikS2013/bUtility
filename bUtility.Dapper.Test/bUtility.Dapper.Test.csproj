@@ -35,12 +35,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper.StrongName, Version=1.50.0.0, Culture=neutral, PublicKeyToken=e3e8412083d25dd3, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.StrongName.1.50.0\lib\net451\Dapper.StrongName.dll</HintPath>
+    <Reference Include="Dapper.StrongName, Version=1.50.2.0, Culture=neutral, PublicKeyToken=e3e8412083d25dd3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.StrongName.1.50.2\lib\net451\Dapper.StrongName.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.24160719\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -61,11 +65,22 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="GMI_PayBook.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="testClass.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="UnitTestOracleDb.cs" />
+    <Compile Include="UnitTestSql.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\bUtility.Dapper.Oracle\bUtility.Dapper.Oracle.csproj">
+      <Project>{4b6ef8fd-edbf-4539-8efe-ef39bb6a49ec}</Project>
+      <Name>bUtility.Dapper.Oracle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\bUtility.Dapper.Sql\bUtility.Dapper.Sql.csproj">
+      <Project>{f848df19-a6cf-46e4-bd15-0b223a73d17e}</Project>
+      <Name>bUtility.Dapper.Sql</Name>
+    </ProjectReference>
     <ProjectReference Include="..\bUtility.Dapper\bUtility.Dapper.csproj">
       <Project>{1261a0ff-c8d3-4225-a421-4641cb0fb130}</Project>
       <Name>bUtility.Dapper</Name>
@@ -76,6 +91,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

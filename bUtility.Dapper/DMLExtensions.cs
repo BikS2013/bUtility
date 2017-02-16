@@ -123,5 +123,12 @@ namespace bUtility.Dapper
             whereObject?.GetMembers<PropertyInfo>(pi => { return keepNulls || pi.GetValue(whereObject) != null; }).ToList().ForEach(pi => pars.Add(pi.Name, pi.GetValue(whereObject)));
             return pars;
         }
+        /// <summary>
+        /// Not to be used for many objects due to performance issues
+        /// </summary>
+        public static int MultipleInsert<T>(this IDbConnection con, IEnumerable<T> dataList, IDbTransaction trn = null, int? timeout = 0, CommandType? commandType = null, DMLOptions options = null)
+        {
+            return con.Execute(Statements<T>.GetInsert(options), dataList, trn, timeout, commandType);
+        }
     }
 }
