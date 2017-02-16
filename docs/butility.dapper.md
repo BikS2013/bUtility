@@ -1,4 +1,4 @@
-#### [bUtility](../README.md), [bUtility.Dapper.Sql](butility.Dapper.Sql.md), [bUtility.Dapper.Oracle](butility.Dapper.Oracle.md), [bUtility.WebApi](butility.WebApi.md), [bUtility.Sts](butility.sts.md)
+#### [bUtility](../README.md), [bUtility.Dapper.Sql](butility.dapper.sql.md), [bUtility.Dapper.Oracle](butility.dapper.oracle.md), [bUtility.WebApi](butility.WebApi.md), [bUtility.Sts](butility.sts.md)
 
 ## bUtility.Dapper
 Dapper related utilities:
