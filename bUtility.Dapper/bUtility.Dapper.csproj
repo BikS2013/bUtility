@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Count.cs" />
     <Compile Include="DDLInfo.cs" />
     <Compile Include="DMLOptions.cs" />
     <Compile Include="Guid2StringMapper.cs" />

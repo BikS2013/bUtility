@@ -65,3 +65,8 @@ int Update<T>(this IDbConnection con, object updateObject, object whereObject)
 ```c#
 int MultipleInsert<T>(this IDbConnection con, IEnumerable<T> dataList)
 ```
+
+**Count**
+```c#
+int Count<T>(this IDbConnection con, object whereObject)
+```

@@ -39,7 +39,17 @@ namespace bUtility.Dapper
         {
             return $"select {Columns(options)} from {Table(options)} where {whereClause}";
         }
-        
+
+        public static string GetCount(object whereObject, DMLOptions options = null)
+        {
+            return $"select count(*) as Found from {Table(options)} where {whereObject.GetWhereClause(options: options)}";
+        }
+
+        public static string GetCount(string whereClause, DMLOptions options = null)
+        {
+            return $"select count(*) as Found from {Table(options)} where {whereClause}";
+        }
+
         public static string GetInsert(DMLOptions options = null)
         {
             return $"insert into {Table(options)}({Columns(options)}) values({Parameters(options)})";

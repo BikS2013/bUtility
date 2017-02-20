@@ -98,7 +98,7 @@ namespace bUtility.Dapper
         {
             return con.Query<T>(Statements<T>.GetSelect(whereObject, options), whereObject, trn, buffered, timeout, commandType);
         }
-
+        
         public static int Insert<T>(this IDbConnection con, T data, IDbTransaction trn = null, int? timeout = 0, CommandType? commandType = null, DMLOptions options = null)
         {
             return con.Execute(Statements<T>.GetInsert(options), data, trn, timeout, commandType);
@@ -118,17 +118,23 @@ namespace bUtility.Dapper
         {
             if (updateObject == null && whereObject == null) return null;
             var pars = new DynamicParameters();
-            Dictionary<string, object> members = new Dictionary<string, object>();
             updateObject?.GetMembers<PropertyInfo>(pi => { return keepNulls || pi.GetValue(updateObject) != null; }).ToList().ForEach(pi => pars.Add(pi.Name.SetUpdateParameterName(options), pi.GetValue(updateObject)));
             whereObject?.GetMembers<PropertyInfo>(pi => { return keepNulls || pi.GetValue(whereObject) != null; }).ToList().ForEach(pi => pars.Add(pi.Name, pi.GetValue(whereObject)));
             return pars;
         }
+
         /// <summary>
         /// Not to be used for many objects due to performance issues
         /// </summary>
         public static int MultipleInsert<T>(this IDbConnection con, IEnumerable<T> dataList, IDbTransaction trn = null, int? timeout = 0, CommandType? commandType = null, DMLOptions options = null)
         {
             return con.Execute(Statements<T>.GetInsert(options), dataList, trn, timeout, commandType);
+        }
+
+        public static int Count<T>(this IDbConnection con, object whereObject, IDbTransaction trn = null, int? timeout = 0, CommandType? commandType = null, DMLOptions options = null)
+        {
+            var res = con.QueryFirst<Count>(Statements<T>.GetCount(whereObject, options), whereObject, trn, timeout, commandType);
+            return res?.Found ?? 0;
         }
     }
 }
