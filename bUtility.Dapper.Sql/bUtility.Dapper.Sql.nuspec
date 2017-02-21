@@ -7,16 +7,16 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <licenseUrl>http://biks.lcl</licenseUrl>
-    <projectUrl>https://github.com/BikS2013/bUtility/tree/master/bUtility.Dapper</projectUrl>
+    <projectUrl>https://github.com/BikS2013/bUtility/tree/master/bUtility.Dapper.Sql</projectUrl>
     <iconUrl>http://biks.lcl</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>simple dapper utility.</releaseNotes>
-    <copyright>Copyright 2016</copyright>
-    <tags>biks dapper utility</tags>
+    <releaseNotes>simple utility for SqlServer specific extensions.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>biks dapper utility Sql SqlServer</tags>
     <dependencies>
       <group>
-        <dependency id="bUtility" version="0.0.0.7" />
+        <dependency id="bUtility.Dapper" version="0.0.0.10" />
       </group>
     </dependencies>
   </metadata>
