@@ -69,5 +69,13 @@ namespace bUtility.WebApi
             });
         }
 
+        public static Response<R> ToResponse<R>(this Tuple<R, ResponseMessage> tuple) where R: class
+        {
+            if (tuple == null) return null;
+            var resp = new Response<R>();
+            resp.Payload = tuple.Item1;
+            resp.Exception = tuple.Item2;
+            return resp;
+        }
     }
 }

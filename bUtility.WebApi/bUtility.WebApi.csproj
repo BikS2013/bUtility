@@ -63,7 +63,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="actionFilters\ConvertTimeFilterAttribute.cs" />
+    <Compile Include="actionFilters\ResponseToUtcFilterAttribute.cs" />
     <Compile Include="AuthenticationHeaderHandler.cs" />
+    <Compile Include="callHandler\CallHandler.cs" />
     <Compile Include="ConfigurationProxy.cs" />
     <Compile Include="CustomAssembliesResolver.cs" />
     <Compile Include="exceptionFilters\ExceptionHandlingAttribute.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="handlers\AuthenticationHandler.cs" />
     <Compile Include="authorizationFilters\ClaimsAuthorizeAttribute.cs" />
     <Compile Include="RequiresAuthenticationHandler.cs" />
+    <Compile Include="types\EmptyRequest.cs" />
     <Compile Include="types\IExceptionContainer.cs" />
     <Compile Include="NoCacheAttribute.cs" />
     <Compile Include="NotFoundResolution\ActionSelector.cs" />
