@@ -11,12 +11,12 @@
     <iconUrl>http://biks.lcl</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>simple utility for SqlServer specific extensions.</releaseNotes>
+    <releaseNotes>simple utility for SqlServer specific extensions as add-on of bUtility.Dapper.</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>biks dapper utility Sql SqlServer</tags>
     <dependencies>
       <group>
-        <dependency id="bUtility.Dapper" version="0.0.0.10" />
+        <dependency id="bUtility.Dapper" version="0.0.0.11" />
       </group>
     </dependencies>
   </metadata>
