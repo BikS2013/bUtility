@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace bUtility
 {
-    public class ExceptionHandler 
+    public class ExceptionHandler
     {
         readonly ILogger Logger;
         readonly Type[] BusinessExceptions;
         readonly Func<Exception, string> ExceptionCodeResolver;
-        public ExceptionHandler(ILogger logger, Func<Exception, string> exceptionCodeResolver,  params Type[] businessExceptionTypes)
+        public ExceptionHandler(ILogger logger, Func<Exception, string> exceptionCodeResolver, params Type[] businessExceptionTypes)
         {
             Logger = logger;
             ExceptionCodeResolver = exceptionCodeResolver;
@@ -37,7 +37,26 @@ namespace bUtility
                 };
             }
         }
-        public Tuple<R, ResponseMessage> HandleException<R>(Func<R> action) where R:class
+
+        Tuple<R, ResponseMessage> ResolveException<R>(Exception ex, R nullValue)
+        {
+            if (ex == null) return null;
+            var r = Log(ex);
+            if (r != null) { return new Tuple<R, ResponseMessage>(nullValue, r); }
+
+
+            return new Tuple<R, ResponseMessage>(nullValue,
+                    new ResponseMessage
+                    {
+                        Category = BusinessExceptions.FirstOrDefault(t => t.IsInstanceOfType(ex)) != null ? ErrorCategory.Business : ErrorCategory.Technical,
+                        Code = ExceptionCodeResolver != null ? ExceptionCodeResolver(ex) : null,
+                        Description = ex.Message,
+                        Severity = ErrorSeverity.Error
+                    }
+                );
+        }
+
+        public Tuple<R, ResponseMessage> HandleException<R>(Func<R> action) where R : class
         {
             return HandleException(action, null);
         }
@@ -49,38 +68,32 @@ namespace bUtility
         /// <param name="action"></param>
         /// <param name="nullValue"></param>
         /// <returns></returns>
-        public Tuple<R, ResponseMessage> HandleException<R>(Func<R> action, R nullValue) 
+        public Tuple<R, ResponseMessage> HandleException<R>(Func<R> action, R nullValue)
         {
             try
             {
-                return new Tuple<R, ResponseMessage> ( action(), null );
-            }
-            catch (Exception ex) when ( BusinessExceptions.FirstOrDefault( t => t.IsInstanceOfType(ex)) != null )
-            {
-                var r = Log(ex);
-                if ( r != null ) { return new Tuple<R, ResponseMessage>(nullValue, r); }
-                return new Tuple<R, ResponseMessage>(nullValue,
-                    new ResponseMessage
-                    {
-                        Category = ErrorCategory.Business,
-                        Code = ExceptionCodeResolver != null ? ExceptionCodeResolver(ex) : null,
-                        Description = ex.Message,
-                        Severity = ErrorSeverity.Error
-                    }
-                );
+                return new Tuple<R, ResponseMessage>(action(), null);
             }
             catch (Exception ex)
             {
-                var r = Log(ex);
-                if (r != null) { return new Tuple<R, ResponseMessage>(nullValue, r); }
-                return new Tuple<R, ResponseMessage>(nullValue,
-                    new ResponseMessage
-                    {
-                        Category = ErrorCategory.Technical,
-                        Description = ex.Message,
-                        Severity = ErrorSeverity.Error
-                    }
-                );
+                return ResolveException(ex, nullValue);
+            }
+        }
+
+        public Tuple<R, ResponseMessage> HandleException<T, R>(Func<T, R> action, T input) where R: class
+        {
+            return HandleException(action, input, null);
+        }
+
+        public Tuple<R, ResponseMessage> HandleException<T, R>(Func<T, R> action, T input, R nullValue)
+        {
+            try
+            {
+                return new Tuple<R, ResponseMessage>(action(input), null);
+            }
+            catch (Exception ex)
+            {
+                return ResolveException(ex, nullValue);
             }
         }
 
