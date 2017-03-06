@@ -10,11 +10,38 @@ namespace bUtility.Dapper
 {
     public static class DMLExtensionsOracle
     {
+        public static readonly DMLOptions OracleDefaultOptions = new DMLOptions(":", "\"");
+
         public static int BulkInsertOracleDb<T>(this IDbConnection con, IEnumerable<T> dataList, int linesPerBatch = 1000, int timeout = 0, DMLOptions options = null)
+        {
+            DMLOptions curOptions = options ?? OracleDefaultOptions;
+            return con.BulkInsert(dataList, Statements<T>.GetInsert(curOptions), linesPerBatch, timeout, curOptions);
+        }
+
+        public static int BulkInsertOracleDb<T>(this IDbConnection con, IEnumerable<T> dataList, IEnumerable<string> excludedColumnNames, int linesPerBatch = 1000, int timeout = 0, DMLOptions options = null)
+        {
+            Func<PropertyInfo, Boolean> filter = (PropertyInfo pi) => { return !excludedColumnNames.Contains(pi.Name); };
+            return con.BulkInsertOracleDb(dataList, excludedColumnNames.HasAny() ? filter : null, linesPerBatch, timeout, options);
+        }
+
+        public static int BulkInsertOracleDb<T>(this IDbConnection con, IEnumerable<T> dataList, IEnumerable<PropertyInfo> excludedColumns, int linesPerBatch = 1000, int timeout = 0, DMLOptions options = null)
+        {
+            Func<PropertyInfo, Boolean> filter = (PropertyInfo pi) => { return !excludedColumns.Contains(pi); };
+            return con.BulkInsertOracleDb(dataList, excludedColumns.HasAny() ? filter : null, linesPerBatch, timeout, options);
+        }
+
+        public static int BulkInsertOracleDb<T>(this IDbConnection con, IEnumerable<T> dataList, Func<PropertyInfo, Boolean> filter, int linesPerBatch = 1000, int timeout = 0, DMLOptions options = null)
+        {
+            DMLOptions curOptions = options ?? OracleDefaultOptions;
+            string commandText = filter != null ? Statements<T>.GetFilteredInsert(filter, curOptions) : Statements<T>.GetInsert(curOptions);
+            return con.BulkInsert(dataList, commandText, linesPerBatch, timeout, curOptions);
+        }
+
+        public static int BulkInsert<T>(this IDbConnection con, IEnumerable<T> dataList, string commandText, int linesPerBatch, int timeout, DMLOptions options)
         {
             if (!(con is OracleConnection))
             {
-                throw new Exception("invalid connection");
+                throw new Exception("invalid connection, OracleConnection expected");
             }
             int res = 0;
             if (dataList.HasAny())
@@ -26,7 +53,7 @@ namespace bUtility.Dapper
                 }
                 using (var command = oracleCon.CreateCommand())
                 {
-                    command.CommandText = Statements<T>.GetInsert(options);
+                    command.CommandText = commandText;
                     command.CommandType = CommandType.Text;
                     command.BindByName = true;
                     command.CommandTimeout = timeout;
@@ -34,9 +61,9 @@ namespace bUtility.Dapper
 
                     int items = dataList.Count();
                     int outcount = 0;
-                    while(outcount < items)
+                    while (outcount < items)
                     {
-                        int incount =  linesPerBatch > items - outcount ? items - outcount : linesPerBatch;
+                        int incount = linesPerBatch > items - outcount ? items - outcount : linesPerBatch;
                         command.ArrayBindCount = incount;
                         command.Parameters.Clear();
                         foreach (var c in columns)

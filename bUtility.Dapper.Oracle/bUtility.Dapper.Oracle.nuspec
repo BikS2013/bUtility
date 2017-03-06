@@ -16,7 +16,7 @@
     <tags>biks dapper utility Oracle OracleDb</tags>
     <dependencies>
       <group>
-        <dependency id="bUtility.Dapper" version="0.0.0.11" />
+        <dependency id="bUtility.Dapper" version="0.0.0.12" />
       </group>
     </dependencies>
   </metadata>
