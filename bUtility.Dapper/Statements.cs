@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace bUtility.Dapper
 {
@@ -20,9 +17,19 @@ namespace bUtility.Dapper
             return typeof(T).GetColumnList(options);
         }
 
+        public static string FilteredColumns(Func<PropertyInfo, Boolean> filter, DMLOptions options = null)
+        {
+            return typeof(T).GetFilteredColumnList(filter, options);
+        }
+
         public static string Parameters(DMLOptions options = null)
         {
             return typeof(T).GetParameterList(options);
+        }
+
+        public static string FilteredParameters(Func<PropertyInfo, Boolean> filter, DMLOptions options = null)
+        {
+            return typeof(T).GetFilteredParameterList(filter, options);
         }
 
         public static string GetSelect(DMLOptions options = null)
@@ -53,6 +60,11 @@ namespace bUtility.Dapper
         public static string GetInsert(DMLOptions options = null)
         {
             return $"insert into {Table(options)}({Columns(options)}) values({Parameters(options)})";
+        }
+
+        public static string GetFilteredInsert(Func<PropertyInfo, Boolean> filter, DMLOptions options = null)
+        {
+            return $"insert into {Table(options)}({FilteredColumns(filter, options)}) values({FilteredParameters(filter, options)})";
         }
         
         public static string GetUpdate(string updateClause, string whereClause, DMLOptions options = null)

@@ -1,39 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace bUtility.Dapper
+﻿namespace bUtility.Dapper
 {
     public class DMLOptions
     {
-        public char? IdentifierStartingDelimeter { get; set; }
-        public char? IdentifierEndingDelimeter { get; set; }
-        public char ParameterDelimeter { get; set; }
+        /// <summary>
+        /// Delemeter coming before identifier. If left null none is used.
+        /// </summary>
+        public string IdentifierStartingDelimeter { get; set; }
+        /// <summary>
+        /// Delemeter coming after identifier. If left null identifierStartingDelimeter is used. If identifierStartingDelimeter is also null none is used
+        /// </summary>
+        public string IdentifierEndingDelimeter { get; set; }
+        /// <summary>
+        /// Where clause parameter delemeter to avoid reserved words, default is "P_". Must not be equal to UpdateParameterDelimeter.
+        /// </summary>
+        public string ParameterDelimeter { get; set; }
+        /// <summary>
+        /// Parameter symbol eg. "@" for SqlServer or ":" for OracleDB
+        /// </summary>
+        public string ParameterSymbol { get; set; }
+        /// <summary>
+        /// Update clause parameter delemeter to distinguish from where clause parameters, default is "U_". Must not be equal to ParameterDelimeter.
+        /// </summary>
         public string UpdateParameterDelimeter { get; set; }
 
         /// <summary>
         /// DML options for different sql db implementations.
         /// Eg. for case sensitive db installations identifier (table/column names) delimeters should be set.
         /// </summary>
-        /// <param name="parameterDelimeter">Parameter delemeter eg. @ for SqlServer or : for OracleDB</param>
-        /// <param name="updateParameterDelimeter">Update clause parameter delemeter to distinguish from where clause parameters, eg. "U_".</param>
+        /// <param name="parameterSymbol">Parameter symbol eg. @ for SqlServer or : for OracleDB</param>
         /// <param name="identifierStartingDelimeter">Delemeter coming before identifier. If left null none is used.</param>
         /// <param name="identifierEndingDelimeter">Delemeter coming after identifier. If left null identifierStartingDelimeter is used. If identifierStartingDelimeter is also null none is used</param>
-        public DMLOptions(char parameterDelimeter, string updateParameterDelimeter, char? identifierStartingDelimeter = null, char? identifierEndingDelimeter = null)
+        public DMLOptions(string parameterSymbol, string identifierStartingDelimeter = null, string identifierEndingDelimeter = null)
         {
-            ParameterDelimeter = parameterDelimeter;
-            UpdateParameterDelimeter = updateParameterDelimeter;
+            ParameterSymbol = parameterSymbol;
             IdentifierStartingDelimeter = identifierStartingDelimeter;
             IdentifierEndingDelimeter = identifierEndingDelimeter ?? identifierStartingDelimeter;
+            ParameterDelimeter = "P_";
+            UpdateParameterDelimeter = "U_";
         }
-
+        /// <summary>
+        /// Minimum options for SqlServer
+        /// </summary>
         public static DMLOptions DefaultOptions
         {
             get
             {
-                return new DMLOptions('@', "U_");
+                return new DMLOptions("@");
             }
         }
 
