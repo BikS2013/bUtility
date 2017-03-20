@@ -83,6 +83,8 @@
     <Compile Include="NotFoundResolution\ErrorController.cs" />
     <Compile Include="ExceptionHanling\ExceptionHandler.Simple.cs" />
     <Compile Include="ReflectionExtensions.cs" />
+    <Compile Include="types\IRequest.cs" />
+    <Compile Include="types\IResponse.cs" />
     <Compile Include="types\ResponseMessage.cs" />
     <Compile Include="types\IUserIDProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="handlers\ThrottlingException.cs" />
     <Compile Include="stsClient\StsPostHandler.cs" />
     <Compile Include="TestIndexController.cs" />
+    <Compile Include="types\SystemRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

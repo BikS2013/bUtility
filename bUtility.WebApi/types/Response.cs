@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace bUtility
 {
     [DataContract]
-    public class Response<T>: IExceptionContainer where T : class
+    public class Response<T>: IResponse where T : class
     {
         [DataMember(Name = "payload")]
         public T Payload { get; set; }
+
+        public object Data { get; set; }
 
         private ResponseMessage _exception;
         [DataMember(Name = "exception")]

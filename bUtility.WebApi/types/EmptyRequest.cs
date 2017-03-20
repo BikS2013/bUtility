@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace bUtility
 {
-    public class EmptyRequest: IUserIDProvider
+    public class EmptyRequest : IRequest
     {
+        [DataMember(Name = "header")]
+        public RequestHeader Header { get; set; }
+
+        public object Data { get { return null; } }
         public string UserID { get; set; }
     }
 }
