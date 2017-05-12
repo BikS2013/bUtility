@@ -8,6 +8,10 @@ namespace bUtility.SimpleInjector.Test
 {
     public class Service1a: IService1
     {
+        public Service1a(IDependency1 dep1, IDependency2 dep2)
+        {
+
+        }
         public Service1a( IDependency1 dep1)
         {
 

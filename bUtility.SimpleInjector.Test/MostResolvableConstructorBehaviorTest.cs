@@ -75,5 +75,31 @@ namespace bUtility.SimpleInjector.Test
             container.Register<IService1, Service1a>();
             container.Verify(VerificationOption.VerifyAndDiagnose);
         }
+
+        [TestMethod]
+        public void Step7()
+        {
+            var container = new Container();
+            container.Options.ConstructorResolutionBehavior = new MostResolvableConstructorBehavior(container);
+
+            container.Register<IDependency1>(() => new Dependency1());
+            container.Register<IDependency2>(() => new Dependency2());
+            container.Register<IService1, Service1a>();
+            container.Verify(VerificationOption.VerifyAndDiagnose);
+
+        }
+
+        [TestMethod]
+        public void Step8()
+        {
+            var container = new Container();
+            container.Options.ConstructorResolutionBehavior = new MostResolvableConstructorBehavior(container);
+
+            container.Register<IDependency1>(() => new Dependency1());
+            container.Register<IDependency2>(() => new Dependency2());
+            container.Register<IDependency3>(() => new Dependency3());
+            container.Register<IService1, Service1a>();
+            container.Verify(VerificationOption.VerifyAndDiagnose);
+        }
     }
 }
