@@ -18,5 +18,7 @@ namespace bUtility
         public string SmtpAddress { get; set; }
         public int SmtpPort { get; set; }
         public bool Ssl { get; set; }
+        public Encoding SubjectEncoding { get; set; }
+        public Encoding BodyEncoding { get; set; }
     }
 }

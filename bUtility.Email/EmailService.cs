@@ -53,10 +53,10 @@ namespace bUtility
                 mail.Sender = Sender;
 
                 mail.Subject = request.Subject;
-                mail.SubjectEncoding = Encoding.UTF8;
+                mail.SubjectEncoding = ServiceParams.SubjectEncoding != null ? ServiceParams.SubjectEncoding : Encoding.UTF8;
 
                 mail.IsBodyHtml = request.IsBodyHtml;
-                mail.BodyEncoding = Encoding.Unicode;
+                mail.BodyEncoding = ServiceParams.BodyEncoding != null ? ServiceParams.BodyEncoding : Encoding.Unicode; 
                 mail.Body = request.Body;
 
                 mail.AddAttachments(request.Attachments, ResourceResolver);
