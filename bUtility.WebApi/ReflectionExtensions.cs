@@ -45,7 +45,6 @@ namespace bUtility.WebApi
             else {
                 obj.GetType().GetProperties().ToList().ForEach(p =>
                 {
-                    Console.WriteLine(p.Name);
                     if (p.PropertyType.IsClass
                     && p.PropertyType != typeof(string)
                     && !p.PropertyType.IsArray)
