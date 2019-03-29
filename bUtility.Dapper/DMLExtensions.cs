@@ -59,10 +59,10 @@ namespace bUtility.Dapper
         public static string GetUpdateClause(this object obj, bool includeNulls = false, DMLOptions options = null)
         {
             var part1 = obj?.GetMemberNames<PropertyInfo>((PropertyInfo pInfo) => pInfo.GetValue(obj) != null)?
-                .Select(c => $"{c.SetIdentifierDelimeters(options)} = {c.SetUpdateParameterDelimeter(options)}").Concatenate((c, n) => $"{c} and {n}");
+                .Select(c => $"{c.SetIdentifierDelimeters(options)} = {c.SetUpdateParameterDelimeter(options)}").Concatenate((c, n) => $"{c}, {n}");
             if (!includeNulls) return part1;
-            var part2 = obj.GetMemberNames<PropertyInfo>((PropertyInfo pInfo) => pInfo.GetValue(obj) == null)?.Select(c => $"{c.SetIdentifierDelimeters(options)} is null")?.Concatenate((c, n) => $"{c} and {n}");
-            if (part1.Clear() != null && part2.Clear() != null) return $"{part1} and {part2}";
+            var part2 = obj.GetMemberNames<PropertyInfo>((PropertyInfo pInfo) => pInfo.GetValue(obj) == null)?.Select(c => $"{c.SetIdentifierDelimeters(options)} is null")?.Concatenate((c, n) => $"{c}, {n}");
+            if (part1.Clear() != null && part2.Clear() != null) return $"{part1}, {part2}";
             return part1 ?? part2;
         }
 
