@@ -58,8 +58,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Extensions\HttpExtensions.cs" />
+    <Compile Include="Extensions\RouteConfigExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProxyHandler.cs" />
+    <Compile Include="Types\ReverseProxyConfig.cs" />
+    <Compile Include="Types\ReverseProxyConfigList.cs" />
+    <Compile Include="Types\RouteConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
