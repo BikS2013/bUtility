@@ -34,8 +34,6 @@ namespace bUtility.ReverseProxy
                 throw new ArgumentNullException("webApiSourceUrl");
             if (string.IsNullOrEmpty(webApiDestinationUrl))
                 throw new ArgumentNullException("webApiDestinationUrl");
-            if (httpClientProvider == null)
-                throw new ArgumentNullException(nameof(httpClientProvider));
             WebApiSourceUrl = webApiSourceUrl.ToLowerInvariant();
             WebApiDestinationUrl = webApiDestinationUrl.ToLowerInvariant();
             Client = client;
