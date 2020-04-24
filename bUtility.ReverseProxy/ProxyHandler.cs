@@ -24,10 +24,10 @@ namespace bUtility.ReverseProxy
         string WebApiDestinationUrl { get; set; }
         Action<HttpRequestMessage> PrepareApiCall { get; set; }
         Action<HttpResponseMessage> PrepareResponse { get; set; }
-        private readonly Func<HttpClient> HttpClientProvider;
+        private readonly HttpClient Client;
         readonly ILogger Logger;
         public ReverseProxyHandler(string webApiSourceUrl, string webApiDestinationUrl, 
-            Func<HttpClient> httpClientProvider, Action<HttpRequestMessage> prepareApiCall,
+            HttpClient client, Action<HttpRequestMessage> prepareApiCall,
             Action<HttpResponseMessage> prepareResponse, ILogger logger)
         {
             if (string.IsNullOrEmpty(webApiSourceUrl))
@@ -38,7 +38,7 @@ namespace bUtility.ReverseProxy
                 throw new ArgumentNullException(nameof(httpClientProvider));
             WebApiSourceUrl = webApiSourceUrl.ToLowerInvariant();
             WebApiDestinationUrl = webApiDestinationUrl.ToLowerInvariant();
-            HttpClientProvider = httpClientProvider;
+            Client = client;
             PrepareApiCall = prepareApiCall;
             PrepareResponse = prepareResponse;
             Logger = logger;
@@ -70,9 +70,8 @@ namespace bUtility.ReverseProxy
                     }
 
                     PrepareApiCall(apiRequest);
-                    HttpClient client = HttpClientProvider(); 
 
-                    var apiResponse = await client.SendAsync(apiRequest, HttpCompletionOption.ResponseHeadersRead,
+                    var apiResponse = await Client.SendAsync(apiRequest, HttpCompletionOption.ResponseHeadersRead,
                         cancellationToken);
                     var respData = await apiResponse.Content.ReadAsByteArrayAsync();
 
