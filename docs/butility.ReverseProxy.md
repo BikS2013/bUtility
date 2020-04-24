@@ -5,7 +5,7 @@ Reverse Proxy utility
 
 ###Initialization\
 Creates a reverse proxy that routes requests from source url to target url using HttpClient.\
-The HttpClient must have been preconfigured from the calling app. This function should never return a new instance of the HttpClient.
+The HttpClient must have been preconfigured from the calling app. 
 
 webApiDestinationUrl => source url\
 webApiDestinationUrl => destination url\
