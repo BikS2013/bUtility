@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bUtility", "bUtility\bUtility.csproj", "{F07AF388-76DC-423A-A434-33BD0B2086B1}"
 EndProject
@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D62CE562-5
 		docs\butility.dapper.md = docs\butility.dapper.md
 		docs\butility.dapper.oracle.md = docs\butility.dapper.oracle.md
 		docs\butility.dapper.sql.md = docs\butility.dapper.sql.md
+		docs\butility.ReverseProxy.md = docs\butility.ReverseProxy.md
 		docs\butility.sts.md = docs\butility.sts.md
 		docs\butility.WebApi.md = docs\butility.WebApi.md
 	EndProjectSection
@@ -243,5 +244,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {276D7B43-CD3C-474C-BA27-2C24D619C0F3}
 	EndGlobalSection
 EndGlobal
