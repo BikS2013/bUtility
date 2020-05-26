@@ -35,8 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SimpleInjector, Version=3.2.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\SimpleInjector.3.2.0\lib\net45\SimpleInjector.dll</HintPath>
+    <Reference Include="SimpleInjector, Version=4.0.6.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.0.6\lib\net45\SimpleInjector.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -55,7 +55,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="MostResolvableConstructorBehavior.support\Dependency1.cs" />
+    <Compile Include="MostResolvableConstructorBehavior.support\Dependency2.cs" />
+    <Compile Include="MostResolvableConstructorBehavior.support\Dependency3.cs" />
     <Compile Include="MostResolvableConstructorBehavior.support\IDependency1.cs" />
+    <Compile Include="MostResolvableConstructorBehavior.support\IDependency2.cs" />
+    <Compile Include="MostResolvableConstructorBehavior.support\IDependency3.cs" />
     <Compile Include="MostResolvableConstructorBehavior.support\IService1.cs" />
     <Compile Include="MostResolvableConstructorBehavior.support\Service1.cs" />
     <Compile Include="MostResolvableConstructorBehaviorTest.cs" />
@@ -63,13 +67,13 @@
     <Compile Include="MostResolvableConstructorBehavior.support\Service1a.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\bUtility.SimpleInjector\bUtility.SimpleInjector.csproj">
       <Project>{5dce5b41-3b32-4954-9283-8089f8c13f6f}</Project>
       <Name>bUtility.SimpleInjector</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -33,13 +33,13 @@ namespace bUtility.SimpleInjector
         }
 
         [DebuggerStepThrough]
-        public ConstructorInfo GetConstructor(Type service, Type implementation)
+        public ConstructorInfo GetConstructor(Type implementation)
         {
             var constructors = implementation.GetConstructors();
             if (constructors.Length == 1 || IsCalledDuringRegistrationPhase) return constructors.FirstOrDefault();
 
             return constructors.Select(ctor => new { parameters = ctor.GetParameters(), ctor = ctor })
-                .Where(i => i.parameters.All(p => this.CanBeResolved(p, service, implementation)))
+                .Where(i => i.parameters.All(p => this.CanBeResolved(p, implementation)))
                 .OrderByDescending(i => i.parameters.Length).First().ctor;
 
             //return (
@@ -54,19 +54,19 @@ namespace bUtility.SimpleInjector
         }
 
         [DebuggerStepThrough]
-        private bool CanBeResolved(ParameterInfo p, Type service, Type implementation)
+        private bool CanBeResolved(ParameterInfo p, Type implementation)
         {
             return this.container.GetRegistration(p.ParameterType) != null ||
-                this.CanBuildType(p, service, implementation);
+                this.CanBuildType(p, implementation);
         }
 
         [DebuggerStepThrough]
-        private bool CanBuildType(ParameterInfo p, Type service, Type implementation)
+        private bool CanBuildType(ParameterInfo p, Type implementation)
         {
             try
             {
-                this.container.Options.DependencyInjectionBehavior.BuildExpression(
-                    new InjectionConsumerInfo(service, implementation, p));
+                this.container.Options.DependencyInjectionBehavior.GetInstanceProducer(
+                    new InjectionConsumerInfo(p),true);
                 return true;
             }
             catch (ActivationException)
